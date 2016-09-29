@@ -52,21 +52,6 @@ RSpec.describe SnippetsController, type: :controller do
     end
   end
 
-  describe "GET #new" do
-    it "assigns a new snippet as @snippet" do
-      get :new, params: {}, session: valid_session
-      expect(assigns(:snippet)).to be_a_new(Snippet)
-    end
-  end
-
-  describe "GET #edit" do
-    it "assigns the requested snippet as @snippet" do
-      snippet = Snippet.create! valid_attributes
-      get :edit, params: {id: snippet.to_param}, session: valid_session
-      expect(assigns(:snippet)).to eq(snippet)
-    end
-  end
-
   describe "POST #create" do
     context "with valid params" do
       it "creates a new Snippet" do
