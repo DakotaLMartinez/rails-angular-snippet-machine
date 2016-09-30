@@ -3,17 +3,25 @@
 
   angular
     .module('dlmSnippetMachine')
-    .controller('StoryIndexController', StoryIndexController);
+    .controller('SnippetIndexController', SnippetIndexController);
 
-  StoryIndexController.$inject = ['$http'];
-  function StoryIndexController($http) {
+  SnippetIndexController.$inject = ['Snippet'];
+  function SnippetIndexController(Snippet) {
     var vm = this;
-    
+    vm.snippets;
 
     activate();
 
     ////////////////
 
-    function activate() { }
+    function activate() { 
+      Snippet
+        .getSnippets()
+        .then(function(res){
+          vm.snippets = res;
+          console.log(vm.snippets);
+        });
+      
+    }
   }
 })();

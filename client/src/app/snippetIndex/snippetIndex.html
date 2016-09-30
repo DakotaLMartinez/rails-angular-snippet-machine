@@ -1,0 +1,11 @@
+<h1>Snippets</h1>
+<div ng-repeat="snippet in vm.snippets">
+  <h3>{{ snippet.name }}</h3>
+  <p>Description: {{ snippet.description }}</p>
+  <p>Language: {{ snippet.language }}</p>
+  <p>Tab Trigger: {{ snippet.trigger }}</p>
+  <h3>Snippet Body:</h3>
+  <textarea name="snippetBody" id="snippetBox" cols="70" rows="20">
+{{ snippet.body }}
+  </textarea>
+</div>
