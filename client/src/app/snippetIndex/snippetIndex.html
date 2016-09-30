@@ -1,6 +1,6 @@
 <h1>Snippets</h1>
 <div ng-repeat="snippet in vm.snippets">
-  <h3>{{ snippet.name }}</h3>
+  <h3><a href="" ui-sref="snippetShow({id: snippet.id})">{{ snippet.name }}</a></h3>
   <p>Description: {{ snippet.description }}</p>
   <p>Language: {{ snippet.language }}</p>
   <p>Tab Trigger: {{ snippet.trigger }}</p>

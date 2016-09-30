@@ -8,7 +8,8 @@
   Snippet.$inject = ['railsResourceFactory'];
   function Snippet(railsResourceFactory) {
     var service = {
-      getSnippets:getSnippets
+      getSnippets:getSnippets,
+      getSnippet:getSnippet
     };
     
     return service;
@@ -17,6 +18,13 @@
     function getSnippets() { 
       return railsResourceFactory({
         url: '/api/snippets', 
+        name: 'snippet'
+      }).query();
+    }
+
+    function getSnippet(id) {
+      return railsResourceFactory({
+        url: '/api/snippets/' + id,
         name: 'snippet'
       }).query();
     }

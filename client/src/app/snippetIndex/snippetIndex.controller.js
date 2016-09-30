@@ -19,7 +19,6 @@
         .getSnippets()
         .then(function(res){
           vm.snippets = res;
-          console.log(vm.snippets);
         });
       
     }
