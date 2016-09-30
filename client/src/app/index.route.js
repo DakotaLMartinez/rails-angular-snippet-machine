@@ -13,6 +13,11 @@
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
+      }).state('snippets', {
+        url: '/snippets', 
+        templateUrl: 'app/snippetIndex/snippetIndex.html', 
+        controller: 'SnippetIndexController', 
+        controllerAs: 'vm'
       });
 
     $urlRouterProvider.otherwise('/');
