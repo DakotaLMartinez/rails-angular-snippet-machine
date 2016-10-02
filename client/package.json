@@ -1,11 +1,8 @@
 {
   "name": "dlmSnippetMachine",
   "version": "0.0.0",
-  "dependencies": {},
-  "scripts": {
-    "test": "gulp test"
-  },
-  "devDependencies": {
+  "dependencies": {
+    "bower": "",
     "browser-sync": "~2.9.11",
     "browser-sync-spa": "~1.0.3",
     "chalk": "~1.1.1",
@@ -48,6 +45,13 @@
     "phantomjs": "~1.9.18",
     "uglify-save-license": "~0.4.1",
     "wiredep": "~2.2.2"
+  },
+  "scripts": {
+    "test": "gulp test",
+    "postinstall": "bower install"
+  },
+  "devDependencies": {
+    
   },
   "engines": {
     "node": ">=0.10.0"
