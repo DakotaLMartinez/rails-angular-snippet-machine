@@ -2,6 +2,7 @@
   "name": "dlmSnippetMachine",
   "version": "0.0.0",
   "dependencies": {
+    "angular-mocks": "^1.5.8",
     "bower": "",
     "browser-sync": "~2.9.11",
     "browser-sync-spa": "~1.0.3",
@@ -33,6 +34,7 @@
     "gulp-useref": "~3.0.3",
     "gulp-util": "~3.0.6",
     "http-proxy-middleware": "^0.9.1",
+    "jasmine-core": "^2.5.2",
     "karma": "~0.13.10",
     "karma-angular-filesort": "~1.0.0",
     "karma-coverage": "~0.5.2",
