@@ -7,7 +7,8 @@
 
   var Editor = {
     bindings: {
-      language: '='
+      language: '=', 
+      body: '='
     },
     templateUrl: 'app/components/aceEditor/aceEditor.html',
     controller: EditorController,
@@ -16,7 +17,8 @@
 
   EditorController.$inject = ['visualStudioCodeFilter', '$scope']
   function EditorController (visualStudioCodeFilter, $scope) {
-    
+    var vm = this;
+    vm.mode = vm.language || 'html';
   }
 
   angular

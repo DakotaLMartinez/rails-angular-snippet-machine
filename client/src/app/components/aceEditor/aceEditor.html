@@ -1,17 +1,16 @@
-<div class="h5 dn ba b--black" style="height: 500px" ui-ace="{
+<div class="h5 ba b--black" ng-model="vm.body" ui-ace="{
   useWrapMode: true, 
   showGutter: false, 
   blockScrolling: Infinity, 
-  mode: 'html', 
+  mode: '{{ vm.mode }}', 
   firstLineNumber: 1, 
   onLoad: aceLoaded, 
   onChange: aceChanged, 
   require: ['ace/ext/language/tools'], 
   advanced: {
-    enableSnippets: true, 
-    enableBasicAutocompletion: true, 
-    enableLiveAutocompletion: true
+      enableSnippets: true,
+      enableBasicAutocompletion: true,
+      enableLiveAutocompletion: true
   }
 }">
-
 </div>

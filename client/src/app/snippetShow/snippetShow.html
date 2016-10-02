@@ -5,7 +5,5 @@
   <p>Language: {{ vm.snippet.language }}</p>
   <p>Tab Trigger: {{ vm.snippet.trigger }}</p>
   <h3>vm.snippet Body:</h3>
-  <textarea name="snippetBody" id="snippetBox" cols="70" rows="20">
-{{ vm.snippet.body }}
-  </textarea>
+  <ace-editor body="vm.snippet.body"></ace-editor>
 </div>
