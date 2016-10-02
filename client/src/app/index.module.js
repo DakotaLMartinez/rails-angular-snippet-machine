@@ -13,7 +13,8 @@
       'ui.router', 
       'ui.bootstrap', 
       'toastr',
-      'rails'
+      'rails',
+      'ui.ace'
     ]);
 
 })();
