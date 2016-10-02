@@ -8,7 +8,8 @@
   var Editor = {
     bindings: {
       language: '=', 
-      body: '='
+      body: '=', 
+      size: '<'
     },
     templateUrl: 'app/components/aceEditor/aceEditor.html',
     controller: EditorController,
@@ -18,7 +19,22 @@
   EditorController.$inject = ['visualStudioCodeFilter', '$scope']
   function EditorController (visualStudioCodeFilter, $scope) {
     var vm = this;
-    vm.mode = vm.language || 'html';
+    vm.mode = vm.language || 'js';
+    $scope.editorSize = setEditorSize();
+    
+    
+    /////////////////////
+
+    function setEditorSize() {
+      if(!isNaN(parseFloat(vm.size)) && isFinite(vm.size)) {
+        var sizeInPixels = String(Math.floor(vm.size)) + 'px';
+        
+        return {height: sizeInPixels};
+      } else {
+        return {};
+      }
+    }
+
   }
 
   angular
