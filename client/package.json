@@ -44,6 +44,7 @@
     "karma-phantomjs-shim": "~1.2.0",
     "lodash": "~3.10.1",
     "main-bower-files": "~2.9.0",
+    "npm-install-que": "0.0.3",
     "phantomjs": "~1.9.18",
     "tachyons": "^4.5.3",
     "uglify-save-license": "~0.4.1",
@@ -53,9 +54,7 @@
     "test": "gulp test",
     "postinstall": "bower install"
   },
-  "devDependencies": {
-    
-  },
+  "devDependencies": {},
   "engines": {
     "node": ">=0.10.0"
   }
