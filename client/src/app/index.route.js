@@ -15,12 +15,12 @@
         controllerAs: 'main'
       }).state('snippetsIndex', {
         url: '/snippets', 
-        templateUrl: 'app/snippetIndex/snippetIndex.html', 
+        templateUrl: 'app/components/snippetIndex/snippetIndex.html', 
         controller: 'SnippetIndexController', 
         controllerAs: 'vm'
       }).state('snippetShow', {
         url: '/snippets/:id',
-        templateUrl: 'app/snippetShow/snippetShow.html', 
+        templateUrl: 'app/components/snippetShow/snippetShow.html', 
         controller: 'SnippetShowController', 
         controllerAs: 'vm'
       });
