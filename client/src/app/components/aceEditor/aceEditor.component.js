@@ -19,7 +19,7 @@
   EditorController.$inject = ['visualStudioCodeFilter', '$scope']
   function EditorController (visualStudioCodeFilter, $scope) {
     var vm = this;
-    vm.mode = vm.language || 'js';
+    vm.mode = vm.language || 'javascript';
     $scope.editorSize = setEditorSize();
     
     
