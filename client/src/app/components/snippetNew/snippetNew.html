@@ -7,7 +7,7 @@
   
 </form>-->
 
-<form>
+<form ng-submit="vm.submitForm()">
   <div class="form-group">
     <label for="snippetName">Name</label>
     <input type="text" class="form-control" id="snippetName" placeholder="..." ng-model="vm.name" />
@@ -25,6 +25,18 @@
     <input type="text" class="form-control" id="snippetTrigger" placeholder="Enter the Tab Trigger Text." ng-model="vm.trigger">
   </div>
   <h4>Snippet Body:</h4>
-  <ace-editor size="450"></ace-editor>
+  <ace-editor body="vm.body" size="450"></ace-editor>
   <button type="submit" class="btn btn-primary">Create Snippet</button>
 </form>
+
+<textarea name="visualStudioCodeSnippet" id="visualStudioCodeSnippet" cols="100" rows="40">
+"{{ vm.name }}": {
+  "prefix": "{{ vm.trigger }}",
+  "body": [
+{{ vm.body | visualStudioCode }}    
+  ],
+  "description": "{{ vm.description }}"
+}
+</textarea>
+
+{{ vm.response }}
