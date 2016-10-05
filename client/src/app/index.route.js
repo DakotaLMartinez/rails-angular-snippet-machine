@@ -18,6 +18,11 @@
         templateUrl: 'app/components/snippetIndex/snippetIndex.html', 
         controller: 'SnippetIndexController', 
         controllerAs: 'vm'
+      }).state('snippetNew', {
+        url: '/snippets/new', 
+        templateUrl: 'app/components/snippetNew/snippetNew.html',
+        controller: 'SnippetNewController', 
+        controllerAs: 'vm'
       }).state('snippetShow', {
         url: '/snippets/:id',
         templateUrl: 'app/components/snippetShow/snippetShow.html', 
