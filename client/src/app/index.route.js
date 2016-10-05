@@ -28,6 +28,9 @@
         templateUrl: 'app/components/snippetShow/snippetShow.html', 
         controller: 'SnippetShowController', 
         controllerAs: 'vm'
+      }).state('snippetShow.vscode', {
+        url: '/vscode', 
+        templateUrl: 'app/components/vsCodeView/vsCodeView.html'
       });
 
     $urlRouterProvider.otherwise('/');
