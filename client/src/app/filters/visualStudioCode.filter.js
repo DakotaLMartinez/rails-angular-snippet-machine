@@ -18,4 +18,4 @@ angular
         throw new Error('visualStudioCodeFilter must be given a string of code as an input');
       }
     };
-  };
+  }

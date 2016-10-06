@@ -9,11 +9,17 @@
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
-        url: '/',
+        url: '/main',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
-      }).state('snippetsIndex', {
+      }).state('login', {
+        component: 'loginForm',
+        url: '/login',
+        template: '<login-form></login-form>'
+        
+      })
+      .state('snippetsIndex', {
         url: '/snippets', 
         templateUrl: 'app/components/snippetIndex/snippetIndex.html', 
         controller: 'SnippetIndexController', 
@@ -35,7 +41,7 @@
         controllerAs: 'vm'
       });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/snippets');
   }
 
 })();
