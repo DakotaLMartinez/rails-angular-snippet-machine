@@ -7,17 +7,17 @@
 
   var vsCodeSnippet = {
     bindings: {
-      snippetId: '=',
-      snippet: '='
+      id: '='
     },
     templateUrl: 'app/components/vsCodeSnippet/vsCodeSnippet.html',
     controller: vsCodeSnippetController,
     controllerAs: 'vm'
   };
 
-  vsCodeSnippetController.$inject = ['visualStudioCodeFilter']
-  function vsCodeSnippetController (visualStudioCodeFilter) {
+  vsCodeSnippetController.$inject = ['visualStudioCodeFilter', 'Snippet']
+  function vsCodeSnippetController (visualStudioCodeFilter, Snippet) {
     var vm = this;
+    vm.snippet;
     vm.name; 
     vm.description;
     vm.trigger;
@@ -26,10 +26,16 @@
 
     /////////////////////////
 
-    vm.name = vm.snippet.name;
-    vm.description = vm.snippet.description || "";
-    vm.trigger = vm.snippet.trigger;
-    vm.body = visualStudioCodeFilter(vm.snippet.body);
+    Snippet 
+      .getSnippet(vm.id)
+      .then(function(res){
+        vm.snippet = res;
+        vm.name = res.name;
+        vm.description = res.description || "";
+        vm.trigger = res.trigger;
+        vm.language = res.language
+        vm.body = visualStudioCodeFilter(res.body);
+      })
   }
 
   angular

@@ -30,7 +30,9 @@
         controllerAs: 'vm'
       }).state('snippetShow.vscode', {
         url: '/vscode', 
-        templateUrl: 'app/components/vsCodeView/vsCodeView.html'
+        templateUrl: 'app/components/vsCodeView/vsCodeView.html',
+        controller: 'SnippetShowController', 
+        controllerAs: 'vm'
       });
 
     $urlRouterProvider.otherwise('/');
