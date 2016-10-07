@@ -15,9 +15,8 @@
         controllerAs: 'main'
       }).state('login', {
         component: 'loginForm',
-        url: '/login',
+        url: '/sign_in',
         template: '<login-form></login-form>'
-        
       })
       .state('snippetsIndex', {
         url: '/snippets', 

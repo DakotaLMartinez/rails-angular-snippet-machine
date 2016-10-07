@@ -4,4 +4,9 @@ class User < ActiveRecord::Base
           :recoverable, :rememberable, :trackable, :validatable,
           :confirmable, :omniauthable
   include DeviseTokenAuth::Concerns::User
+
+  before_save do 
+    self.uid = SecureRandom.uuid
+    skip_confirmation!
+  end
 end
