@@ -1,5 +1,6 @@
 class SnippetsController < ApplicationController
   before_action :set_snippet, only: [:show, :update, :destroy]
+  # before_action :authenticate_user!
 
   # GET /snippets
   def index

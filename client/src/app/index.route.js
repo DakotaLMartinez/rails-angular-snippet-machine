@@ -9,12 +9,12 @@
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
-        url: '/',
+        url: '/main',
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
       }).state('snippetsIndex', {
-        url: '/snippets', 
+        url: '/', 
         templateUrl: 'app/components/snippetIndex/snippetIndex.html', 
         controller: 'SnippetIndexController', 
         controllerAs: 'vm'

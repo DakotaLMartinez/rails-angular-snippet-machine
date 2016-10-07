@@ -14,7 +14,8 @@
       'ui.bootstrap', 
       'toastr',
       'rails',
-      'ui.ace'
+      'ui.ace',
+      'ng-token-auth'
     ]);
 
 })();

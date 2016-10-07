@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig) {
+  function config($logProvider, toastrConfig, $authProvider) {
     // Enable log
     $logProvider.debugEnabled(true);
 
@@ -16,6 +16,12 @@
     toastrConfig.positionClass = 'toast-top-right';
     toastrConfig.preventDuplicates = true;
     toastrConfig.progressBar = true;
+
+    $authProvider.configure({
+      // note: the defaults are fine for now
+      // @see: https://github.com/lynndylanhurley/ng-token-auth#complete-config-example
+    });
+
   }
 
 })();

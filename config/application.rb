@@ -34,6 +34,16 @@ module RailsAngularSnippets
         request_specs: false,
         controller_specs: true
     end
+
+    # config.middleware.use Rack::Cors do 
+    #   allow do 
+    #     origins '*'
+    #     resource '*',
+    #       :headers => :any, 
+    #       :expose => ['access-token', 'expiry', 'token-type', 'uid', 'client'],
+    #       :methods => [:get, :post, :options, :delete, :put]
+    #   end
+    # end
     
     config.api_only = true
   end

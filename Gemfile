@@ -27,7 +27,17 @@ end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
+  gem 'binding_of_caller'
+  gem 'bullet'
+  gem 'meta_request'
+  gem 'pry-awesome_print'
+  gem 'pry-rails'
+  gem 'rspec-rails'
+  gem 'rubocop', require: false
 end
+
+gem 'devise_token_auth'
+gem 'rack-cors'
 
 group :development do
   gem 'listen', '~> 3.0.5'
