@@ -4,13 +4,16 @@ var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
 
+var proxyMiddleware = require('http-proxy-middleware');
+
 var browserSync = require('browser-sync');
 var browserSyncSpa = require('browser-sync-spa');
+var reload = browserSync.reload;
 
 var util = require('util');
 var exec = require('child_process').exec;
 
-var proxyMiddleware = require('http-proxy-middleware');
+
 
 function browserSyncInit(baseDir, browser) {
   browser = browser === undefined ? 'default' : browser;
@@ -53,6 +56,7 @@ browserSync.use(browserSyncSpa({
 
 gulp.task('serve', ['watch'], function () {
   browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src]);
+  gulp.watch([path.join(conf.paths.tmp, '/serve'), conf.paths.src]).on('change', reload);
 });
 
 gulp.task('rails', function() {

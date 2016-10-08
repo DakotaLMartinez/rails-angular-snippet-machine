@@ -13,6 +13,11 @@
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
+      }).state('signIn', {
+        url: '/sign_in', 
+        templateUrl: 'app/components/loginForm/loginForm.html', 
+        controller: 'loginFormController', 
+        controllerAs: 'vm'
       }).state('snippetsIndex', {
         url: '/', 
         templateUrl: 'app/components/snippetIndex/snippetIndex.html', 

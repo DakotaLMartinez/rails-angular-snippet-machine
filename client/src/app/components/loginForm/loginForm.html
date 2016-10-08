@@ -1,15 +1,27 @@
-<h1>Snippets</h1>
-<div ng-repeat="snippet in vm.snippets">
-  <h3><a href="" ui-sref="snippetShow({id: snippet.id})">{{ snippet.name }}</a></h3>
-  <p>Description: {{ snippet.description }}</p>
-  <p>Language: {{ snippet.language }}</p>
-  <p>Tab Trigger: {{ snippet.trigger }}</p>
-  <h3>Snippet Body:</h3>
-  <ace-editor body="snippet.body"></ace-editor>
-  <!--<textarea name="snippetBody" id="snippetBox" cols="70" rows="20">
-{{ snippet.body }}
-  </textarea>-->
-</div>
+<!--<h1>Log In</h1>
+<form ng-submit="handleLoginBtnClick(loginForm)" role="form" ng-init="loginForm = {}">
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="email"
+           name="email"
+           id="email"
+           ng-model="loginForm.email"
+           required="required"
+           class="form-control">
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <input type="password"
+           name="password"
+           id="password"
+           ng-model="loginForm.password"
+           required="required"
+           class="form-control">
+  </div>
+
+  <button type="submit" class="btn btn-primary btn-lg">Sign In</button>
+</form>-->
 
 <!-- Sign in/out form and user signed in details -->
   <div class="panel panel-default">
@@ -35,7 +47,7 @@
       </form>
 
       <!-- sign out button -->
-      <button class="btn btn-default" ng-click="signOut()" ng-if="user.signedIn">Sign out</button>
+      <button class="btn btn-default" ng-click="vm.signOut()" ng-if="user.signedIn">Sign out</button>
 
     </div>
   </div>

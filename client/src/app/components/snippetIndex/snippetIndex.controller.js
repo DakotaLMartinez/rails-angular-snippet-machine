@@ -5,8 +5,8 @@
     .module('dlmSnippetMachine')
     .controller('SnippetIndexController', SnippetIndexController);
 
-  SnippetIndexController.$inject = ['Snippet', '$auth', '$rootScope'];
-  function SnippetIndexController(Snippet, $auth, $rootScope) {
+  SnippetIndexController.$inject = ['Snippet'];
+  function SnippetIndexController(Snippet) {
     var vm = this;
     vm.snippets = [];
 
@@ -22,14 +22,6 @@
             vm.snippets = res;
           });
       }
-
-      $rootScope.$on('auth:login-success', function(ev,user){
-        getSnippets();
-      });
-
-      $rootScope.$on('auth:logout-success', function(ev){
-        vm.snippets = [];
-      });
       
       getSnippets();
     }

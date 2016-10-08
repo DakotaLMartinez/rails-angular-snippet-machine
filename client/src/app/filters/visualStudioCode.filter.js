@@ -1,6 +1,6 @@
 angular
   .module('dlmSnippetMachine')
-  .filter('visualStudioCode', visualStudioCode)
+  .filter('visualStudioCode', visualStudioCode);
   
   function visualStudioCode() {
     return function(input) {
@@ -17,5 +17,5 @@ angular
       } else {
         throw new Error('visualStudioCodeFilter must be given a string of code as an input');
       }
-    };
-  };
+    }
+  }
