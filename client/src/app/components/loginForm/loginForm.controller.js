@@ -21,7 +21,6 @@
       }
 
       $rootScope.$on('auth:login-success', function(ev, user){
-        alert('welcome ' + user.email);
         $state.go('snippetsIndex');
       });
 
