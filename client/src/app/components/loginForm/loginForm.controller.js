@@ -5,10 +5,11 @@
     .module('dlmSnippetMachine')
     .controller('loginFormController', loginFormController);
 
-  loginFormController.$inject = ['$auth', '$rootScope', '$state'];
-  function loginFormController($auth, $rootScope, $state) {
+  loginFormController.$inject = ['$auth', '$rootScope', '$state', '$scope'];
+  function loginFormController($auth, $rootScope, $state, $scope) {
     var vm = this;
     vm.logOut;
+    vm.error;
 
 
     activate();
@@ -26,6 +27,10 @@
 
       $rootScope.$on('auth:logout-success', function(){
         $state.go('signIn');
+      });
+
+      $scope.$on('auth:login-error', function(ev, reason){
+        vm.error = reason.errors[0];
       });
 
     }

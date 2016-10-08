@@ -48,6 +48,8 @@
 
       <!-- sign out button -->
       <button class="btn btn-default" ng-click="vm.signOut()" ng-if="user.signedIn">Sign out</button>
-
+      <div class="mt3 alert alert-danger" role="alert" ng-show="vm.error">
+        {{vm.error}}
+      </div>
     </div>
   </div>
