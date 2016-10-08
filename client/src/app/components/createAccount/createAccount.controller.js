@@ -5,10 +5,10 @@
     .module('dlmSnippetMachine')
     .controller('createAccountController', createAccountController);
 
-  createAccountController.$inject = ['$scope', '$auth'];
-  function createAccountController($scope, $auth) {
+  createAccountController.$inject = ['$rootScope', '$scope', '$auth'];
+  function createAccountController($rootScope, $scope, $auth) {
     var vm = this;
-    
+    vm.errors;
 
     activate();
 
@@ -24,6 +24,10 @@
             });
           });
       };
+
+      $rootScope.$on('auth:registration-email-error', function(ev,reason){
+        vm.errors = reason.errors.full_messages;
+      });
     }
   }
 })();

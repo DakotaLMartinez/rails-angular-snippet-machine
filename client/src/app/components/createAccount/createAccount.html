@@ -31,4 +31,9 @@
   </div>
 
   <button type="submit" class="btn btn-primary btn-lg">Register</button>
+  <div class="mt3 alert alert-danger" role="alert" ng-show="vm.errors">
+    <div ng-repeat="error in vm.errors">
+      {{ error }}  
+    </div>
+  </div>
 </form>
