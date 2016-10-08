@@ -20,7 +20,7 @@
         $rootScope.signOut();
       }
 
-      $rootScope.$on('auth:login-success', function(ev, user){
+      $rootScope.$on('auth:login-success', function(){
         $state.go('snippetsIndex');
       });
 
