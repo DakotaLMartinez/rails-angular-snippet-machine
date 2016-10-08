@@ -40,7 +40,7 @@
         controllerAs: 'vm'
       });
 
-    $urlRouterProvider.otherwise('/');
+    $urlRouterProvider.otherwise('/snippets');
   }
 
 })();
