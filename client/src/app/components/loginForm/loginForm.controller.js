@@ -23,6 +23,10 @@
         $rootScope.signOut();
       }
 
+      $rootScope.$on('auth:login-success', function(){
+        $state.go('snippetsIndex');
+      }); 
+
       $scope.$on('auth:login-error', function(ev, reason){
         vm.error = reason.errors[0];
       });
