@@ -39,6 +39,8 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rspec-rails'
   gem 'rubocop', require: false
+  gem 'factory_girl_rails'
+  gem 'faker'
 end
 
 gem 'devise_token_auth'
