@@ -30,6 +30,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 ActiveRecord::Migration.maintain_test_schema!
 
 Capybara.javascript_driver = :poltergeist 
+Capybara.raise_server_errors = false
 
 # Capybara.app = Rack::Builder.new do 
 #   eval File.read("./config.ru")
@@ -43,6 +44,7 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = false
+
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -71,16 +73,22 @@ RSpec.configure do |config|
   config.before(:suite) do 
     DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean_with(:truncation)
-  end
-
-  config.before(:all, type: :feature) do 
     system("gulp build --gulpfile #{Rails.configuration.gulpfile_location}")
     system("ln -s client/dist public")
   end
 
-  config.after(:all, type: :feature) do 
+  config.after(:suite) do 
     FileUtils.rm_rf(Rails.root.join("public"))
   end
+
+  # config.before(:all, type: :feature) do 
+  #   system("gulp build --gulpfile #{Rails.configuration.gulpfile_location}")
+  #   system("ln -s client/dist public")
+  # end
+
+  # config.after(:all, type: :feature) do 
+  #   FileUtils.rm_rf(Rails.root.join("public"))
+  # end
 
   config.before(:each) do 
     DatabaseCleaner.start

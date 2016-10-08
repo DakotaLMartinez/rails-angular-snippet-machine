@@ -3,14 +3,14 @@ require 'rails_helper'
 feature 'Authentication', js: true do
   before do
     @user = FactoryGirl.create(:confirmed_user)
-    visit '#/sign_in'
+    visit '/#/sign_in'
     @login_page = LoginPage.new
   end
 
   feature 'login' do
     scenario 'with valid inputs' do
       @login_page.sign_in(@user.email, @user.password)
-      expect(page).to have_content('Sign out')
+      expect(page).to have_content('Sign Out')
     end
 
     scenario 'with invalid credentials' do 
@@ -23,4 +23,6 @@ feature 'Authentication', js: true do
       expect(page).to have_content('Snippets Index')
     end
   end
+
 end
+

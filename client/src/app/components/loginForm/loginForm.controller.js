@@ -11,6 +11,7 @@
     vm.logOut;
     vm.error;
 
+    // See index.run.js for details of login/logout redirects
 
     activate();
 
@@ -18,16 +19,9 @@
 
     function activate() {
       vm.signOut = function() {
+        $state.go('snippetsIndex');
         $rootScope.signOut();
       }
-
-      $rootScope.$on('auth:login-success', function(){
-        $state.go('snippetsIndex');
-      });
-
-      $rootScope.$on('auth:logout-success', function(){
-        $state.go('signIn');
-      });
 
       $scope.$on('auth:login-error', function(ev, reason){
         vm.error = reason.errors[0];

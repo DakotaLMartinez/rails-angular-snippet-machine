@@ -6,11 +6,33 @@
     .run(runBlock);
 
   /** @ngInject */
-  runBlock.$inject = ['$log', '$rootScope', '$location'];
-  function runBlock($log, $rootScope, $location) {
+  runBlock.$inject = ['$log', '$rootScope', '$location', '$timeout', '$state'];
+  function runBlock($log, $rootScope, $location, $timeout, $state) {
     $rootScope.$on('auth:login-success', function(){
-      $location.path('/');
+      $timeout(function(){
+        $state.go('snippetsIndex');
+      });
     });
+    $rootScope.$on('auth:logout-sucess', function(){
+      alert('it worked');
+      $timeout(function(){
+        $state.go('snippetsIndex');
+      });
+    });
+    $rootScope.$on('auth:invalid', function(){
+      $timeout(function(){
+        $state.go('signIn');
+      });
+    });
+
+    $rootScope.$on('$stateChangeError', function(evt, to, toParams, from, fromParams, error){
+      if (error.redirectTo) {
+        $state.go(error.redirectTo);
+      } else {
+        $state.go('error', {status: error.status});
+      }
+    });
+
     $log.debug('runBlock end');
   }
 

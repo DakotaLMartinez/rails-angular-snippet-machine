@@ -37,13 +37,11 @@ group :development, :test do
   gem 'meta_request'
   gem 'pry-awesome_print'
   gem 'pry-rails'
-  gem 'rspec-rails'
   gem 'rubocop', require: false
   gem 'factory_girl_rails'
   gem 'faker'
 end
 
-gem 'devise_token_auth'
 gem 'rack-cors'
 
 group :development do
