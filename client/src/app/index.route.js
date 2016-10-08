@@ -13,6 +13,11 @@
         templateUrl: 'app/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
+      }).state('register', {
+        url: '/sign_up', 
+        templateUrl: 'app/components/createAccount/createAccount.html', 
+        controller: 'createAccountController', 
+        controllerAs: 'vm'
       }).state('signIn', {
         url: '/sign_in', 
         templateUrl: 'app/components/loginForm/loginForm.html', 
