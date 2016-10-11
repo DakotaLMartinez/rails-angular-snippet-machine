@@ -7,6 +7,9 @@ Devise.setup do |config|
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
   # config.secret_key = ENV['SECRET_KEY_BASE']
+  
+  # Make sure that build script includes an export SECRET_KEY_BASE=keybase_matching_nginx_conf_goes_here
+  # without this, devise won't be set up properly when bundle install runs
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
