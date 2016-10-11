@@ -13,8 +13,6 @@ DeviseTokenAuth.setup do |config|
   # After this limit is reached, the oldest tokens will be removed.
   # config.max_number_of_devices = 10
 
-  config.secret_key = ENV['SECRET_KEY_BASE']
-
   # Sometimes it's necessary to make several requests to the API at the same
   # time. In this case, each request in the batch will need to share the same
   # auth token. This setting determines how far apart the requests can be while
