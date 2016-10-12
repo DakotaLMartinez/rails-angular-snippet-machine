@@ -53,6 +53,11 @@
         templateUrl: 'app/components/vsCodeView/vsCodeView.html',
         controller: 'SnippetShowController', 
         controllerAs: 'vm'
+      }).state('snippetEdit', {
+        url: '/snippets/:id/edit', 
+        templateUrl: 'app/components/snippetEdit/snippetEdit.html', 
+        controller: 'SnippetEditController', 
+        controllerAs: 'vm'
       });
 
     $urlRouterProvider.otherwise('/');
