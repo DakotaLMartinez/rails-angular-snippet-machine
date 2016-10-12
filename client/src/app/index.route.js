@@ -30,7 +30,7 @@
         controllerAs: 'vm'
       }).state('snippetNew', {
         url: '/snippets/new', 
-        templateUrl: 'app/components/snippetNew/snippetNew.html',
+        templateUrl: 'app/components/snippetForm/snippetForm.html',
         controller: 'SnippetNewController', 
         controllerAs: 'vm', 
         resolve: {
@@ -55,7 +55,7 @@
         controllerAs: 'vm'
       }).state('snippetEdit', {
         url: '/snippets/:id/edit', 
-        templateUrl: 'app/components/snippetNew/snippetNew.html', 
+        templateUrl: 'app/components/snippetForm/snippetForm.html', 
         controller: 'SnippetEditController', 
         controllerAs: 'vm'
       });
