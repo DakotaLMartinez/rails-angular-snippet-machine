@@ -18,7 +18,7 @@
       if (error.redirectTo) {
         $state.go(error.redirectTo);
       } else {
-        $state.go('error', {status: error.status});
+        // $state.go('error', {status: error.status});
       }
     });
 
