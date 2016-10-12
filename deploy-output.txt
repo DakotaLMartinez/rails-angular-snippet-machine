@@ -1,0 +1,2 @@
+revised build script to omit npm install and bower install (not needed for now)
+adds gulp build back into build script
