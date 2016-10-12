@@ -6,6 +6,8 @@ class User < ActiveRecord::Base
           # :omniauthable
   include DeviseTokenAuth::Concerns::User
 
+  validates :email, uniqueness: true
+
   has_many :snippets
   before_save do 
     self.uid = SecureRandom.uuid
