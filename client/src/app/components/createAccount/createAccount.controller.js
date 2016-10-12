@@ -5,8 +5,8 @@
     .module('dlmSnippetMachine')
     .controller('createAccountController', createAccountController);
 
-  createAccountController.$inject = ['$rootScope', '$scope', '$auth'];
-  function createAccountController($rootScope, $scope, $auth) {
+  createAccountController.$inject = ['$rootScope', '$scope', '$auth', '$state'];
+  function createAccountController($rootScope, $scope, $auth, $state) {
     var vm = this;
     vm.errors;
 
@@ -24,6 +24,10 @@
             });
           });
       };
+
+      $rootScope.$on('auth:registration-email-success', function(ev){
+        $state.go('snippetsIndex');
+      })
 
       $rootScope.$on('auth:registration-email-error', function(ev,reason){
         vm.errors = reason.errors.full_messages;
