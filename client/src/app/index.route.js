@@ -55,7 +55,7 @@
         controllerAs: 'vm'
       }).state('snippetEdit', {
         url: '/snippets/:id/edit', 
-        templateUrl: 'app/components/snippetEdit/snippetEdit.html', 
+        templateUrl: 'app/components/snippetNew/snippetNew.html', 
         controller: 'SnippetEditController', 
         controllerAs: 'vm'
       });

@@ -1,11 +1,4 @@
-<h1>New Snippet</h1>
-<!--<form class="bg-blue w-50 mw-100 pv2 br2">
-  <div>
-    <span class="label">Name:</span>
-    <input type="text" ng-model="vm.name" />
-  </div>
-  
-</form>-->
+<h1>{{ vm.title }}</h1>
 
 <form ng-submit="vm.submitForm()">
   <div class="form-group">
@@ -26,7 +19,7 @@
   </div>
   <h4>Snippet Body:</h4>
   <ace-editor body="vm.body" size="450"></ace-editor>
-  <button type="submit" class="btn btn-primary">Create Snippet</button>
+  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 <textarea name="visualStudioCodeSnippet" id="visualStudioCodeSnippet" cols="100" rows="40">

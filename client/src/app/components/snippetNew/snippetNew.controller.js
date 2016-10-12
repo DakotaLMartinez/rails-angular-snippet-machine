@@ -8,6 +8,7 @@
   SnippetNewController.$inject = ['Snippet', '$filter'];
   function SnippetNewController(Snippet, $filter) {
     var vm = this;
+    vm.title = "New Snippet";
     var snippet = {}
     vm.name = "";
     vm.description = "";

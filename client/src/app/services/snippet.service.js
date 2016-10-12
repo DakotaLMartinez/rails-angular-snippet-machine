@@ -10,6 +10,7 @@
     this.getSnippets = getSnippets;
     this.getSnippet = getSnippet;
     this.createSnippet = createSnippet;
+    this.updateSnippet = updateSnippet;
 
     ////////////////
 
@@ -35,6 +36,15 @@
               .then(function(res){
                 return res.data;
               });
+    }
+
+    function updateSnippet(id, data){
+      var url = '/api/snippets/' + id;
+      return $http
+              .put(url, data)
+              .then(function(res){
+                return res.data;
+              })
     }
 
   }

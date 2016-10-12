@@ -28,10 +28,16 @@ class SnippetsController < ApplicationController
 
   # PATCH/PUT /snippets/1
   def update
-    if @snippet.update(snippet_params)
-      render json: @snippet
+    if is_my_snippet?(@snippet)
+      attributes = snippet_params.merge(user: current_user)
+      if @snippet.update(attributes)
+        render json: @snippet
+      else
+        render json: @snippet.errors, status: :unprocessable_entity
+      end
     else
-      render json: @snippet.errors, status: :unprocessable_entity
+      @snippet.errors.add(:user, "can't edit other user's snippets. Please fork this snippet to your account first.")
+      render json: @snippet.errors, status: :unauthorized
     end
   end
 
@@ -49,5 +55,9 @@ class SnippetsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def snippet_params
       params.require(:snippet).permit(:name, :description, :language, :trigger, :body)
+    end
+
+    def is_my_snippet?(snippet)
+      snippet.user === current_user
     end
 end
