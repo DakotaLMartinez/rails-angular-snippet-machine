@@ -5,8 +5,8 @@
     .module('dlmSnippetMachine')
     .controller('SnippetNewController', SnippetNewController);
 
-  SnippetNewController.$inject = ['Snippet', '$filter'];
-  function SnippetNewController(Snippet, $filter) {
+  SnippetNewController.$inject = ['Snippet', '$filter', '$state'];
+  function SnippetNewController(Snippet, $filter, $state) {
     var vm = this;
     vm.title = "New Snippet";
     var snippet = {}
@@ -34,8 +34,9 @@
         Snippet
           .createSnippet(data)
           .then(function(res){
-            vm.response = res;
-          })
+            $state.go('snippetShow', {id: res.id});
+          });
+
       }
     }
   }
