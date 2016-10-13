@@ -5,8 +5,8 @@
     .module('dlmSnippetMachine')
     .controller('SnippetEditController', SnippetEditController);
 
-  SnippetEditController.$inject = ['Snippet', '$stateParams', '$filter'];
-  function SnippetEditController(Snippet, $stateParams, $filter) {
+  SnippetEditController.$inject = ['Snippet', '$stateParams', '$filter', '$state'];
+  function SnippetEditController(Snippet, $stateParams, $filter, $state) {
     var vm = this;
     vm.title = "Edit Snippet";
     var snippet = {};
@@ -46,7 +46,7 @@
         Snippet
           .updateSnippet(vm.id, data)
           .then(function(res){
-            vm.response = res;
+            $state.go('snippetShow', {id: vm.id});
           })
       }
     }
