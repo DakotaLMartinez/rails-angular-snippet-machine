@@ -17,34 +17,42 @@
     function getSnippets() { 
       return $http
               .get('/api/snippets')
-              .then(function(res){
-                return res.data;
-              });
+              .then(handleGetSnippets);
+              
+      function handleGetSnippets(res){
+        return res.data;
+      }
     }
 
     function getSnippet(id) {
       return $http
               .get('/api/snippets/' + id)
-              .then(function(res){
-                return res.data;
-              });
+              .then(handleGetSnippet);
+              
+      function handleGetSnippet(res){
+        return res.data;
+      }
     }
 
     function createSnippet(data) {
       return $http
               .post('/api/snippets', data)
-              .then(function(res){
-                return res.data;
-              });
+              .then(handleCreateSnippet);
+              
+      function handleCreateSnippet(res){
+        return res.data;
+      }
     }
 
     function updateSnippet(id, data){
       var url = '/api/snippets/' + id;
       return $http
               .put(url, data)
-              .then(function(res){
-                return res.data;
-              })
+              .then(handleUpdateSnippet);
+              
+      function handleUpdateSnippet(res){
+        return res.data;
+      }
     }
 
   }
