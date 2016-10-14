@@ -34,6 +34,7 @@
         })
 
       vm.submitForm = submitForm;
+      vm.errors = {};
       
       function submitForm(){
         snippet.name = vm.name;
@@ -45,9 +46,18 @@
 
         Snippet
           .updateSnippet(vm.id, data)
-          .then(function(res){
-            $state.go('snippetShow', {id: vm.id});
-          })
+          .then(updateSuccess, updateError);
+          
+        function updateSuccess(){
+          $state.go('snippetShow', {id: vm.id});
+        }
+        function updateError(res){
+          vm.errors.name = res.data.name;
+          vm.errors.description = res.data.description;
+          vm.errors.language = res.data.language;
+          vm.errors.trigger = res.data.trigger;
+          vm.errors.body = res.data.body;
+        }
       }
     }
   }

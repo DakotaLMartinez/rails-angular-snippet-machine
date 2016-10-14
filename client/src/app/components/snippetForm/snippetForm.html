@@ -1,5 +1,5 @@
 <h1>{{ vm.title }}</h1>
-
+<display-errors errors="vm.errors"></display-errors>
 <form ng-submit="vm.submitForm()">
   <div class="form-group">
     <label for="snippetName">Name</label>
@@ -21,13 +21,3 @@
   <ace-editor body="vm.body" size="450"></ace-editor>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
-
-<!--<textarea name="visualStudioCodeSnippet" id="visualStudioCodeSnippet" cols="100" rows="40">
-"{{ vm.name }}": {
-  "prefix": "{{ vm.trigger }}",
-  "body": [
-{{ vm.body | visualStudioCode }}    
-  ],
-  "description": "{{ vm.description }}"
-}
-</textarea>-->
