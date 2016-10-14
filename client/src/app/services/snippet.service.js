@@ -5,18 +5,19 @@
     .module('dlmSnippetMachine')
     .service('Snippet', Snippet);
 
-  Snippet.$inject = ['$http'];
-  function Snippet($http) {
+  Snippet.$inject = ['$http', 'getApiUrl'];
+  function Snippet($http, getApiUrl) {
     this.getSnippets = getSnippets;
     this.getSnippet = getSnippet;
     this.createSnippet = createSnippet;
     this.updateSnippet = updateSnippet;
+    var url = getApiUrl.getUrl();
 
     ////////////////
 
     function getSnippets() { 
       return $http
-              .get('/api/snippets')
+              .get(url + '/snippets')
               .then(handleGetSnippets);
               
       function handleGetSnippets(res){
@@ -26,7 +27,7 @@
 
     function getSnippet(id) {
       return $http
-              .get('/api/snippets/' + id)
+              .get(url + '/snippets/' + id)
               .then(handleGetSnippet);
               
       function handleGetSnippet(res){
@@ -36,7 +37,7 @@
 
     function createSnippet(data) {
       return $http
-              .post('/api/snippets', data)
+              .post(url + '/snippets', data)
               .then(handleCreateSnippet);
               
       function handleCreateSnippet(res){
@@ -45,9 +46,9 @@
     }
 
     function updateSnippet(id, data){
-      var url = '/api/snippets/' + id;
+      var putUrl = url + '/snippets/' + id;
       return $http
-              .put(url, data)
+              .put(putUrl, data)
               .then(handleUpdateSnippet);
               
       function handleUpdateSnippet(res){

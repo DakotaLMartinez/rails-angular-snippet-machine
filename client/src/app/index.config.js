@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, $authProvider) {
+  function config($logProvider, toastrConfig, $authProvider, getApiUrlProvider) {
     // Enable log
     $logProvider.debugEnabled(true);
 
@@ -16,8 +16,11 @@
     toastrConfig.positionClass = 'toast-top-right';
     toastrConfig.preventDuplicates = true;
     toastrConfig.progressBar = true;
+    
+    var url = getApiUrlProvider.$get().getUrl();
 
     $authProvider.configure({
+      apiUrl: url
       // note: the defaults are fine for now
       // @see: https://github.com/lynndylanhurley/ng-token-auth#complete-config-example
     });
