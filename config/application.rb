@@ -35,7 +35,7 @@ module RailsAngularSnippets
         controller_specs: true
     end
 
-    config.middleware.use Rack::Cors do 
+    config.middleware.insert_before 0, Rack::Cors do 
       allow do 
         origins '*'
         resource '*',
