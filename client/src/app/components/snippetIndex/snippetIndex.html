@@ -1,14 +1,18 @@
 <h1>{{ vm.title }}</h1>
 <display-errors errors="vm.errors"></display-errors>
 <p><a class="btn btn-default mt3" href="" ng-click="vm.loadSnippets()">Reload Snippets</a></p>
+
 <div ng-repeat="snippet in vm.snippets">
-  <h3><a href="" ui-sref="snippetShow({id: snippet.id})">{{ snippet.name }}</a></h3>
-  <p>Description: {{ snippet.description }}</p>
-  <p>Language: {{ snippet.language }}</p>
-  <p>Tab Trigger: {{ snippet.trigger }}</p>
-  <h3>Snippet Body:</h3>
-  <ace-editor body="snippet.body"></ace-editor>
-  <!--<textarea name="snippetBody" id="snippetBox" cols="70" rows="20">
-{{ snippet.body }}
-  </textarea>-->
+  <div class="row">
+    <div class="col-sm-3">
+      <h3><a href="" ui-sref="snippetShow({id: snippet.id})">{{ snippet.name }}</a></h3>
+      <p>Description: {{ snippet.description }}</p>
+      <p>Language: {{ snippet.language }}</p>
+      <p>Tab Trigger: {{ snippet.trigger }}</p>
+    </div>
+    <div class="col-sm-9">
+      <h3>Snippet Body:</h3>
+      <ace-editor body="snippet.body"></ace-editor>
+    </div>
+  </div>
 </div>
