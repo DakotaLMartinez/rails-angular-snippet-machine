@@ -36,7 +36,7 @@
         <button type="submit" class="btn btn-default">Submit</button>
       </form>-->
       <ul class="nav navbar-nav navbar-right">
-        <li ng-show="vm.user.signedIn"><a href="">{{ vm.user.email }}</a></li>
+        <li ng-show="vm.user.signedIn"><a href="" ui-sref="userProfile">{{ vm.user.email }}</a></li>
         <li ng-show="vm.user.signedIn"><a href="" ng-click="vm.signOut()">Sign Out</a></li>
         <li ng-show="!vm.user.signedIn"><a href="" ui-sref="signIn">Sign In</a></li>
         <li ng-show="!vm.user.signedIn"><a href="" ui-sref="register">Sign Up</a></li>
