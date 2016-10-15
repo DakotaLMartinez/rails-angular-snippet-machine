@@ -1,6 +1,8 @@
 <div>
   <h1>{{ vm.snippet.name }}</h1>
-  <a class="btn btn-primary" href="" ui-sref="snippetEdit({id: {{ vm.id }} })">Edit</a>
+  <div class="mv2">
+    <a class="btn btn-primary" href="" ui-sref="snippetEdit({id: {{ vm.id }} })">Edit</a>
+  </div>
   <p>Description: {{ vm.snippet.description }}</p>
   <p>Language: {{ vm.snippet.language }}</p>
   <p>Tab Trigger: {{ vm.snippet.trigger }}</p>
