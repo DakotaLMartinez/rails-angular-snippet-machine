@@ -18,6 +18,7 @@ class SnippetsController < ApplicationController
   def create
     @snippet = Snippet.new(snippet_params)
     @snippet.user = current_user
+    @snippet.author = current_user.email
 
     if @snippet.save
       render json: @snippet, status: :created, location: @snippet
