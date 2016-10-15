@@ -15,7 +15,8 @@
       'toastr',
       'rails',
       'ui.ace',
-      'ng-token-auth'
+      'ng-token-auth',
+      'ngFlash'
     ]);
 
 })();

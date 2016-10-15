@@ -5,8 +5,8 @@
     .module('dlmSnippetMachine')
     .controller('SnippetShowController', SnippetShowController);
 
-  SnippetShowController.$inject = ['Snippet', '$stateParams', 'Session', '$state'];
-  function SnippetShowController(Snippet, $stateParams, Session, $state) {
+  SnippetShowController.$inject = ['Snippet', '$stateParams', 'Session', '$state', 'Flash'];
+  function SnippetShowController(Snippet, $stateParams, Session, $state, Flash) {
     var vm = this;
     vm.snippet;
     vm.id = $stateParams.id;
@@ -28,7 +28,7 @@
         function handleSuccess(res) {
           vm.snippet = res;
           vm.errors = {};
-          if (vm.snippet.user_id === vm.currentUser.id) {
+          if (vm.currentUser && vm.snippet.user_id === vm.currentUser.id) {
             vm.showDeleteButton = true;
           } else {
             vm.showDeleteButton = false;
@@ -37,6 +37,7 @@
       
         function handleError(res){
           vm.errors = res;
+          Flash.create('danger', 'Snippet not found');
           $state.go('snippetsIndex');
         }
       }

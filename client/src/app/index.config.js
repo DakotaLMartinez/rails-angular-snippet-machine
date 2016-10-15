@@ -6,7 +6,7 @@
     .config(config);
 
   /** @ngInject */
-  function config($logProvider, toastrConfig, $authProvider, getApiUrlProvider) {
+  function config($logProvider, toastrConfig, $authProvider, getApiUrlProvider, FlashProvider) {
     // Enable log
     $logProvider.debugEnabled(true);
 
@@ -24,6 +24,10 @@
       // note: the defaults are fine for now
       // @see: https://github.com/lynndylanhurley/ng-token-auth#complete-config-example
     });
+
+    FlashProvider.setTimeout(10000);
+    FlashProvider.setShowClose(true);
+
 
   }
 
