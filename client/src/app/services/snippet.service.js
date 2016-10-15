@@ -11,6 +11,7 @@
     this.getSnippet = getSnippet;
     this.createSnippet = createSnippet;
     this.updateSnippet = updateSnippet;
+    this.deleteSnippet = deleteSnippet;
     var url = getApiUrl.getUrl();
 
     ////////////////
@@ -54,6 +55,10 @@
       function handleUpdateSnippet(res){
         return res.data;
       }
+    }
+
+    function deleteSnippet(id) {
+      return $http.delete(url + '/snippets/' + id);
     }
 
   }
