@@ -37,7 +37,7 @@
           .createSnippet(data)
           .then(createSuccess, createError);
 
-        function createSuccess(){
+        function createSuccess(res){
           $state.go('snippetShow', {id: res.id});
         }
 
