@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161015193032) do
+ActiveRecord::Schema.define(version: 20161015234405) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20161015193032) do
     t.datetime "updated_at",  null: false
     t.integer  "user_id"
     t.string   "author"
+    t.json     "vscode"
     t.index ["trigger"], name: "index_snippets_on_trigger", unique: true, using: :btree
     t.index ["user_id"], name: "index_snippets_on_user_id", using: :btree
   end
