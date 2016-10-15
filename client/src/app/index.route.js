@@ -70,6 +70,13 @@
         templateUrl: 'app/components/snippetForm/snippetForm.html', 
         controller: 'SnippetEditController', 
         controllerAs: 'vm'
+      })
+
+      .state('userProfile', {
+        url: '/profile', 
+        templateUrl: 'app/components/userProfile/userProfile.html', 
+        controller: 'UserProfileController', 
+        controllerAs: 'vm'
       });
 
     $urlRouterProvider.otherwise('/');
