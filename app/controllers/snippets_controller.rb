@@ -43,7 +43,13 @@ class SnippetsController < ApplicationController
 
   # DELETE /snippets/1
   def destroy
-    @snippet.destroy
+    if is_my_snippet?(@snippet)
+      @snippet.destroy
+      render json: @snippet
+    else 
+      @snippet.errors['unauthorized'] = ["- only the creator of a snippet can delete it"]
+      render json: @snippet.errors, status: :unauthorized
+    end
   end
 
   private
