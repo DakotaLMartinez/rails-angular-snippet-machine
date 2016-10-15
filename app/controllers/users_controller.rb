@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def show 
     if @user
-      render json: @user.snippets
+      render json: @user.snippets.order(updated_at: 'desc')
     else 
       render json: @user
     end

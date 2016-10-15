@@ -4,7 +4,7 @@ class SnippetsController < ApplicationController
 
   # GET /snippets
   def index
-    @snippets = Snippet.all
+    @snippets = Snippet.all.order(updated_at: 'desc')
 
     render json: @snippets
   end
