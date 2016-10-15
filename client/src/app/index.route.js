@@ -30,10 +30,8 @@
       })
       
       .state('snippetsIndex', {
-        url: '/', 
-        templateUrl: 'app/components/snippetIndex/snippetIndex.html', 
-        controller: 'SnippetIndexController', 
-        controllerAs: 'vm'
+        url: '/',
+        template: '<snippet-index></snippet-index>'
       })
       
       .state('snippetNew', {
