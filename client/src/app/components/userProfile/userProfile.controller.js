@@ -5,8 +5,8 @@
     .module('dlmSnippetMachine')
     .controller('UserProfileController', UserProfileController);
 
-  UserProfileController.$inject = ['User', '$rootScope', '$state'];
-  function UserProfileController(User, $rootScope, $state) {
+  UserProfileController.$inject = ['$rootScope'];
+  function UserProfileController($rootScope) {
     var vm = this;
     vm.user = $rootScope.user;
   
