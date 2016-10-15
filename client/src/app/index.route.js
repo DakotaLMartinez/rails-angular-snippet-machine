@@ -76,7 +76,17 @@
         url: '/profile', 
         templateUrl: 'app/components/userProfile/userProfile.html', 
         controller: 'UserProfileController', 
-        controllerAs: 'vm'
+        controllerAs: 'vm',
+        resolve: {
+          auth: ['$auth', '$q', function($auth, $q) {
+            var deferred = $q.defer();
+            if ($auth.validateUser()) {
+              return deferred.resolve({});
+            } else {
+              return deferred.reject({redirectTo: 'signIn'});
+            }
+          }]
+        }
       });
 
     $urlRouterProvider.otherwise('/');
