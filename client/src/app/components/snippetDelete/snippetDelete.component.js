@@ -14,8 +14,8 @@
     controllerAs: 'vm'
   };
 
-  snippetDeleteController.$inject = ['Snippet']
-  function snippetDeleteController (Snippet) {
+  snippetDeleteController.$inject = ['Snippet', '$state']
+  function snippetDeleteController (Snippet, $state) {
     var vm = this; 
     vm.id;
     vm.deleteSnippet;
@@ -35,6 +35,7 @@
           function handleSuccess(res) {
             vm.message = "Snippet Successfully Deleted";
             vm.errors = {};
+            $state.go('snippetsIndex');
           }
       
           function handleError(res){
