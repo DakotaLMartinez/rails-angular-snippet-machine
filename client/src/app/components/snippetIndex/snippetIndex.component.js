@@ -30,8 +30,6 @@
     ///////////////////////////////
 
     function activate() {
-      vm.getAllSnippets = getAllSnippets;
-      vm.getUserSnippets = getUserSnippets;
       vm.loadSnippets = loadSnippets;
       vm.errors = {};
      
