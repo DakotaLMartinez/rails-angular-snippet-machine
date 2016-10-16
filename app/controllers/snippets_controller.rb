@@ -17,6 +17,7 @@ class SnippetsController < ApplicationController
   # POST /snippets
   def create
     @snippet = Snippet.new(snippet_params)
+    @snippet.vscode = @snippet.body.split("\n")
     @snippet.user = current_user
     @snippet.author = current_user.email
 
@@ -32,6 +33,8 @@ class SnippetsController < ApplicationController
     if is_my_snippet?(@snippet)
       attributes = snippet_params.merge(user: current_user)
       if @snippet.update(attributes)
+        @snippet.vscode = @snippet.body.split("\n")
+        @snippet.save
         render json: @snippet
       else
         render json: @snippet.errors, status: :unprocessable_entity
@@ -61,7 +64,7 @@ class SnippetsController < ApplicationController
 
     # Only allow a trusted parameter "white list" through.
     def snippet_params
-      params.require(:snippet).permit(:name, :description, :language, :trigger, :body)
+      params.require(:snippet).permit(:name, :description, :language, :trigger, :body, :vscode)
     end
 
     def is_my_snippet?(snippet)
