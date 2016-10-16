@@ -32,7 +32,7 @@
             .deleteSnippet(id)
             .then(handleSuccess, handleError)
           
-          function handleSuccess(res) {
+          function handleSuccess() {
             vm.message = "Snippet Successfully Deleted";
             vm.errors = {};
             Flash.create('success', vm.message);

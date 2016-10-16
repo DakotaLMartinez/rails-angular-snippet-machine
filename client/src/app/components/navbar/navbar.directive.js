@@ -21,7 +21,6 @@
     return directive;
 
     /** @ngInject */
-    NavbarController.$inject = ['moment', '$auth', '$rootScope', '$state', 'Session'];
     function NavbarController(moment, $auth, $rootScope, $state, Session) {
       var vm = this;
       vm.user = $rootScope.user;

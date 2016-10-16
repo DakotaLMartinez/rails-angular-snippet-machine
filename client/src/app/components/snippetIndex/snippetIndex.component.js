@@ -41,7 +41,6 @@
             getUserSnippets(vm.userId);
           } else {
             vm.errors.user = ['must be loaded before snippets can be fetched - please click reload snippets button'];
-            console.log(vm.errors.user);
           }
         } else {
           getAllSnippets();
