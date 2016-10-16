@@ -7,7 +7,7 @@
 
   InstructionsController.$inject = [];
   function InstructionsController() {
-    var vm = this;
+    // var vm = this;
     
 
     activate();
