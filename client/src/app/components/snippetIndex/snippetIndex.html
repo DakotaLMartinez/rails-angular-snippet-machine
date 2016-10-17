@@ -1,8 +1,23 @@
 <h1>{{ vm.title }}</h1>
 <display-errors errors="vm.errors"></display-errors>
 <p><a class="btn btn-default mt3" href="" ng-click="vm.loadSnippets()">Reload Snippets</a></p>
+<section class="row">
+  <div class="col-sm-4">
+    <label for="itemsPerPage" id="itemsPerPage">Items Per Page: {{ vm.itemsPerPage }}</label>
+    <input type="range" ng-model="vm.itemsPerPage" min="3" max="10" style="height: 34px" />
+  </div>
+  <div class="col-sm-4">
+    <label for="Search">Full Search: </label>
+    <input type="text" ng-model="search.$" class="form-control" />
+  </div>
+  <div class="col-sm-4">
+    <label for="languageSearch">Filter by Language: </label>
+    <input type="text" ng-model="search.language" uib-typeahead="lang for lang in vm.languages | filter:$viewValue | limitTo:8" class="form-control" />
+  </div>
+</section>
 
-<div ng-repeat="snippet in vm.snippets">
+
+<div dir-paginate="snippet in vm.snippets | filter:search | itemsPerPage: vm.itemsPerPage">
   <div class="row">
     <div class="col-sm-3">
       <h3><a href="" ui-sref="snippetShow({id: snippet.id})">{{ snippet.name }}</a></h3>
@@ -16,3 +31,4 @@
     </div>
   </div>
 </div>
+<dir-pagination-controls></dir-pagination-controls>

@@ -16,7 +16,8 @@
       'rails',
       'ui.ace',
       'ng-token-auth',
-      'ngFlash'
+      'ngFlash',
+      'angularUtils.directives.dirPagination'
     ]);
 
 })();
