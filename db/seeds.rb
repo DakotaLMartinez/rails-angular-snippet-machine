@@ -325,3 +325,68 @@ Snippet.create(
   trigger: 'jsnumber',
   body: '(!isNaN(parseFloat(${value})) && isFinite(${value}))'
 )
+Snippet.create(
+  name: 'Javascript Filter Array for Unique Values',
+  description: 'Code to filter out unique values in an array', 
+  language: 'javascript', 
+  trigger: 'jsuniquearray', 
+  body: 'function uniqueFilter(array) {
+    var seen = {};
+    var out = [];
+    var len = array.length;
+    var j = 0;
+    for(var i = 0; i < len; i++) {
+         var item = array[i];
+         if(seen[item] !== 1) {
+               seen[item] = 1;
+               out[j++] = item;
+         }
+    }
+    return out;
+}'
+)
+Snippet.create(
+  name: 'Rails Helper', 
+  description: 'Adds rails helper to Rspec test file', 
+  language: 'ruby', 
+  trigger: 'rh',
+  body: "require 'rails_helper' \n"
+)
+Snippet.create(
+  name: 'Rails Authorization Spec with Factory Girl', 
+  description: 'Adds rails authorization spec with Factory Girl', 
+  language: 'ruby', 
+  trigger: 'authspec', 
+  body: "require 'rails_helper'
+
+feature 'Authentication'${, js: true} do
+  feature 'login' do 
+    scenario 'with valid inputs' do 
+      @user = FactoryGirl.create(:confirmed_user)
+      visit '${/sign_in}'
+      fill_in '${Email}', with: @user.${email}
+      fill_in '${Password}', with: @user.${password}
+      find('${button}', text: '${Log in}').click
+      
+      expect(page).to have_content('${Log out}')
+    end
+  end
+end"
+)
+Snippet.create(
+  name: 'Factory Girl User Factory', 
+  description: 'Create a user factory with Factory girl including a method for a confirmed_user', 
+  language: 'ruby', 
+  trigger: 'fguserfactory', 
+  body: 'FactoryGirl.define do
+  factory :user do
+    email { Faker::Internet.email }
+    password { Faker::Internet.password(8) }
+    password_confirmation { password }
+
+    factory :confirmed_user do
+      confirmed_at Time.zone.now
+    end
+  end
+end'
+)

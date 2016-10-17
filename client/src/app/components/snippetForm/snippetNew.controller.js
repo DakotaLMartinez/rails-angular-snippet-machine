@@ -5,14 +5,15 @@
     .module('dlmSnippetMachine')
     .controller('SnippetNewController', SnippetNewController);
 
-  SnippetNewController.$inject = ['Snippet', '$filter', '$state'];
-  function SnippetNewController(Snippet, $filter, $state) {
+  SnippetNewController.$inject = ['Snippet', '$filter', '$state', 'Language'];
+  function SnippetNewController(Snippet, $filter, $state, Language) {
     var vm = this;
     vm.title = "New Snippet";
     var snippet = {}
     vm.name = "";
     vm.description = "";
     vm.language = "";
+    vm.languages = Language.listSupportedLanguages();
     vm.trigger = "";
     vm.body = "";
     

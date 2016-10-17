@@ -16,12 +16,12 @@
     controllerAs: 'vm'
   };
 
-  SnippetIndexController.$inject = ['Snippet', 'User']
-  function SnippetIndexController (Snippet, User) {
+  SnippetIndexController.$inject = ['Snippet', 'User', 'Language']
+  function SnippetIndexController (Snippet, User, Language) {
     var vm = this; 
     vm.snippets = [];
     vm.itemsPerPage = vm.itemsPerPage || 4;
-    vm.languages = ['javascript', 'ruby', 'html', 'css'];
+    vm.languages = Language.listSupportedLanguages();
     if (vm.profilePage === true) {
       vm.title = "My Snippets";
     } else {

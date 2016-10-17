@@ -5,8 +5,8 @@
     .module('dlmSnippetMachine')
     .controller('SnippetEditController', SnippetEditController);
 
-  SnippetEditController.$inject = ['Snippet', '$stateParams', '$filter', '$state'];
-  function SnippetEditController(Snippet, $stateParams, $filter, $state) {
+  SnippetEditController.$inject = ['Snippet', '$stateParams', '$filter', '$state', 'Language'];
+  function SnippetEditController(Snippet, $stateParams, $filter, $state, Language) {
     var vm = this;
     vm.title = "Edit Snippet";
     var snippet = {};
@@ -14,6 +14,7 @@
     vm.name = "";
     vm.description = "";
     vm.language = "";
+    vm.languages = Language.listSupportedLanguages();
     vm.trigger = "";
     vm.body = "";
 

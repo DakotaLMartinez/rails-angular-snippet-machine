@@ -11,7 +11,7 @@
   </div>
   <div class="form-group">
     <label for="snippetLanguage">Language</label>
-    <input type="text" class="form-control" id="snippetLanguage" placeholder="What language is this used for" ng-model="vm.language">
+    <input type="text" class="form-control" id="snippetLanguage" autocomplete="off" placeholder="What language is this used for" ng-model="vm.language" uib-typeahead="lang for lang in vm.languages | filter:$viewValue | limitTo:8"  />
   </div>
   <div class="form-group">
     <label for="snippetTrigger">Tab Trigger</label>
