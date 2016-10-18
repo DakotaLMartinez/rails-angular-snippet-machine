@@ -44,9 +44,15 @@ module RailsAngularSnippets
           :methods => [:get, :post, :options, :delete, :put]
       end
     end
-    
+
     config.api_only = true
     config.from_file 'settings.yml'
     config.from_file 'settings.local.yml'
+
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.insert_after(ActionDispatch::Cookies, ActionDispatch::Session::CookieStore)
+    config.middleware.use OmniAuth::Builder do
+      provider :dropbox, Rails.configuration.dropbox.app_key, Rails.configuration.dropbox.secret_key
+    end
   end
 end
