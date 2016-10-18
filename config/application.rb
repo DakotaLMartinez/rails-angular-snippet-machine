@@ -46,5 +46,7 @@ module RailsAngularSnippets
     end
     
     config.api_only = true
+    config.from_file 'settings.yml'
+    config.from_file 'settings.local.yml'
   end
 end
