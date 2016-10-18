@@ -11,6 +11,7 @@ gem 'omniauth'
 gem 'devise_token_auth'
 
 gem 'dropbox-api'
+gem 'omniauth-dropbox'
 gem 'choices'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.5'
