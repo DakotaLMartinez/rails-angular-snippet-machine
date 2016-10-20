@@ -5,4 +5,17 @@ class Snippet < ApplicationRecord
     validates :trigger, uniqueness: { scope: [:user, :language], message: "must be unique for each language" }
 
     belongs_to :user
+
+    before_save :set_author
+    before_save :save_editor_formats
+
+    private 
+
+    def set_author
+        self.author = self.user.email
+    end
+
+    def save_editor_formats
+        self.vscode = self.body.split("\n")
+    end
 end
