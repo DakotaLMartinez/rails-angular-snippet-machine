@@ -11,17 +11,23 @@ class VscodeSnippetsController < ApplicationController
   # get 'api/user_snippets/:user_id/language/:language'
   def language 
     lang = params[:language]
-    @snippets = @user.snippets.where('language = ?', lang)
     response = {}
-    @snippets.each do |s|
-      name = s.name
-      snippet = {}
-      snippet['prefix'] = s.trigger
-      snippet['body'] = s.vscode
-      snippet['description'] = s.description
-      response[name] = snippet
+    # render json: session
+    begin
+      @snippets = @user.snippets.where('language = ?', lang)
+      @snippets.each do |s|
+        name = s.name
+        snippet = {}
+        snippet['prefix'] = s.trigger
+        snippet['body'] = s.vscode
+        snippet['description'] = s.description
+        response[name] = snippet
+      end
+      render json: response
+    rescue
+      response["errors"] = ["no snippets found for this user in #{lang}"]
+      render json: response, status: :not_found
     end
-    render json: response
   end
 
   private 
@@ -31,7 +37,8 @@ class VscodeSnippetsController < ApplicationController
   end
 
   def set_user 
-    @user = User.find(params[:user_id])
+    @user = current_user
+    # User.find(params[:user_id])
   end
 
   def vscode_snippet_params

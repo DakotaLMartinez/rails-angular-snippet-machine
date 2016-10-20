@@ -1,4 +1,6 @@
 class DropboxController < ApplicationController
+
+  before_action :set_client, only: [:add_snippets]
   
   def authorize 
     consumer      = Dropbox::API::OAuth.consumer(:authorize)
@@ -27,10 +29,18 @@ class DropboxController < ApplicationController
     redirect_to @redirect_url
   end
 
+  def add_snippets
+
+  end
+
   private
 
-  def create_folders
+  def set_client 
     client = Dropbox::API::Client.new(token: session[:dropbox_token], secret: session[:dropbox_secret])
+  end
+
+  def create_folders
+    set_client
       
     begin client.mkdir('vscode') rescue {} end
     begin client.mkdir('sublime') rescue {} end
