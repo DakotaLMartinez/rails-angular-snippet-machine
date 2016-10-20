@@ -5,6 +5,7 @@ class Snippet < ApplicationRecord
     validates :trigger, uniqueness: { scope: [:user, :language], message: "must be unique for each language" }
 
     belongs_to :user
+    belongs_to :language
 
     before_save :set_author
     before_save :save_editor_formats

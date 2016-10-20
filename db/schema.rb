@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020040813) do
+ActiveRecord::Schema.define(version: 20161020082050) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(version: 20161020040813) do
   create_table "snippets", force: :cascade do |t|
     t.string   "name",        null: false
     t.string   "description"
-    t.string   "language"
     t.string   "trigger"
     t.text     "body"
     t.datetime "created_at",  null: false
@@ -32,7 +31,8 @@ ActiveRecord::Schema.define(version: 20161020040813) do
     t.integer  "user_id"
     t.string   "author"
     t.json     "vscode"
-    t.index ["user_id", "language", "trigger"], name: "index_snippets_on_user_id_and_language_and_trigger", unique: true, using: :btree
+    t.integer  "language_id"
+    t.index ["language_id"], name: "index_snippets_on_language_id", using: :btree
     t.index ["user_id"], name: "index_snippets_on_user_id", using: :btree
   end
 
@@ -64,5 +64,6 @@ ActiveRecord::Schema.define(version: 20161020040813) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true, using: :btree
   end
 
+  add_foreign_key "snippets", "languages"
   add_foreign_key "snippets", "users"
 end

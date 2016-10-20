@@ -9,6 +9,7 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
 
   has_many :snippets
+  has_many :languages, through: :snippets
   before_save do 
     self.uid = SecureRandom.uuid
     skip_confirmation!

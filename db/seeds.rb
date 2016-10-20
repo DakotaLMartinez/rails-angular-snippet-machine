@@ -7,26 +7,30 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'factory_girl_rails' 
 test_user = FactoryGirl.create(:test_user)
+javascript = Language.where(name: "JavaScript").first_or_create
+ruby = Language.where(name: "Ruby").first_or_create
+html = Language.where(name: "HTML").first_or_create
+css = Language.where(name: "CSS").first_or_create
 
 test_user.snippets.create(
   name: 'my first snippet', 
   description: 'the best snippet ever', 
   trigger: 'snip', 
-  language: 'JavaScript', 
+  language: javascript, 
   body: 'var snippet = "awesomer";'
 )
 test_user.snippets.create(
   name: 'my second snippet', 
   description: 'the second best snippet ever', 
   trigger: 'snip2', 
-  language: 'JavaScript', 
+  language: javascript, 
   body: 'var snippet = "awesome";'
 )
 test_user.snippets.create(
   name: '3 Column Row', 
   description: 'Adds Bootstrap 3 column row', 
   trigger: 'bsrowthreecolumns', 
-  language: 'html', 
+  language: html, 
   body: '<div class="row">
 	<div class="${1:col-md-4 col-sm-6}">
 		$2
@@ -43,7 +47,7 @@ test_user.snippets.create(
   name: 'Angular 1 Session Service', 
   description: 'Adds code for an Angular 1 Session service that stores user data in $cookies using ngCookies', 
   trigger: 'ng1sessionservice', 
-  language: 'javascript', 
+  language: javascript, 
   body: "(function() {
 'use strict';
 
@@ -84,7 +88,7 @@ test_user.snippets.create(
   name: 'Angular 1 Service Call from Controller', 
   description: 'Creates a function that calls an Angular 1 service call from within a controller', 
   trigger: 'ng1callservice', 
-  language: 'javascript', 
+  language: javascript, 
   body:'function ${getUserSnippets}(${id}) {
     ${User}
       .${getUserSnippets}(${id})
@@ -103,7 +107,7 @@ test_user.snippets.create(
 test_user.snippets.create(
   name: 'Bootstrap 3 Columns', 
   description: 'Adds 3 more columns to a bootstrap row', 
-  language: 'html', 
+  language: html, 
   trigger: 'bsthreecolumns', 
   body: '<div class="${1:col-md-4 col-sm-6}">
 	$2
@@ -118,7 +122,7 @@ test_user.snippets.create(
 test_user.snippets.create(
   name: 'CSS for Background Image', 
   description: 'Adds background image to a CSS selector of your choice', 
-  language: 'css', 
+  language: css, 
   trigger: 'cssbackground', 
   body: '${1:body} {
     background: url(${2:image url}) no-repeat ${3:center} ${4:center} ${5:fixed}; 
@@ -131,7 +135,7 @@ test_user.snippets.create(
 test_user.snippets.create(
   name: 'Bootstrap Centered Navbar', 
   description: 'Enters HTML for simple centered bootstrap navbar', 
-  language: 'html', 
+  language: html, 
   trigger: 'bsnavcenter', 
   body: '<nav class="navbar navbar-default">
   <div class="container-fluid">
@@ -158,7 +162,7 @@ test_user.snippets.create(
 test_user.snippets.create(
   name: 'Javascript Function', 
   description: 'adds javascript function definition', 
-  language: 'javascript', 
+  language: javascript, 
   trigger: 'fn', 
   body: 'function ${1:name}(${2:args}) {
 	$3
@@ -167,7 +171,7 @@ test_user.snippets.create(
 test_user.snippets.create(
   name: 'CSS Comment', 
   description: 'adds a nice banner comment to a CSS file', 
-  language: 'css', 
+  language: css, 
   trigger: 'comment', 
   body: '/*--------------------------------------------------------------
 # ${1:Section}
@@ -177,7 +181,7 @@ $2'
 test_user.snippets.create(
   name: 'Angular 1 Display Errors Component', 
   description: 'adds component to display errors', 
-  language: 'javascript', 
+  language: javascript, 
   trigger: 'ng1displayerrors', 
   body: "(function() {
   'use strict';
@@ -253,7 +257,7 @@ test_user.snippets.create(
 test_user.snippets.create(
   name: 'Angular 1 Component', 
   description: 'Adds an Angular 1 Component Template', 
-  language: 'javascript', 
+  language: javascript, 
   trigger: 'ng1component', 
   body: "(function() {
   'use strict';
@@ -295,7 +299,7 @@ test_user.snippets.create(
 test_user.snippets.create(
   name: 'Angular 1 UI Router Config',
   description: 'Adds UI Router configuration to Angular 1 project',
-  language: 'javascript', 
+  language: javascript, 
   trigger: 'ng1uirouterconfig', 
   body: "(function() {
   'use strict';
@@ -323,14 +327,14 @@ test_user.snippets.create(
 test_user.snippets.create(
   name: 'Javascript Check if Value is Numeric',
   description: 'Javascript code that returns a boolean value regarding the numericality of a value.', 
-  language: 'javascript', 
+  language: javascript, 
   trigger: 'jsnumber',
   body: '(!isNaN(parseFloat(${value})) && isFinite(${value}))'
 )
 test_user.snippets.create(
   name: 'Javascript Filter Array for Unique Values',
   description: 'Code to filter out unique values in an array', 
-  language: 'javascript', 
+  language: javascript, 
   trigger: 'jsuniquearray', 
   body: 'function uniqueFilter(array) {
     var seen = {};
@@ -350,14 +354,14 @@ test_user.snippets.create(
 test_user.snippets.create(
   name: 'Rails Helper', 
   description: 'Adds rails helper to Rspec test file', 
-  language: 'ruby', 
+  language: ruby, 
   trigger: 'rh',
   body: "require 'rails_helper' \n"
 )
 test_user.snippets.create(
   name: 'Rails Authorization Spec with Factory Girl', 
   description: 'Adds rails authorization spec with Factory Girl', 
-  language: 'ruby', 
+  language: ruby, 
   trigger: 'authspec', 
   body: "require 'rails_helper'
 
@@ -378,7 +382,7 @@ end"
 test_user.snippets.create(
   name: 'Factory Girl User Factory', 
   description: 'Create a user factory with Factory girl including a method for a confirmed_user', 
-  language: 'ruby', 
+  language: ruby, 
   trigger: 'fguserfactory', 
   body: 'FactoryGirl.define do
   factory :user do
@@ -395,14 +399,14 @@ end'
 test_user.snippets.create(
   name: 'Variable definition in Rspec file', 
   description: 'adds a let definition for a variable to be used in an rspec testing block',
-  language: 'ruby', 
+  language: ruby, 
   trigger: 'let', 
   body: 'let(:${1:var}) { ${2:definition goes here} } $3'
 )
 test_user.snippets.create(
   name: 'Context Block for Rspec Test', 
   description: 'adds a context block to an rspec spec file', 
-  language: 'ruby', 
+  language: ruby, 
   trigger: 'context',
   body: 'context "${whatever}" do
   $1
@@ -411,9 +415,16 @@ end'
 test_user.snippets.create(
   name: 'It block for Rspec test', 
   description: 'Adds an it block to an rspec spec file', 
-  language: 'ruby', 
+  language: ruby, 
   trigger: 'it', 
   body: 'it "${does something cool}" do 
   $1
 end'
+)
+test_user.snippets.create(
+  name: 'Find or Create By (first or create)', 
+  description: 'new syntax for find or create by in Ruby on Rails', 
+  language: ruby,
+  trigger: 'findorcreate',
+  body: '${Class}.where(${query}).first_or_create'
 )
