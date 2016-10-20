@@ -16,7 +16,7 @@ class Language < ApplicationRecord
   validates :name, uniqueness: true
 
   def must_have_language_support
-    if !languages.has_key?(self.name)
+    if !languages.has_key?(self.name.to_sym)
       errors.add(:name, "Sorry, we don't support snippets in #{self.name}")
     end
   end
