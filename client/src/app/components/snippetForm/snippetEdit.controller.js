@@ -53,12 +53,7 @@
           $state.go('snippetShow', {id: vm.id});
         }
         function updateError(res){
-          vm.errors = res;
-          vm.errors.name = res.data.name;
-          vm.errors.description = res.data.description;
-          vm.errors.language = res.data.language;
-          vm.errors.trigger = res.data.trigger;
-          vm.errors.body = res.data.body;
+          vm.errors = res.data;
         }
       }
     }
