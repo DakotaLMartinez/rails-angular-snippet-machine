@@ -30,7 +30,7 @@
       "Git Rebase message": "git-rebase",
       "Go": "go",
       "Groovy": "groovy",
-      "Handlebars": "handlbars",
+      "Handlebars": "handlebars",
       "HTML": "html",
       "Ini": "ini",
       "Jade": "jade",
