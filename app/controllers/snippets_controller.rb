@@ -16,10 +16,7 @@ class SnippetsController < ApplicationController
 
   # POST /snippets
   def create
-    @snippet = Snippet.new(snippet_params)
-    @snippet.vscode = @snippet.body.split("\n")
-    @snippet.user = current_user
-    @snippet.author = current_user.email
+    @snippet = current_user.snippets.build(snippet_params)
 
     if @snippet.save
       render json: @snippet, status: :created, location: @snippet
@@ -33,14 +30,12 @@ class SnippetsController < ApplicationController
     if is_my_snippet?(@snippet)
       attributes = snippet_params.merge(user: current_user)
       if @snippet.update(attributes)
-        @snippet.vscode = @snippet.body.split("\n")
-        @snippet.save
         render json: @snippet
       else
         render json: @snippet.errors, status: :unprocessable_entity
       end
     else
-      @snippet.errors.add(:user, "can't edit other user's snippets. Please fork this snippet to your account first.")
+      @snippet.errors.add(:user, "can't edit other user's snippets. Please add this snippet to your account first.")
       render json: @snippet.errors, status: :unauthorized
     end
   end
