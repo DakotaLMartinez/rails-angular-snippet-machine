@@ -29,7 +29,7 @@
           vm.snippet = res;
           vm.name = res.name;
           vm.description = res.description;
-          vm.language = res.language; 
+          vm.language = res.language.name; 
           vm.trigger = res.trigger; 
           vm.body = res.body;
         })
