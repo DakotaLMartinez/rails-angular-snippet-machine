@@ -1,6 +1,7 @@
 class SnippetsController < ApplicationController
   before_action :set_snippet, only: [:show, :update, :destroy]
   before_action :authenticate_user!, only: [:create, :update, :destroy]
+  after_action :add_to_dropbox, only: [:create]
 
   # GET /snippets
   def index
@@ -17,12 +18,22 @@ class SnippetsController < ApplicationController
   # POST /snippets
   def create
     @snippet = current_user.snippets.build(snippet_params)
-
-    if @snippet.save
-      render json: @snippet, status: :created, location: @snippet
-    else
+    begin 
+      language = Language.find_or_create_by(name: params[:language])
+      if language 
+        @snippet.language = language
+        if @snippet.save
+          language.
+          render json: @snippet, status: :created, location: @snippet
+        else
+          render json: @snippet.errors, status: :unprocessable_entity
+        end
+      end
+    rescue 
+      @snippet.errors.add(:language, 'not supported')
       render json: @snippet.errors, status: :unprocessable_entity
     end
+    
   end
 
   # PATCH/PUT /snippets/1
@@ -52,6 +63,10 @@ class SnippetsController < ApplicationController
   end
 
   private
+
+    def add_to_dropbox
+      redirect_to add_user_snippets_url(current_user.id)
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_snippet
       @snippet = Snippet.find(params[:id])
