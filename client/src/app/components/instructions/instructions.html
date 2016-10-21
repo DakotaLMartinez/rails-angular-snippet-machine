@@ -7,29 +7,29 @@
 </p> 
 
 <p>
-  After authenticating with Dropbox, you'll need to set up a symlink between your dropbox directory and the directory where Visual Studio Code snippets are stored. First, you'll want to copy any existing snippets into your dropbox folder.
+  After authenticating with Dropbox, you'll need to set up a symlink between your dropbox directory and the directory where Visual Studio Code snippets are stored. First, you'll want to copy any existing snippets into SnippetMachine. At the moment, this means entering them into the web app through the New Snippet Form. Note that once you've synchronized SnippetMachine with Dropbox, your changes will be effective immediately upon clicking the Save to Dropbox button on your User Profile page. So, any custom snippets you were created that were not saved into the web app before syncing will be overwritten by the symlink you create below.
 </p>
 
 <pre>
-cp ~/Library/Application\ Support/Code/User/snippets ~/Dropbox/dlmSnippetMachine/vscode/snippets
+cp ~/Library/Application\ Support/Code/User/snippets ~/Dropbox/Apps/dlmSnippetMachine/vscode/snippets
 rm -rf ~/Library/Application\ Support/Code/User/snippets
-ln -s ~/Dropbox/dlmSnippetMachine/vscode/snippets ~/Library/Application\ Support/Code/User/
+ln -s ~/Dropbox/Apps/dlmSnippetMachine/vscode/snippets ~/Library/Application\ Support/Code/User/
 </pre>
 
 <p>
-  After this symlink is complete, any changes you save to Dropbox from within Snippet Machine will be available within Visual Studio Code.
+  After this symlink is complete, any snippets you save to Dropbox from within SnippetMachine will be available within Visual Studio Code.
 </p>
 
 <h4>Sublime Text 2</h4>
 
 <p>
-  Again, Dropbox integration is crucial to getting the most out of SnippetMachine.
+  Again, Dropbox integration is crucial to getting the most out of SnippetMachine. After authenticating with Dropbox, you'll want to create a symlink between your dropbox directory and the directory where Sublime Text 2 Snippets are usually stored. First, you'll want to copy the contents of that Sublime directory into your dropbox, then delete the folder and symlink your dropbox folder to the directory containing the folder you just deleted. Finally, creating the symlink will enable SnippetMachine to add Snippets to Sublime Text through Dropbox integration. The commands to do this are below. 
 </p>
 
 <pre>
-cp ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User ~/Dropbox/dlmSnippetMachine/sublime2/User
+cp ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User ~/Dropbox/Apps/dlmSnippetMachine/sublime/User
 rm -rf ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User
-ln -s ~/Dropbox/dlmSnippetMachine/sublime2/User ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
+ln -s ~/Dropbox/dlmSnippetMachine/sublime/User ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/
 </pre>
 
 <p>
