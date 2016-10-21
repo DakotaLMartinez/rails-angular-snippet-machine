@@ -1,6 +1,4 @@
 class DropboxController < ApplicationController
-
-  before_action :set_client, only: [:add_snippets]
   
   def authorize 
     consumer      = Dropbox::API::OAuth.consumer(:authorize)
@@ -29,20 +27,29 @@ class DropboxController < ApplicationController
     redirect_to @redirect_url
   end
 
+  # get /api/dropbox/users/:user_id/add_snippets
   def add_snippets
-
+    if dropbox_enabled?
+      user = User.find_by(id: params[:user_id])
+      if user
+        user.languages.uniq.each do |lang|
+          snippets_file = lang.vscode_snippets(user.id)
+          dropbox.upload "vscode/snippets/#{lang.vscode}.json", snippets_file
+        end
+        render json: "Successfully saved snippets to dropbox, you may now close this window."
+      else
+        render json: "couldn't find a user with that ID", status: :not_found
+      end
+    end
   end
 
   private
 
-  def set_client 
-    client = Dropbox::API::Client.new(token: session[:dropbox_token], secret: session[:dropbox_secret])
-  end
-
   def create_folders
-    set_client
+    client = Dropbox::API::Client.new(token: session[:dropbox_token], secret: session[:dropbox_secret])
       
     begin client.mkdir('vscode') rescue {} end
+    begin client.mkdir('vscode/snippets') rescue {} end
     begin client.mkdir('sublime') rescue {} end
     begin client.mkdir('sublime/User') rescue {} end
     @response = client.ls

@@ -3,11 +3,28 @@ class Language < ApplicationRecord
   has_many :snippets
 
   def vscode
-    languages[@language.to_sym][:vscode]
+    languages[name.to_sym][:vscode]
   end
 
   def sublime
-    languages[@language.to_sym][:sublime]
+    languages[name.to_sym][:sublime]
+  end
+
+  def vscode_snippets(user_id)
+    response = {} 
+    begin
+      snippets.where('user_id = ?', user_id).each do |s| 
+        name = s.name 
+        snippet = {}
+        snippet['prefix'] = s.trigger
+        snippet['body'] = s.vscode 
+        snippet['description'] = s.description 
+        response[name] = snippet
+      end
+    rescue 
+      response["errors"] = ["no snippets found for this user in #{self.name}"]
+    end
+    JSON.pretty_generate(response)
   end
 
   # Validations
@@ -16,7 +33,7 @@ class Language < ApplicationRecord
   validates :name, uniqueness: true
 
   def must_have_language_support
-    if !languages.has_key?(self.name.to_sym)
+    if !languages.has_key?(name.to_sym)
       errors.add(:name, "Sorry, we don't support snippets in #{self.name}")
     end
   end
