@@ -428,3 +428,47 @@ test_user.snippets.create(
   trigger: 'findorcreate',
   body: '${Class}.where(${query}).first_or_create'
 )
+test_user.snippets.create(
+  name: 'Iffe', 
+  description: 'Surrounds the statement in an iffe', 
+  language: javascript, 
+  trigger: 'iffe', 
+  body: "(function() {
+  'use strict';
+
+  ${...}
+
+})();"
+)
+
+test_user.snippets.create(
+  name: 'Custom Validator in Ruby on Rails', 
+  description: 'Adds a custom Validation function to a Ruby on Rails Model',
+  language: ruby, 
+  trigger: 'railscustomvalidation',
+  body: "validate :${myCustomValidation}
+
+def ${myCustomValidation}
+  ${My}Validator.new(self).validate
+end
+
+include ActiveModel::Validations 
+
+class ${My}Validator 
+  def initialize(${model})
+    @${model} = ${model} 
+  end
+  
+  def validate 
+    if ${something to check}
+      @${model}.errors.add(:${field_name}, ${error_message})
+    end
+  end
+  
+end
+
+validate do |${model}| 
+  ${My}Validator.new(${model}).validate
+end"
+)
+
