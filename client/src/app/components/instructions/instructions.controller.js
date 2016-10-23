@@ -5,9 +5,9 @@
     .module('dlmSnippetMachine')
     .controller('InstructionsController', InstructionsController);
 
-  InstructionsController.$inject = [];
-  function InstructionsController() {
-    // var vm = this;
+  InstructionsController.$inject = ['$auth'];
+  function InstructionsController($auth) {
+    var vm = this;
     
 
     activate();
@@ -15,7 +15,10 @@
     ////////////////
 
     function activate() { 
-      
+      vm.authenticateWithDropbox = function() {
+        $auth.authenticate('dropbox')
+      };
+
     }
   }
 })();
