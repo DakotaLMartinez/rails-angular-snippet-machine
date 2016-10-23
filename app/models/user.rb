@@ -3,15 +3,12 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
           :recoverable, :rememberable, :trackable, :validatable,
           :confirmable 
-          :omniauthable
+          
+  devise :omniauthable, omniauth_providers: [:dropbox]
   include DeviseTokenAuth::Concerns::User
 
   validates :email, uniqueness: true
 
   has_many :snippets
   has_many :languages, through: :snippets
-  before_save do 
-    self.uid = SecureRandom.uuid
-    skip_confirmation!
-  end
 end
