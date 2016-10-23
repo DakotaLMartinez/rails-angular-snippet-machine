@@ -5,12 +5,12 @@
     .module('dlmSnippetMachine')
     .service('User', User);
 
-  User.$inject = ['$http', 'getApiUrl', 'Session', '$window'];
-  function User($http, getApiUrl, Session, $window) {
+  User.$inject = ['$http', 'getApiUrl', '$window', '$rootScope', '$log'];
+  function User($http, getApiUrl, $window, $rootScope, $log) {
     this.getUserSnippets = getUserSnippets;
     this.saveUserSnippets = saveUserSnippets;
     var url = getApiUrl.getUrl();
-    var currentUserId = Session.getCurrentUserId();
+    var currentUserId;
     
     ////////////////
 
@@ -23,8 +23,13 @@
     }
 
     function saveUserSnippets() {
-      var saveUrl = url + '/dropbox/users/' + currentUserId + '/add_snippets';
-      $window.open(saveUrl, 'Save-to-Dropbox','width=500,height=400');
+      if ($rootScope.user) { 
+        currentUserId = $rootScope.user.id
+        var saveUrl = url + '/dropbox/users/' + currentUserId + '/add_snippets';
+        $window.open(saveUrl, 'Save-to-Dropbox','width=500,height=400');
+      } else {
+        $log.log('User must be loaded first');
+      }
       // var popUp = $window.open(saveUrl, 'Save-to-Dropbox','width=500,height=400');
       // $timeout(function(){popUp.close()}, 8000);
     }
