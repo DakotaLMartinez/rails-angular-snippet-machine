@@ -20,7 +20,11 @@
     var url = getApiUrlProvider.$get().getUrl();
 
     $authProvider.configure({
-      apiUrl: url
+      apiUrl: url,
+      omniauthWindowType: 'sameWindow',
+      authProviderPaths: {
+        dropbox: '/auth/dropbox'
+      }
       // note: the defaults are fine for now
       // @see: https://github.com/lynndylanhurley/ng-token-auth#complete-config-example
     });
