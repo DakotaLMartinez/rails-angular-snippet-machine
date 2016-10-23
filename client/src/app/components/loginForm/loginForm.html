@@ -1,29 +1,38 @@
-  <div class="panel panel-default">
-    <div class="panel-heading">Sign in via email</div>
-    <div class="panel-body">
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3 bg-lightest-blue ph3 pv4 br4">
+    <div ng-if="!user.signedIn">
+      <dropbox-connect></dropbox-connect>
+      <p class="pv0 mt3 tc"> -- or --</p>
+    </div>
+    <div class="panel panel-warning mb0">
+      <div class="panel-heading" ng-if="!user.signedIn"><h4 class="mv1 tc">Sign in via email</h4></div>
+      <div class="panel-heading" ng-if="user.signedIn"><h4 class="mv1 tc">Welcome to SnippetMachine!</h4></div>
+      <div class="panel-body">
 
-      <label>user signed in?</label>
-      <p>{{ user.signedIn ? "true" : "false" }}</p>
-      <label>user email</label>
-      <p>{{ user.email || "n/a" }}</p>
+        <form ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}" ng-if="!user.signedIn">
+          <div class="form-group">
+            <label for="email">Email address</label>
+            <input type="email" class="form-control" id="email" ng-model="loginForm.email" placeholder="Email">
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" ng-model="loginForm.password" placeholder="Password">
+          </div>
+          <button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
+          
+        </form>
 
-      <!-- sign in form -->
-      <form ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}" ng-if="!user.signedIn">
-        <div class="form-group">
-          <label for="email">Email address</label>
-          <input type="email" class="form-control" id="email" ng-model="loginForm.email" placeholder="Email">
+        <div ng-if="user.signedIn" class="tc">
+          <button ui-sref="userProfile" class="btn btn-primary">Go to My Profile</button> or <button ui-sref="snippetsIndex" class="btn btn-primary">View All Snippets</button>
+          <!--<button class="btn btn-default" ng-click="vm.signOut()" ng-if="user.signedIn">Sign out</button>-->
         </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" ng-model="loginForm.password" placeholder="Password">
-        </div>
-        <button type="submit" class="btn btn-default">Sign In</button>
-      </form>
 
-      <!-- sign out button -->
-      <button class="btn btn-default" ng-click="vm.signOut()" ng-if="user.signedIn">Sign out</button>
-      <div class="mt3 alert alert-danger" role="alert" ng-show="vm.error">
-        {{vm.error}}
+        <!-- sign out button -->
+        
+        <div class="mt3 alert alert-danger" role="alert" ng-show="vm.error">
+          {{vm.error}}
+        </div>
       </div>
     </div>
   </div>
+</div>

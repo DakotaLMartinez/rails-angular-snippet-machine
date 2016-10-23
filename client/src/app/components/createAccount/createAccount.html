@@ -1,39 +1,45 @@
-<h1>Create Account</h1>
-<form ng-submit="handleRegBtnClick()" role="form" ng-init="registrationForm = {}">
-  <div class="form-group">
-    <label for="email">Email</label>
-    <input type="email"
-           name="email"
-           id="email"
-           ng-model="registrationForm.email"
-           required="required"
-           class="form-control">
-  </div>
+<div class="row">
+  <div class="col-sm-6 col-sm-offset-3 bg-lightest-blue ph3 pv4 br4">
+    <dropbox-connect></dropbox-connect>
+    <p class="pv0 mt3 tc">-- or --</p> 
+    <h1>Create Account</h1>
+    <form ng-submit="handleRegBtnClick()" role="form" ng-init="registrationForm = {}">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email"
+              name="email"
+              id="email"
+              ng-model="registrationForm.email"
+              required="required"
+              class="form-control">
+      </div>
 
-  <div class="form-group">
-    <label for="password">Password</label>
-    <input type="password"
-           name="password"
-           id="password"
-           ng-model="registrationForm.password"
-           required="required"
-           class="form-control">
-  </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password"
+              name="password"
+              id="password"
+              ng-model="registrationForm.password"
+              required="required"
+              class="form-control">
+      </div>
 
-  <div class="form-group">
-    <label for="password_confirmation">Password confirmation</label>
-    <input type="password"
-           name="password_confirmation"
-           id="password_confirmation"
-           ng-model="registrationForm.password_confirmation"
-           required="required"
-           class="form-control">
-  </div>
+      <div class="form-group">
+        <label for="password_confirmation">Password confirmation</label>
+        <input type="password"
+              name="password_confirmation"
+              id="password_confirmation"
+              ng-model="registrationForm.password_confirmation"
+              required="required"
+              class="form-control">
+      </div>
 
-  <button type="submit" class="btn btn-primary btn-lg">Register</button>
-  <div class="mt3 alert alert-danger" role="alert" ng-show="vm.errors">
-    <div ng-repeat="error in vm.errors">
-      {{ error }}  
-    </div>
+      <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+      <div class="mt3 alert alert-danger" role="alert" ng-show="vm.errors">
+        <div ng-repeat="error in vm.errors">
+          {{ error }}  
+        </div>
+      </div>
+    </form>
   </div>
-</form>
+</div>
