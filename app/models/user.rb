@@ -19,5 +19,15 @@ class User < ActiveRecord::Base
     snippet.users << self if !snippet.users.include?(self)
     self.save
   end
+
+  def remove_snippet(snippet)
+    if snippet.user === self
+      "can't remove your own snippet from your collection, try deleting instead."
+    else
+      self.snippets.delete(snippet) if self.snippets.include?(snippet)
+      snippet.users.delete(self) if snippet.users.include?(self)
+      self.save
+    end
+  end
   
 end
