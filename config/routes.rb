@@ -9,5 +9,6 @@ Rails.application.routes.draw do
     get 'dropbox/users/:user_id/add_snippets', to: 'dropbox#add_snippets', as: 'add_user_snippets'
     
     resources :users, only: [:index, :show]
+    get '/users/:id/permissions', to: 'users#permissions'
   end
 end
