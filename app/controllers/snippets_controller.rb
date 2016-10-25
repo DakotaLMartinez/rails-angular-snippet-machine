@@ -25,8 +25,10 @@ class SnippetsController < ApplicationController
       render json: @snippet.errors, status: :unprocessable_entity
     end
     
-    if language 
+    if language
       @snippet.language = language
+      @snippet.user = current_user
+      @snippet.author = current_user.email
       if @snippet.save
         render json: @snippet, status: :created, location: @snippet
       else
