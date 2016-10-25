@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       can_download: {}
     }
     @user.snippets.each do |s|
-      if @user.id === s.user_id
+      if @user === s.user
         response[:can_edit][s.id] = true
         response[:can_download][s.id] = true
       else

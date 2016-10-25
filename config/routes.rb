@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   scope '/api' do 
     resources :snippets
     get '/snippets/:id/add_snippet', to: 'snippets#add_snippet'
+    get '/snippets/:id/remove_snippet', to: 'snippets#remove_snippet'
 
     get 'dropbox/', to: 'dropbox#authorize'
     get 'dropbox/connect', to: 'dropbox#connect'

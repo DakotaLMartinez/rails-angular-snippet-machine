@@ -10,6 +10,7 @@
     this.getUserSnippets = getUserSnippets;
     this.getCurrentUserPermissions = getCurrentUserPermissions;
     this.addSnippet = addSnippet;
+    this.removeSnippet = removeSnippet;
     this.saveUserSnippets = saveUserSnippets;
   
     var url = getApiUrl.getUrl();
@@ -35,6 +36,12 @@
     function addSnippet(id){
       if ($rootScope.user) {
         return $http.get(url + '/snippets/' + id + '/add_snippet');
+      }
+    }
+
+    function removeSnippet(id) {
+      if ($rootScope.user) {
+        return $http.get(url + '/snippets/' + id + '/remove_snippet');
       }
     }
 

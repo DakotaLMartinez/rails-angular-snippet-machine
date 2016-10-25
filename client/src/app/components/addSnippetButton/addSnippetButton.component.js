@@ -30,12 +30,12 @@
 
     ////////////////
 
-    $ctrl.$onInit = function() { 
+    function updateUserPermissions() {
       User 
         .getCurrentUserPermissions()
         .then(function(res){
           $ctrl.editableSnippets = res.data.can_edit;
-          $ctrl.downloadableSnippets = res.data.can_download
+          $ctrl.downloadableSnippets = res.data.can_download;
           if(!$ctrl.editableSnippets[$ctrl.snippetId]) {
             $ctrl.showButton = true;
             if($ctrl.downloadableSnippets[$ctrl.snippetId]) {
@@ -43,20 +43,37 @@
             } 
           }
         });
+    }
 
-      $ctrl.addToSnippets = function(){
+    $ctrl.$onInit = function() { 
+      updateUserPermissions();
+
+      $ctrl.addOrRemoveFromSnippets = function(){
         var id = $ctrl.snippetId;
-        User 
-          .addSnippet(id)
-          .then(function(res){
-            $log.log(res);
-            $ctrl.buttonText = "Remove From My Snippets"
-          });
+        if ($ctrl.buttonText === "Add to My Snippets") {
+          User 
+            .addSnippet(id)
+            .then(function(res){
+              $log.log(res);
+              $ctrl.buttonText = "Remove From My Snippets";
+              updateUserPermissions();
+            });
+        } else {
+          User
+            .removeSnippet(id)
+            .then(function(res){
+              $log.log(res);
+              $ctrl.buttonText = "Add to My Snippets";
+              updateUserPermissions();
+            });
+        }
       }
       
       
     };
-    $ctrl.$onChanges = function(changesObj) { };
+    $ctrl.$onChanges = function(changesObj) { 
+      updateUserPermissions();
+    };
     $ctrl.$onDestroy = function() { };
   }
 })();
