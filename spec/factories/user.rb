@@ -14,5 +14,12 @@ FactoryGirl.define do
       password_confirmation { 'password' }
       confirmed_at Time.zone.now
     end
+
+    factory :other_user do 
+      email { 'other@email.com' }
+      password { 'password' }
+      password_confirmation { 'password' }
+      confirmed_at Time.zone.now
+    end
   end
 end

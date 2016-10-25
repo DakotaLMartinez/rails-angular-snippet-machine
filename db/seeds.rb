@@ -7,468 +7,481 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'factory_girl_rails' 
 test_user = FactoryGirl.create(:test_user)
+other_user = FactoryGirl.create(:other_user)
 javascript = Language.where(name: "JavaScript").first_or_create
 ruby = Language.where(name: "Ruby").first_or_create
 html = Language.where(name: "HTML").first_or_create
 css = Language.where(name: "CSS").first_or_create
-
-test_user.snippets.create(
-  name: 'my first snippet', 
-  description: 'the best snippet ever', 
-  trigger: 'snip', 
-  language: javascript, 
-  body: 'var snippet = "awesomer";'
-)
-test_user.snippets.create(
-  name: 'my second snippet', 
-  description: 'the second best snippet ever', 
-  trigger: 'snip2', 
-  language: javascript, 
-  body: 'var snippet = "awesome";'
-)
-test_user.snippets.create(
-  name: '3 Column Row', 
-  description: 'Adds Bootstrap 3 column row', 
-  trigger: 'bsrowthreecolumns', 
-  language: html, 
-  body: '<div class="row">
-	<div class="${1:col-md-4 col-sm-6}">
-		$2
-	</div>
-	<div class="${1:col-md-4 col-sm-6}">
-	    $3
-	</div>
-	<div class="${1:col-md-4 col-sm-6}">
-		
-	</div>
-</div>'
-)
-test_user.snippets.create(
-  name: 'Angular 1 Session Service', 
-  description: 'Adds code for an Angular 1 Session service that stores user data in $cookies using ngCookies', 
-  trigger: 'ng1sessionservice', 
-  language: javascript, 
-  body: "(function() {
-'use strict';
-
-  angular
-    .module('${dlmSnippetMachine}')
-    .service('Session', Session);
-
-  Session.$inject = ['$cookies'];
-  function Session($cookies) {
-    this.getCurrentUser = getCurrentUser;
-    this.getCurrentUserId = getCurrentUserId;
-    this.setCurrentUser = setCurrentUser;
-    this.endSession = endSession;
-    
-    ////////////////
-
-    function getCurrentUser() { 
-      return $cookies.getObject('currentUser');
-    }
-
-    function getCurrentUserId() {
-      return Number($cookies.get('currentUserId'));
-    }
-
-    function setCurrentUser(user) {
-      $cookies.putObject('currentUser', user);
-      $cookies.put('currentUserId', user.id);
-    }
-
-    function endSession() {
-      $cookies.remove('currentUser');
-      $cookies.remove('currentUserId');
-    }
-  }
-})();"
-)
-test_user.snippets.create(
-  name: 'Angular 1 Service Call from Controller', 
-  description: 'Creates a function that calls an Angular 1 service call from within a controller', 
-  trigger: 'ng1callservice', 
-  language: javascript, 
-  body:'function ${getUserSnippets}(${id}) {
-    ${User}
-      .${getUserSnippets}(${id})
-      .then(handleSuccess, handleError)
-    
-    function handleSuccess(res) {
-      ${vm.something}
-      vm.errors = {};
-    }
-
-    function handleError(res){
-      ${vm.errors = res;}
-    }
-}'
-)
-test_user.snippets.create(
-  name: 'Bootstrap 3 Columns', 
-  description: 'Adds 3 more columns to a bootstrap row', 
-  language: html, 
-  trigger: 'bsthreecolumns', 
-  body: '<div class="${1:col-md-4 col-sm-6}">
-	$2
-</div>
-<div class="${1:col-md-4 col-sm-6}">
-	
-</div>
-<div class="${1:col-md-4 col-sm-6}">
-	
-</div>
-')
-test_user.snippets.create(
-  name: 'CSS for Background Image', 
-  description: 'Adds background image to a CSS selector of your choice', 
-  language: css, 
-  trigger: 'cssbackground', 
-  body: '${1:body} {
-    background: url(${2:image url}) no-repeat ${3:center} ${4:center} ${5:fixed}; 
-    -webkit-background-size: ${6:cover};
-    -moz-background-size: ${6:cover};
-    -o-background-size: ${6:cover};
-    background-size: ${6:cover};
-}.'
-)
-test_user.snippets.create(
-  name: 'Bootstrap Centered Navbar', 
-  description: 'Enters HTML for simple centered bootstrap navbar', 
-  language: html, 
-  trigger: 'bsnavcenter', 
-  body: '<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="#">Brand</a>
+attributes_hashes = [
+  {
+    name: 'my first snippet', 
+    description: 'the best snippet ever', 
+    trigger: 'snip', 
+    language: javascript, 
+    body: 'var snippet = "awesomer";'
+  },
+  {
+    name: 'my second snippet', 
+    description: 'the second best snippet ever', 
+    trigger: 'snip2', 
+    language: javascript, 
+    body: 'var snippet = "awesome";'
+  },
+  {
+    name: '3 Column Row', 
+    description: 'Adds Bootstrap 3 column row', 
+    trigger: 'bsrowthreecolumns', 
+    language: html, 
+    body: '<div class="row">
+    <div class="${1:col-md-4 col-sm-6}">
+      $2
     </div>
-
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Contact</a></li>
-        <li><a href="#">Portfolio</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>')
-test_user.snippets.create(
-  name: 'Javascript Function', 
-  description: 'adds javascript function definition', 
-  language: javascript, 
-  trigger: 'fn', 
-  body: 'function ${1:name}(${2:args}) {
-	$3
-}'
-)
-test_user.snippets.create(
-  name: 'CSS Comment', 
-  description: 'adds a nice banner comment to a CSS file', 
-  language: css, 
-  trigger: 'comment', 
-  body: '/*--------------------------------------------------------------
-# ${1:Section}
---------------------------------------------------------------*/
-$2'
-)
-test_user.snippets.create(
-  name: 'Angular 1 Display Errors Component', 
-  description: 'adds component to display errors', 
-  language: javascript, 
-  trigger: 'ng1displayerrors', 
-  body: "(function() {
+    <div class="${1:col-md-4 col-sm-6}">
+        $3
+    </div>
+    <div class="${1:col-md-4 col-sm-6}">
+      
+    </div>
+  </div>'
+  },
+  {
+    name: 'Angular 1 Session Service', 
+    description: 'Adds code for an Angular 1 Session service that stores user data in $cookies using ngCookies', 
+    trigger: 'ng1sessionservice', 
+    language: javascript, 
+    body: "(function() {
   'use strict';
-  // Usage: Use <display-errors errors=\"vm.errors\"></display-errors> within a view
-  // passing in an errors object defined within the parent scope where the component is placed.
-  // Creates: an alert showing a list of the errors that occured.
-  // NOTE: The html uses tachyons and bootstrap classes for styling
 
-  var ${displayErrors} = {
-    bindings: {
-      errors: '='
-    },
-    template: '<div ng-show=\"vm.showErrors()\" class=\"mt3 alert alert-danger\" ng-bind-html=\"vm.getErrorMessage()\"></div>',
-    controller: ${displayErrors}Controller,
-    controllerAs: 'vm'
-  };
+    angular
+      .module('${dlmSnippetMachine}')
+      .service('Session', Session);
 
-  ${displayErrors}Controller.$inject = ['${dep}']
-  function ${displayErrors}Controller (${dep}) {
-    var vm = this;
-    vm.errors = vm.errors || {};
-    vm.showErrors = showErrors;
-    vm.getErrorMessage = getErrorMessage;
-    
-    /////////////////////////////////////
+    Session.$inject = ['$cookies'];
+    function Session($cookies) {
+      this.getCurrentUser = getCurrentUser;
+      this.getCurrentUserId = getCurrentUserId;
+      this.setCurrentUser = setCurrentUser;
+      this.endSession = endSession;
+      
+      ////////////////
 
-    function showErrors() {
-      if (Object.keys(vm.errors).length !== 0) {
-        return true;
-      } else {
-        return false;
+      function getCurrentUser() { 
+        return $cookies.getObject('currentUser');
+      }
+
+      function getCurrentUserId() {
+        return Number($cookies.get('currentUserId'));
+      }
+
+      function setCurrentUser(user) {
+        $cookies.putObject('currentUser', user);
+        $cookies.put('currentUserId', user.id);
+      }
+
+      function endSession() {
+        $cookies.remove('currentUser');
+        $cookies.remove('currentUserId');
       }
     }
+  })();"
+  },
+  {
+    name: 'Angular 1 Service Call from Controller', 
+    description: 'Creates a function that calls an Angular 1 service call from within a controller', 
+    trigger: 'ng1callservice', 
+    language: javascript, 
+    body:'function ${getUserSnippets}(${id}) {
+      ${User}
+        .${getUserSnippets}(${id})
+        .then(handleSuccess, handleError)
+      
+      function handleSuccess(res) {
+        ${vm.something}
+        vm.errors = {};
+      }
 
-    function getErrorMessage(){
-      var errorCount = 0;
-      var errorList = '';
+      function handleError(res){
+        ${vm.errors = res;}
+      }
+  }'
+  }, 
+  {
+    name: 'Bootstrap 3 Columns', 
+    description: 'Adds 3 more columns to a bootstrap row', 
+    language: html, 
+    trigger: 'bsthreecolumns', 
+    body: '<div class="${1:col-md-4 col-sm-6}">
+    $2
+  </div>
+  <div class="${1:col-md-4 col-sm-6}">
+    
+  </div>
+  <div class="${1:col-md-4 col-sm-6}">
+    
+  </div>
+  '
+  },
+  {
+    name: 'CSS for Background Image', 
+    description: 'Adds background image to a CSS selector of your choice', 
+    language: css, 
+    trigger: 'cssbackground', 
+    body: '${1:body} {
+      background: url(${2:image url}) no-repeat ${3:center} ${4:center} ${5:fixed}; 
+      -webkit-background-size: ${6:cover};
+      -moz-background-size: ${6:cover};
+      -o-background-size: ${6:cover};
+      background-size: ${6:cover};
+  }.'
+  },
+  {
+    name: 'Bootstrap Centered Navbar', 
+    description: 'Enters HTML for simple centered bootstrap navbar', 
+    language: html, 
+    trigger: 'bsnavcenter', 
+    body: '<nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
 
-      errorList += '<ul class=\"pl3 list\">';
-      if (Object.keys(vm.errors).length !== 0) {
-        for (var field in vm.errors) {
-          var fieldErrors = vm.errors[field];
-          if(fieldErrors) {
-            for (var i = 0 ; i < fieldErrors.length ; i++) {
-              errorList += '<li>';
-              errorList += String(field) + ' ' + fieldErrors[i];
-              errorList += '</li>';
-              errorCount++;
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li class="active"><a href="#">Home <span class="sr-only">(current)</span></a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">Portfolio</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>'
+  },
+  {
+    name: 'Javascript Function', 
+    description: 'adds javascript function definition', 
+    language: javascript, 
+    trigger: 'fn', 
+    body: 'function ${1:name}(${2:args}) {
+    $3
+  }'
+  },
+  {
+    name: 'CSS Comment', 
+    description: 'adds a nice banner comment to a CSS file', 
+    language: css, 
+    trigger: 'comment', 
+    body: '/*--------------------------------------------------------------
+  # ${1:Section}
+  --------------------------------------------------------------*/
+  $2'
+  },
+  {
+    name: 'Angular 1 Display Errors Component', 
+    description: 'adds component to display errors', 
+    language: javascript, 
+    trigger: 'ng1displayerrors', 
+    body: "(function() {
+    'use strict';
+    // Usage: Use <display-errors errors=\"vm.errors\"></display-errors> within a view
+    // passing in an errors object defined within the parent scope where the component is placed.
+    // Creates: an alert showing a list of the errors that occured.
+    // NOTE: The html uses tachyons and bootstrap classes for styling
+
+    var ${displayErrors} = {
+      bindings: {
+        errors: '='
+      },
+      template: '<div ng-show=\"vm.showErrors()\" class=\"mt3 alert alert-danger\" ng-bind-html=\"vm.getErrorMessage()\"></div>',
+      controller: ${displayErrors}Controller,
+      controllerAs: 'vm'
+    };
+
+    ${displayErrors}Controller.$inject = ['${dep}']
+    function ${displayErrors}Controller (${dep}) {
+      var vm = this;
+      vm.errors = vm.errors || {};
+      vm.showErrors = showErrors;
+      vm.getErrorMessage = getErrorMessage;
+      
+      /////////////////////////////////////
+
+      function showErrors() {
+        if (Object.keys(vm.errors).length !== 0) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+
+      function getErrorMessage(){
+        var errorCount = 0;
+        var errorList = '';
+
+        errorList += '<ul class=\"pl3 list\">';
+        if (Object.keys(vm.errors).length !== 0) {
+          for (var field in vm.errors) {
+            var fieldErrors = vm.errors[field];
+            if(fieldErrors) {
+              for (var i = 0 ; i < fieldErrors.length ; i++) {
+                errorList += '<li>';
+                errorList += String(field) + ' ' + fieldErrors[i];
+                errorList += '</li>';
+                errorCount++;
+              }
             }
           }
+          errorList += '</ul>';
+        } else {
+          return;
         }
-        errorList += '</ul>';
-      } else {
-        return;
-      }
 
-      if (errorCount === 1) {
-        var header = '<h4>' + errorCount + ' error prevented this record from being saved:</h4>';
-      } else {
-        var header = '<h4>' + errorCount + ' errors prevented this record from being saved:</h4>';
+        if (errorCount === 1) {
+          var header = '<h4>' + errorCount + ' error prevented this record from being saved:</h4>';
+        } else {
+          var header = '<h4>' + errorCount + ' errors prevented this record from being saved:</h4>';
+        }
+        
+        return header + errorList;
+      }
+    }
+
+    angular
+      .module('${app}')
+      .component('${displayErrors}', ${displayErrors});
+
+  })();"
+  },
+  {
+    name: 'Angular 1 Component', 
+    description: 'Adds an Angular 1 Component Template', 
+    language: javascript, 
+    trigger: 'ng1component', 
+    body: "(function() {
+    'use strict';
+    // Usage:
+    //
+    // Creates:
+    //
+
+    var ${1:componentName} = {
+      bindings: {
+        ${property}: '='
+      },
+      templateUrl: 'app/components/${1:componentName}/${1:componentName}.html',
+      controller: ${1:componentName}Controller,
+      controllerAs: 'vm'
+    };
+
+    ${1:componentName}Controller.$inject = ['${2:dep}']
+    function ${1:componentName}Controller (${2:dep}) {
+      var vm = this;
+      $3
+      
+      activate();
+      
+      /////////////////////////////////////
+
+      function activate(){
+          $4
       }
       
-      return header + errorList;
     }
-  }
 
-  angular
-    .module('${app}')
-    .component('${displayErrors}', ${displayErrors});
+    angular
+      .module('${5:app}')
+      .component('${1:componentName}', ${1:componentName});
 
-})();"
-)
-test_user.snippets.create(
-  name: 'Angular 1 Component', 
-  description: 'Adds an Angular 1 Component Template', 
-  language: javascript, 
-  trigger: 'ng1component', 
-  body: "(function() {
-  'use strict';
-  // Usage:
-  //
-  // Creates:
-  //
+  })();"
+  },
+  {
+    name: 'Angular 1 UI Router Config',
+    description: 'Adds UI Router configuration to Angular 1 project',
+    language: javascript, 
+    trigger: 'ng1uirouterconfig', 
+    body: "(function() {
+    'use strict';
 
-  var ${1:componentName} = {
-    bindings: {
-      ${property}: '='
-    },
-    templateUrl: 'app/components/${1:componentName}/${1:componentName}.html',
-    controller: ${1:componentName}Controller,
-    controllerAs: 'vm'
-  };
+    angular
+      .module('${1:app}')
+      .config(routerConfig);
 
-  ${1:componentName}Controller.$inject = ['${2:dep}']
-  function ${1:componentName}Controller (${2:dep}) {
-    var vm = this;
-    $3
-    
-    activate();
-    
-    /////////////////////////////////////
+    /** @ngInject */
+    function routerConfig($stateProvider, $urlRouterProvider) {
+      $stateProvider
+        .state('${home}', {
+          url: '${/}',
+          templateUrl: '${app/main/main.html}',
+          controller: '${MainController}',
+          controllerAs: '${vm}'
+        })
 
-    function activate(){
-        $4
+      $urlRouterProvider.otherwise('/');
     }
-    
-  }
 
-  angular
-    .module('${5:app}')
-    .component('${1:componentName}', ${1:componentName});
+  })();
+  "
+  }, 
+  {
+    name: 'Javascript Check if Value is Numeric',
+    description: 'Javascript code that returns a boolean value regarding the numericality of a value.', 
+    language: javascript, 
+    trigger: 'jsnumber',
+    body: '(!isNaN(parseFloat(${value})) && isFinite(${value}))'
+  },
+  {
+    name: 'Javascript Filter Array for Unique Values',
+    description: 'Code to filter out unique values in an array', 
+    language: javascript, 
+    trigger: 'jsuniquearray', 
+    body: 'function uniqueFilter(array) {
+      var seen = {};
+      var out = [];
+      var len = array.length;
+      var j = 0;
+      for(var i = 0; i < len; i++) {
+          var item = array[i];
+          if(seen[item] !== 1) {
+                seen[item] = 1;
+                out[j++] = item;
+          }
+      }
+      return out;
+  }'
+  }, 
+  {
+    name: 'Rails Helper', 
+    description: 'Adds rails helper to Rspec test file', 
+    language: ruby, 
+    trigger: 'rh',
+    body: "require 'rails_helper' \n"
+  },
+  {
+    name: 'Rails Authorization Spec with Factory Girl', 
+    description: 'Adds rails authorization spec with Factory Girl', 
+    language: ruby, 
+    trigger: 'authspec', 
+    body: "require 'rails_helper'
 
-})();"
-)
-test_user.snippets.create(
-  name: 'Angular 1 UI Router Config',
-  description: 'Adds UI Router configuration to Angular 1 project',
-  language: javascript, 
-  trigger: 'ng1uirouterconfig', 
-  body: "(function() {
-  'use strict';
-
-  angular
-    .module('${1:app}')
-    .config(routerConfig);
-
-  /** @ngInject */
-  function routerConfig($stateProvider, $urlRouterProvider) {
-    $stateProvider
-      .state('${home}', {
-        url: '${/}',
-        templateUrl: '${app/main/main.html}',
-        controller: '${MainController}',
-        controllerAs: '${vm}'
-      })
-
-    $urlRouterProvider.otherwise('/');
-  }
-
-})();
-"
-)
-test_user.snippets.create(
-  name: 'Javascript Check if Value is Numeric',
-  description: 'Javascript code that returns a boolean value regarding the numericality of a value.', 
-  language: javascript, 
-  trigger: 'jsnumber',
-  body: '(!isNaN(parseFloat(${value})) && isFinite(${value}))'
-)
-test_user.snippets.create(
-  name: 'Javascript Filter Array for Unique Values',
-  description: 'Code to filter out unique values in an array', 
-  language: javascript, 
-  trigger: 'jsuniquearray', 
-  body: 'function uniqueFilter(array) {
-    var seen = {};
-    var out = [];
-    var len = array.length;
-    var j = 0;
-    for(var i = 0; i < len; i++) {
-         var item = array[i];
-         if(seen[item] !== 1) {
-               seen[item] = 1;
-               out[j++] = item;
-         }
-    }
-    return out;
-}'
-)
-test_user.snippets.create(
-  name: 'Rails Helper', 
-  description: 'Adds rails helper to Rspec test file', 
-  language: ruby, 
-  trigger: 'rh',
-  body: "require 'rails_helper' \n"
-)
-test_user.snippets.create(
-  name: 'Rails Authorization Spec with Factory Girl', 
-  description: 'Adds rails authorization spec with Factory Girl', 
-  language: ruby, 
-  trigger: 'authspec', 
-  body: "require 'rails_helper'
-
-feature 'Authentication'${, js: true} do
-  feature 'login' do 
-    scenario 'with valid inputs' do 
-      @user = FactoryGirl.create(:confirmed_user)
-      visit '${/sign_in}'
-      fill_in '${Email}', with: @user.${email}
-      fill_in '${Password}', with: @user.${password}
-      find('${button}', text: '${Log in}').click
-      
-      expect(page).to have_content('${Log out}')
+  feature 'Authentication'${, js: true} do
+    feature 'login' do 
+      scenario 'with valid inputs' do 
+        @user = FactoryGirl.create(:confirmed_user)
+        visit '${/sign_in}'
+        fill_in '${Email}', with: @user.${email}
+        fill_in '${Password}', with: @user.${password}
+        find('${button}', text: '${Log in}').click
+        
+        expect(page).to have_content('${Log out}')
+      end
     end
-  end
-end"
-)
-test_user.snippets.create(
-  name: 'Factory Girl User Factory', 
-  description: 'Create a user factory with Factory girl including a method for a confirmed_user', 
-  language: ruby, 
-  trigger: 'fguserfactory', 
-  body: 'FactoryGirl.define do
-  factory :user do
-    email { Faker::Internet.email }
-    password { Faker::Internet.password(8) }
-    password_confirmation { password }
+  end"
+  },
+  {
+    name: 'Factory Girl User Factory', 
+    description: 'Create a user factory with Factory girl including a method for a confirmed_user', 
+    language: ruby, 
+    trigger: 'fguserfactory', 
+    body: 'FactoryGirl.define do
+    factory :user do
+      email { Faker::Internet.email }
+      password { Faker::Internet.password(8) }
+      password_confirmation { password }
 
-    factory :confirmed_user do
-      confirmed_at Time.zone.now
+      factory :confirmed_user do
+        confirmed_at Time.zone.now
+      end
     end
+  end'
+  },
+  {
+    name: 'Variable definition in Rspec file', 
+    description: 'adds a let definition for a variable to be used in an rspec testing block',
+    language: ruby, 
+    trigger: 'let', 
+    body: 'let(:${1:var}) { ${2:definition goes here} } $3'
+  },
+  {
+    name: 'Context Block for Rspec Test', 
+    description: 'adds a context block to an rspec spec file', 
+    language: ruby, 
+    trigger: 'context',
+    body: 'context "${whatever}" do
+    $1
+  end'
+  }, 
+  {
+    name: 'It block for Rspec test', 
+    description: 'Adds an it block to an rspec spec file', 
+    language: ruby, 
+    trigger: 'it', 
+    body: 'it "${does something cool}" do 
+    $1
+  end'
+  },
+  {
+    name: 'Find or Create By (first or create)', 
+    description: 'new syntax for find or create by in Ruby on Rails', 
+    language: ruby,
+    trigger: 'findorcreate',
+    body: '${Class}.where(${query}).first_or_create'
+  },
+  {
+    name: 'Iffe', 
+    description: 'Surrounds the statement in an iffe', 
+    language: javascript, 
+    trigger: 'iffe', 
+    body: "(function() {
+    'use strict';
+
+    ${...}
+
+  })();"
+  },
+  {
+    name: 'Custom Validator in Ruby on Rails', 
+    description: 'Adds a custom Validation function to a Ruby on Rails Model',
+    language: ruby, 
+    trigger: 'railscustomvalidation',
+    body: "validate :${myCustomValidation}
+
+  def ${myCustomValidation}
+    ${My}Validator.new(self).validate
   end
-end'
-)
-test_user.snippets.create(
-  name: 'Variable definition in Rspec file', 
-  description: 'adds a let definition for a variable to be used in an rspec testing block',
-  language: ruby, 
-  trigger: 'let', 
-  body: 'let(:${1:var}) { ${2:definition goes here} } $3'
-)
-test_user.snippets.create(
-  name: 'Context Block for Rspec Test', 
-  description: 'adds a context block to an rspec spec file', 
-  language: ruby, 
-  trigger: 'context',
-  body: 'context "${whatever}" do
-  $1
-end'
-)
-test_user.snippets.create(
-  name: 'It block for Rspec test', 
-  description: 'Adds an it block to an rspec spec file', 
-  language: ruby, 
-  trigger: 'it', 
-  body: 'it "${does something cool}" do 
-  $1
-end'
-)
-test_user.snippets.create(
-  name: 'Find or Create By (first or create)', 
-  description: 'new syntax for find or create by in Ruby on Rails', 
-  language: ruby,
-  trigger: 'findorcreate',
-  body: '${Class}.where(${query}).first_or_create'
-)
-test_user.snippets.create(
-  name: 'Iffe', 
-  description: 'Surrounds the statement in an iffe', 
-  language: javascript, 
-  trigger: 'iffe', 
-  body: "(function() {
-  'use strict';
 
-  ${...}
+  include ActiveModel::Validations 
 
-})();"
-)
+  class ${My}Validator 
+    def initialize(${model})
+      @${model} = ${model} 
+    end
+    
+    def validate 
+      if ${something to check}
+        @${model}.errors.add(:${field_name}, ${error_message})
+      end
+    end
+    
+  end
 
-test_user.snippets.create(
-  name: 'Custom Validator in Ruby on Rails', 
-  description: 'Adds a custom Validation function to a Ruby on Rails Model',
-  language: ruby, 
-  trigger: 'railscustomvalidation',
-  body: "validate :${myCustomValidation}
-
-def ${myCustomValidation}
-  ${My}Validator.new(self).validate
+  validate do |${model}| 
+    ${My}Validator.new(${model}).validate
+  end"
+  }
+]
+attributes_hashes.each do |attributes|
+  # this line creates a new row in the user_snippets table
+  # this line DOES NOT fill in the user_id column for this record
+  snippet = test_user.snippets.create(attributes)
+  # this line fills in the user_id column on the snippet record
+  snippet.user = test_user 
+  # this line fills in the author column on the snippet record 
+  snippet.author = test_user.email
+  # this line saves the changes made un the previous steps
+  snippet.save
 end
-
-include ActiveModel::Validations 
-
-class ${My}Validator 
-  def initialize(${model})
-    @${model} = ${model} 
-  end
-  
-  def validate 
-    if ${something to check}
-      @${model}.errors.add(:${field_name}, ${error_message})
-    end
-  end
-  
-end
-
-validate do |${model}| 
-  ${My}Validator.new(${model}).validate
-end"
-)
-
