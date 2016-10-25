@@ -13,7 +13,7 @@
       templateUrl: 'app/components/addSnippetButton/addSnippetButton.html',
       controller: addSnippetButtonController,
       bindings: {
-        snippetId: '=',
+        id: '=',
       },
     });
 
@@ -31,25 +31,27 @@
     ////////////////
 
     function updateUserPermissions() {
-      User 
-        .getCurrentUserPermissions()
-        .then(function(res){
-          $ctrl.editableSnippets = res.data.can_edit;
-          $ctrl.downloadableSnippets = res.data.can_download;
-          if(!$ctrl.editableSnippets[$ctrl.snippetId]) {
-            $ctrl.showButton = true;
-            if($ctrl.downloadableSnippets[$ctrl.snippetId]) {
-              $ctrl.buttonText = "Remove From My Snippets";
-            } 
-          }
-        });
+      if (User.loggedIn()) {
+        User 
+          .getCurrentUserPermissions()
+          .then(function(res){
+            $ctrl.editableSnippets = res.data.can_edit;
+            $ctrl.downloadableSnippets = res.data.can_download;
+            if(!$ctrl.editableSnippets[$ctrl.id]) {
+              $ctrl.showButton = true;
+              if($ctrl.downloadableSnippets[$ctrl.id]) {
+                $ctrl.buttonText = "Remove From My Snippets";
+              } 
+            }
+          });
+      }
     }
 
     $ctrl.$onInit = function() { 
       updateUserPermissions();
 
       $ctrl.addOrRemoveFromSnippets = function(){
-        var id = $ctrl.snippetId;
+        var id = $ctrl.id;
         if ($ctrl.buttonText === "Add to My Snippets") {
           User 
             .addSnippet(id)
