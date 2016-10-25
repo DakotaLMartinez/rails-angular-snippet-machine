@@ -9,9 +9,11 @@
   function User($http, getApiUrl, $window, $rootScope, $log) {
     this.getUserSnippets = getUserSnippets;
     this.getCurrentUserPermissions = getCurrentUserPermissions;
+    this.currentUserCanEditSnippet = currentUserCanEditSnippet;
     this.addSnippet = addSnippet;
     this.removeSnippet = removeSnippet;
     this.saveUserSnippets = saveUserSnippets;
+    this.loggedIn = loggedIn;
   
     var url = getApiUrl.getUrl();
     var currentUserId;
@@ -33,20 +35,30 @@
       }
     }
 
+    function currentUserCanEditSnippet(id) {
+      currentUserId = $rootScope.user.id;
+      return $http
+              .get(url + '/users/' + currentUserId + '/permissions')
+              .then(function(res){
+                var editable = res.data.can_edit;
+                if(editable[id]) {
+                  return true;
+                } else {
+                  return false;
+                }
+              });
+    }
+
     function addSnippet(id){
-      if ($rootScope.user) {
-        return $http.get(url + '/snippets/' + id + '/add_snippet');
-      }
+      return $http.get(url + '/snippets/' + id + '/add_snippet');
     }
 
     function removeSnippet(id) {
-      if ($rootScope.user) {
         return $http.get(url + '/snippets/' + id + '/remove_snippet');
-      }
     }
 
     function saveUserSnippets() {
-      if ($rootScope.user) { 
+      if (loggedIn()) { 
         currentUserId = $rootScope.user.id;
         var saveUrl = url + '/dropbox/users/' + currentUserId + '/add_snippets';
         $window.open(saveUrl, 'Save-to-Dropbox','width=500,height=400');
@@ -55,6 +67,14 @@
       }
       // var popUp = $window.open(saveUrl, 'Save-to-Dropbox','width=500,height=400');
       // $timeout(function(){popUp.close()}, 8000);
+    }
+
+    function loggedIn() {
+      if(Object.keys($rootScope.user).length !== 0) {
+        return true;
+      } else {
+        return false;
+      }
     }
   }
 })();

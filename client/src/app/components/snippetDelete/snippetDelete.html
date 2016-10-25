@@ -1,2 +1,2 @@
-<a class="btn btn-danger" href="" ng-click="vm.deleteSnippet(vm.id)">Delete</a>
-<display-errors errors="vm.errors"></display-errors>
+<a class="btn btn-danger" href="" ng-click="$ctrl.deleteSnippet($ctrl.id)" ng-show="$ctrl.showButton">Delete</a>
+<display-errors errors="$ctrl.errors"></display-errors>
