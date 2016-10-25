@@ -17,8 +17,8 @@
       },
     });
 
-  addSnippetButtonController.$inject = ['User', 'Snippet'];
-  function addSnippetButtonController(User, Snippet) {
+  addSnippetButtonController.$inject = ['User', 'Snippet', '$log'];
+  function addSnippetButtonController(User, Snippet, $log) {
     var $ctrl = this;
     $ctrl.buttonText = "Add to My Snippets";
     $ctrl.showButton = false;
@@ -43,6 +43,16 @@
             } 
           }
         });
+
+      $ctrl.addToSnippets = function(){
+        var id = $ctrl.snippetId;
+        User 
+          .addSnippet(id)
+          .then(function(res){
+            $log.log(res);
+            $ctrl.buttonText = "Remove From My Snippets"
+          });
+      }
       
       
     };

@@ -1,6 +1,6 @@
 class SnippetsController < ApplicationController
-  before_action :set_snippet, only: [:show, :update, :destroy]
-  before_action :authenticate_user!, only: [:create, :update, :destroy]
+  before_action :set_snippet, only: [:show, :update, :destroy, :add_snippet]
+  before_action :authenticate_user!, only: [:create, :update, :destroy, :add_snippet]
 
   # GET /snippets
   def index
@@ -60,6 +60,16 @@ class SnippetsController < ApplicationController
     else 
       @snippet.errors['unauthorized'] = ["- only the creator of a snippet can delete it"]
       render json: @snippet.errors, status: :unauthorized
+    end
+  end
+
+  # GET /snippets/:id/add_snippet
+  def add_snippet 
+    begin
+      current_user.add_snippet(@snippet)
+      render json: UserSnippet.exists?(user: current_user, snippet: @snippet)
+    rescue
+      render json: @snippet.errors.full_messages
     end
   end
 

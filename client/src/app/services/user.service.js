@@ -9,6 +9,7 @@
   function User($http, getApiUrl, $window, $rootScope, $log) {
     this.getUserSnippets = getUserSnippets;
     this.getCurrentUserPermissions = getCurrentUserPermissions;
+    this.addSnippet = addSnippet;
     this.saveUserSnippets = saveUserSnippets;
   
     var url = getApiUrl.getUrl();
@@ -28,6 +29,12 @@
       if ($rootScope.user) {
         currentUserId = $rootScope.user.id;
         return $http.get(url + '/users/' + currentUserId + '/permissions');
+      }
+    }
+
+    function addSnippet(id){
+      if ($rootScope.user) {
+        return $http.get(url + '/snippets/' + id + '/add_snippet');
       }
     }
 
