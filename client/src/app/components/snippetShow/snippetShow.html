@@ -1,7 +1,7 @@
 <div>
   <h1>{{ vm.snippet.name }}</h1>
   <div class="mv2">
-    <a class="btn btn-primary" href="" ui-sref="snippetEdit({id: {{ vm.id }} })">Edit</a> 
+    <snippet-edit-button id="vm.id"></snippet-edit-button>
     <snippet-delete-button id="vm.id"></snippet-delete-button>
   </div>
   <p>Description: {{ vm.snippet.description }}</p>
