@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   has_many :languages, through: :snippets
 
   has_many :user_snippets
-  has_many :snippets, through: :user_snippets
+  has_many :snippets, through: :user_snippets, dependent: :destroy
 
   def add_snippet(snippet)
     self.snippets << snippet if !self.snippets.include?(snippet)

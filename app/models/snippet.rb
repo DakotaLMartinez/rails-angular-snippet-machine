@@ -8,7 +8,7 @@ class Snippet < ApplicationRecord
     belongs_to :language
 
     has_many :user_snippets
-    has_many :users, through: :user_snippets
+    has_many :users, through: :user_snippets, dependent: :destroy
     
 
     before_save :save_editor_formats
