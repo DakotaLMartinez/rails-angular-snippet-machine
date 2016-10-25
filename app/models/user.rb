@@ -18,6 +18,10 @@ class User < ActiveRecord::Base
     self.snippets << snippet if !self.snippets.include?(snippet)
     snippet.users << self if !snippet.users.include?(self)
     self.save
+    user_snippet = UserSnippet.where(user: self, snippet: snippet)[0]
+    user_snippet.language = snippet.language
+    user_snippet.trigger = snippet.trigger
+    user_snippet.save
   end
 
   def remove_snippet(snippet)

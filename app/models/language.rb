@@ -1,6 +1,7 @@
 class Language < ApplicationRecord
   has_many :users, through: :snippets
   has_many :snippets
+  has_many :user_snippets
 
   def vscode
     languages[name.to_sym][:vscode]
