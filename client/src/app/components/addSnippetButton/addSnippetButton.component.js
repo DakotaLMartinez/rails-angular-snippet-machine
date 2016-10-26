@@ -17,8 +17,8 @@
       },
     });
 
-  addSnippetButtonController.$inject = ['User', 'Snippet', '$log'];
-  function addSnippetButtonController(User, Snippet, $log) {
+  addSnippetButtonController.$inject = ['User', 'Snippet', '$log', '$state'];
+  function addSnippetButtonController(User, Snippet, $log, $state) {
     var $ctrl = this;
     $ctrl.buttonText = "Add to My Snippets";
     $ctrl.showButton = false;
@@ -69,6 +69,7 @@
               updateUserPermissions();
             });
         }
+        $state.go('userProfile');
       }
       
       
