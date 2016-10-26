@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161025223928) do
+ActiveRecord::Schema.define(version: 20161025230825) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,6 +45,8 @@ ActiveRecord::Schema.define(version: 20161025223928) do
     t.string   "trigger"
     t.index ["language_id"], name: "index_user_snippets_on_language_id", using: :btree
     t.index ["snippet_id"], name: "index_user_snippets_on_snippet_id", using: :btree
+    t.index ["user_id", "language_id", "trigger"], name: "index_user_snippets_on_user_id_and_language_id_and_trigger", unique: true, using: :btree
+    t.index ["user_id", "snippet_id"], name: "index_user_snippets_on_user_id_and_snippet_id", unique: true, using: :btree
     t.index ["user_id"], name: "index_user_snippets_on_user_id", using: :btree
   end
 
