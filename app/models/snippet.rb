@@ -2,7 +2,6 @@ class Snippet < ApplicationRecord
     validates :name, presence: true
     validates :trigger, presence: true 
     validates :language_id, presence: true
-    validates :trigger, uniqueness: { scope: [:user_id, :language], message: "must be unique for each language" }
 
     belongs_to :user
     belongs_to :language
