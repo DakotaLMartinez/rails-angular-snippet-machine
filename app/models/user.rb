@@ -15,13 +15,13 @@ class User < ActiveRecord::Base
   has_many :snippets, through: :user_snippets, dependent: :destroy
 
   def add_snippet(snippet)
-    self.snippets << snippet if !self.snippets.include?(snippet)
-    snippet.users << self if !snippet.users.include?(self)
-    self.save
-    user_snippet = UserSnippet.where(user: self, snippet: snippet)[0]
-    user_snippet.language = snippet.language
-    user_snippet.trigger = snippet.trigger
-    user_snippet.save
+    if !UserSnippet.exists?(user: self, language: snippet.language, trigger: snippet.trigger)
+      snippet.save
+      UserSnippet.create(user: self, snippet: snippet, language: snippet.language, trigger: snippet.trigger)
+      self.save
+    else
+      false
+    end
   end
 
   def remove_snippet(snippet)

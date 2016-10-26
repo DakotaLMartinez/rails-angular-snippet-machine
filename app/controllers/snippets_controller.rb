@@ -29,10 +29,11 @@ class SnippetsController < ApplicationController
       @snippet.language = language
       @snippet.user = current_user
       @snippet.author = current_user.email
-      if @snippet.save
-        current_user.add_snippet(@snippet)
+      if current_user.add_snippet(@snippet)
         render json: @snippet, status: :created, location: @snippet
       else
+        message = "must be unique for snippets in #{language.name}"
+        @snippet.errors.add(:trigger, message)
         render json: @snippet.errors, status: :unprocessable_entity
       end
     end
