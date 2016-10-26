@@ -23,11 +23,9 @@
         </form>
 
         <div ng-if="user.signedIn" class="tc">
-          <button ui-sref="userProfile" class="btn btn-primary">Go to My Profile</button> or <button ui-sref="snippetsIndex" class="btn btn-primary">View All Snippets</button>
+          <button ng-click="vm.goToProfile()" class="btn btn-primary">Go to My Profile</button> or <button ng-click="vm.goToIndex()" class="btn btn-primary">View All Snippets</button>
           <!--<button class="btn btn-default" ng-click="vm.signOut()" ng-if="user.signedIn">Sign out</button>-->
         </div>
-
-        <!-- sign out button -->
         
         <div class="mt3 alert alert-danger" role="alert" ng-show="vm.error">
           {{vm.error}}

@@ -5,11 +5,13 @@
     .module('dlmSnippetMachine')
     .controller('loginFormController', loginFormController);
 
-  loginFormController.$inject = ['$auth', '$rootScope', '$state', '$scope', 'Session'];
-  function loginFormController($auth, $rootScope, $state, $scope, Session) {
+  loginFormController.$inject = ['$auth', '$rootScope', '$state', '$scope', 'Session', '$location', '$log'];
+  function loginFormController($auth, $rootScope, $state, $scope, Session, $location, $log) {
     var vm = this;
     vm.signOut;
     vm.error;
+    vm.goToProfile;
+    vm.goToIndex;
 
     // See index.run.js for details of login/logout redirects
 
@@ -32,6 +34,16 @@
       $scope.$on('auth:login-error', function(ev, reason){
         vm.error = reason.errors[0];
       });
+
+      vm.goToProfile = function() {
+        $location.hash('');
+        $state.go('userProfile');
+      }
+
+      vm.goToIndex = function() {
+        $location.hash('');
+        $state.go('snippetsIndex');
+      }
 
     }
   }
