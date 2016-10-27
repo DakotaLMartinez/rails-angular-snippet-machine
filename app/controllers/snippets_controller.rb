@@ -18,12 +18,7 @@ class SnippetsController < ApplicationController
   def create
     @snippet = current_user.snippets.build(snippet_params)
 
-    begin
-      language = Language.find_or_create_by(name: params[:language])
-    rescue 
-      @snippet.errors.add(:language, 'not supported')
-      render json: @snippet.errors, status: :unprocessable_entity
-    end
+    language = find_language(params[:language])
     
     if language
       @snippet.language = language
@@ -42,10 +37,21 @@ class SnippetsController < ApplicationController
   # PATCH/PUT /snippets/1
   def update
     if is_my_snippet?(@snippet)
-      attributes = snippet_params.merge(user: current_user)
-      if @snippet.update(attributes)
+      language = find_language(params[:language])
+
+      if language 
+        @snippet.user = current_user
+        @snippet.name = snippet_params[:name] 
+        @snippet.description = snippet_params[:description]
+        @snippet.language = language
+        @snippet.trigger = snippet_params[:trigger]
+        @snippet.body = snippet_params[:body]
+      end
+  
+      if current_user.update_snippet(@snippet)
         render json: @snippet
-      else
+      else 
+        @snippet.errors.add(:trigger, "must be unique for your snippets in #{language.name}")
         render json: @snippet.errors, status: :unprocessable_entity
       end
     else
@@ -89,6 +95,16 @@ class SnippetsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_snippet
       @snippet = Snippet.find(params[:id])
+    end
+
+    def find_language(language_name)
+      begin
+        language = Language.find_or_create_by(name: language_name)
+      rescue 
+        @snippet.errors.add(:language, 'not supported')
+        render json: @snippet.errors, status: :unprocessable_entity
+      end
+      language if language
     end
 
     # Only allow a trusted parameter "white list" through.

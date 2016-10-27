@@ -477,11 +477,11 @@ attributes_hashes = [
 attributes_hashes.each do |attributes|
   # this line creates a new row in the user_snippets table
   # this line DOES NOT fill in the user_id column for this record
-  snippet = test_user.snippets.create(attributes)
+  snippet = test_user.snippets.build(attributes)
   # this line fills in the user_id column on the snippet record
   snippet.user = test_user 
   # this line fills in the author column on the snippet record 
   snippet.author = test_user.email
   # this line saves the changes made un the previous steps
-  snippet.save
+  test_user.add_snippet(snippet)
 end
