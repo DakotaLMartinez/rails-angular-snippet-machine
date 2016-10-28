@@ -1,5 +1,7 @@
+<h3 class="mt1">Copy and paste into {{ vm.snippet.language.name }}.json for VS Code</h3>
+
 <textarea name="visualStudioCodeSnippet" id="visualStudioCodeSnippet" cols="100" rows="28">
-"{{ vm.name}}": {
+"{{ vm.name }}": {
   "prefix": "{{ vm.trigger }}",
   "body": [
 {{ vm.body }}    
@@ -7,3 +9,8 @@
   "description": "{{ vm.description }}"
 }
 </textarea>
+
+<p>The file referenced above belongs in the following directory:<p>
+<pre>
+  ~/Library/Application\ Support/Code/User/snippets
+</pre>

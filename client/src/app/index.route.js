@@ -62,12 +62,15 @@
           }]
         }
       })
-      
+
       .state('snippetShow.vscode', {
         url: '/vscode', 
-        templateUrl: 'app/components/vsCodeView/vsCodeView.html',
-        controller: 'SnippetShowController', 
-        controllerAs: 'vm'
+        controller: function(snippetId) {
+          var $ctrl = this;
+          $ctrl.snippetId = snippetId;
+        },
+        template: '<vs-code-snippet id="$ctrl.snippetId"></vs-code-snippet>',
+        controllerAs: '$ctrl'
       })
 
       .state('snippetShow.sublime', {
