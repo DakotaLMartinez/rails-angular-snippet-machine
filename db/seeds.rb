@@ -472,6 +472,33 @@ attributes_hashes = [
   validate do |${model}| 
     ${My}Validator.new(${model}).validate
   end"
+  },
+  {
+    name: "Angular UI Router New State", 
+    description: "Adds a new state definition on the $stateProvider object within Angular UI Router configuration",
+    language: javascript, 
+    trigger: 'newstate',
+    body: ".state('${stateName}', {
+  url: '/${path}', 
+  templateUrl: 'app/components/${createAccount}/${createAccount}.html', 
+  controller: '${createAccount}Controller', 
+  controllerAs: 'vm'
+})"
+  }, 
+  {
+    name: 'Angular 1 UI Router Nested Component State', 
+    description: 'Adds a new state definition that will receive a resolved property from a parent route and use it to display a nested component in a nested view.',
+    language: javascript, 
+    trigger: 'ng1nestedcomponentroute',
+    body: ".state('${parentState}.${childState}', {
+  url: '/${childPath}', 
+  controller: function(${resolveFromParent}) {
+    var $ctrl = this;
+    $ctrl.${resolveFromParent} = ${resolveFromParent};
+  },
+  template: '<${component-name} ${binding-name}=\"$ctrl.${resolveFromParent}\"></${component-name}>',
+  controllerAs: '$ctrl'
+})"
   }
 ]
 attributes_hashes.each do |attributes|
