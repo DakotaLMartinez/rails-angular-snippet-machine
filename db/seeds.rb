@@ -499,6 +499,19 @@ attributes_hashes = [
   template: '<${component-name} ${binding-name}=\"$ctrl.${resolveFromParent}\"></${component-name}>',
   controllerAs: '$ctrl'
 })"
+  },
+  {
+    name: 'Angular 1 Info Buttons linking to nested states',
+    description: 'Adds a Few Bootstrap Info Buttons that can be used to link to nested states defined with UI Router',
+    language: html,
+    trigger: 'ng1nestedcomponentlinks' 
+    body: '<h3>${Header Text}</h3>
+<a class="btn btn-default" href="" ui-sref="${parentState}(${{id: {{ vm.id }} }})">${Default Link Text}</a>  
+<a class="btn btn-default" href="" ui-sref="${parentState}.${childState1}(${{id: {{ vm.id }} }})">${Child State 1 Link Text}</a>
+<a class="btn btn-default" href="" ui-sref="${parentState}.${childState2}(${{id: {{ vm.id }} }})">${Child State 2 Link Text}</a>
+<div ui-view>
+  ${defaultContent}
+</div>'
   }
 ]
 attributes_hashes.each do |attributes|
