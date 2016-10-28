@@ -69,7 +69,7 @@
               updateUserPermissions();
             });
         }
-        $state.go('userProfile');
+        // $state.go('userProfile');
       }
       
       
