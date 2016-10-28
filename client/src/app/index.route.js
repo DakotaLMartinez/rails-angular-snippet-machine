@@ -55,7 +55,12 @@
         url: '/snippets/:id',
         templateUrl: 'app/components/snippetShow/snippetShow.html', 
         controller: 'SnippetShowController', 
-        controllerAs: 'vm'
+        controllerAs: 'vm', 
+        resolve: {
+          snippetId: ['$stateParams', function($stateParams){
+            return $stateParams.id;
+          }]
+        }
       })
       
       .state('snippetShow.vscode', {
@@ -63,6 +68,16 @@
         templateUrl: 'app/components/vsCodeView/vsCodeView.html',
         controller: 'SnippetShowController', 
         controllerAs: 'vm'
+      })
+
+      .state('snippetShow.sublime', {
+        url: '/sublime', 
+        controller: function(snippetId) {
+          var $ctrl = this;
+          $ctrl.snippetId = snippetId;
+        },
+        template: '<sublime snippet-id="$ctrl.snippetId"></sublime>',
+        controllerAs: '$ctrl'
       })
       
       .state('snippetEdit', {

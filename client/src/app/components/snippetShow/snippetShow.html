@@ -9,7 +9,9 @@
   <p>Language: {{ vm.snippet.language.name }}</p>
   <p>Tab Trigger: {{ vm.snippet.trigger }}</p>
   <h3>Snippet Body:</h3>
-  <a class="btn btn-default" href="" ui-sref="snippetShow({id: {{ vm.id }} })">Code Editor</a>  <a class="btn btn-default" href="" ui-sref="snippetShow.vscode({id: {{ vm.id }} })">Visual Studio Code Snippet</a>
+  <a class="btn btn-default" href="" ui-sref="snippetShow({id: {{ vm.id }} })">Code Editor</a>  
+  <a class="btn btn-default" href="" ui-sref="snippetShow.vscode({id: {{ vm.id }} })">Visual Studio Code Snippet</a>
+  <a class="btn btn-default" href="" ui-sref="snippetShow.sublime({id: {{ vm.id }} })">Sublime Snippet</a>
   <div ui-view>
     <ace-editor body="vm.snippet.body" size="600"></ace-editor>
   </div>
