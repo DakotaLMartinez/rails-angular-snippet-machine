@@ -14,12 +14,12 @@ class Language < ApplicationRecord
   def vscode_snippets(user_id)
     response = {} 
     begin
-      snippets.where('user_id = ?', user_id).each do |s| 
-        name = s.name 
+      user_snippets.where(user_id: user_id, language: self).each do |us| 
+        name = us.snippet.name 
         snippet = {}
-        snippet['prefix'] = s.trigger
-        snippet['body'] = s.vscode 
-        snippet['description'] = s.description 
+        snippet['prefix'] = us.snippet.trigger
+        snippet['body'] = us.snippet.vscode 
+        snippet['description'] = us.snippet.description 
         response[name] = snippet
       end
     rescue 
