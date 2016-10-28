@@ -28,6 +28,32 @@ class Language < ApplicationRecord
     JSON.pretty_generate(response)
   end
 
+  def sublime_snippets(user_id)
+    response = {}
+    
+    user_snippets.where(user_id: user_id, language: self).each do |us|
+      snippet = "<snippet>\n"
+      snippet += "\t<content><![CDATA[\n"
+      snippet += us.snippet.body + "\n"
+      snippet += "]]></content>\n"
+      snippet += "\t<tabTrigger>" + us.snippet.trigger + "</tabTrigger>\n"
+      if self.sublime != "" 
+        snippet += "\t<scope>" + self.sublime + "</scope>\n"
+      else 
+        snippet += "\t<!-- Optional: Set a scope to limit where the snippet will trigger -->\n"
+        snippet += "\t<!-- <scope>source.python</scope> -->\n"
+      end
+      snippet += "</snippet>"
+      # names snippet based on combo of language and trigger to avoid conflicts
+      snippet_name = us.snippet.trigger + "-" + self.name
+      # adds the body of the snippet to the response object with a key corresponding
+      # to the snippet name. This allows easy iteration to create files for Dropbox
+      response[snippet_name] = snippet
+    end
+    
+    response
+  end
+
   # Validations
 
   validate :must_have_language_support

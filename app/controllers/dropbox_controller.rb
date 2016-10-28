@@ -38,6 +38,9 @@ class DropboxController < ApplicationController
         user.languages.uniq.each do |lang|
           snippets_file = lang.vscode_snippets(user.id)
           dropbox.upload "vscode/snippets/#{lang.vscode}.json", snippets_file
+          lang.sublime_snippets(user.id).each do |name, body|
+            dropbox.upload "sublime/User/#{name}.sublime-snippet", body
+          end
         end
         render json: "Successfully saved snippets to dropbox, you may now close this window."
       else
