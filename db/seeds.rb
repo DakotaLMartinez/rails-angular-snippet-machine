@@ -12,6 +12,7 @@ javascript = Language.where(name: "JavaScript").first_or_create
 ruby = Language.where(name: "Ruby").first_or_create
 html = Language.where(name: "HTML").first_or_create
 css = Language.where(name: "CSS").first_or_create
+plain_text = Language.where(name: "Plain Text").first_or_create
 attributes_hashes = [
   {
     name: 'my first snippet', 
@@ -512,6 +513,27 @@ attributes_hashes = [
 <div ui-view>
   ${defaultContent}
 </div>'
+  }, 
+  {
+    name: 'Custom Rake Task for resetting the counter cache on a model object',
+    description: 'Adds a custom rails task with access to the rails environment that will reset the counter cache on a model object',
+    language: plain_text, 
+    trigger: 'rakeresetcountercache', 
+    body: 'desc "Resets the counter cache on ${model association count}" 
+task ${reset_snippet_count}: :environment do 
+  ${Model}.find_each { |${item}| ${Model}.reset_counters(${item}.id, :${association_count}) }
+end'
+  }, 
+  {
+    name: 'Angular 1 ng-pluralize directive',
+    description: 'Adds ng-pluralize directive to html', 
+    language: html, 
+    trigger: 'ng1pluralize', 
+    body: "<ng-pluralize count=\"${1:model}\" when=\"{
+  '0': '${2:none}',
+  'one': '${3:one}', 
+  'other': '{} $0'
+}\" />"
   }
 ]
 attributes_hashes.each do |attributes|
