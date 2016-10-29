@@ -20,6 +20,7 @@
   function sublimeViewController(Snippet, Language, $log) {
     var $ctrl = this;
     $ctrl.languageName;
+    $ctrl.snippet;
     $ctrl.sublimeSnippet;
 
     ////////////////
@@ -30,7 +31,8 @@
         .then(handleSuccess, handleError)
         
       function handleSuccess(res) {
-        $ctrl.languageName = res.language.name;
+        $ctrl.languageName = Language.getSublimeAbbreviation(res.language.name);
+        $ctrl.snippet = res;
         $ctrl.sublimeSnippet = sublimeSnippet(res);
         $ctrl.errors = {};
       }
