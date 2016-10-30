@@ -16,8 +16,8 @@
       },
     });
 
-  sublimeViewController.$inject = ['Snippet', 'Language', '$log'];
-  function sublimeViewController(Snippet, Language, $log) {
+  sublimeViewController.$inject = ['Snippet', 'Language', '$log', 'sublimeTextFilter'];
+  function sublimeViewController(Snippet, Language, $log, sublimeTextFilter) {
     var $ctrl = this;
     $ctrl.languageName;
     $ctrl.snippet;
@@ -43,19 +43,7 @@
     } 
 
     function sublimeSnippet(snippet) {
-      var snip = "<snippet>\n";
-      snip += "\t<content><![CDATA[\n";
-      snip += snippet.body + "\n";
-      snip += "]]></content>\n";
-      snip += "\t<tabTrigger>" + snippet.trigger + "</tabTrigger>\n";
-      if (Language.getSublimeAbbreviation(snippet.language.name)) { 
-        snip += "\t<scope>" + Language.getSublimeAbbreviation(snippet.language.name) + "</scope>\n"
-      } else { 
-        snip += "\t<!-- Optional: Set a scope to limit where the snippet will trigger -->\n"
-        snip += "\t<!-- <scope>source.python</scope> -->\n"
-      }   
-      snip += "</snippet>"
-      return snip;
+      return sublimeTextFilter(snippet);
     }
 
     $ctrl.$onInit = function() {
