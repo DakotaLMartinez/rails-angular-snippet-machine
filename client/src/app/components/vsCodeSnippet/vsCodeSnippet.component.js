@@ -14,15 +14,10 @@
     controllerAs: 'vm'
   };
 
-  vsCodeSnippetController.$inject = ['visualStudioCodeFilter', 'Snippet']
-  function vsCodeSnippetController (visualStudioCodeFilter, Snippet) {
+  vsCodeSnippetController.$inject = ['Snippet']
+  function vsCodeSnippetController (Snippet) {
     var vm = this;
     vm.snippet;
-    vm.name; 
-    vm.description;
-    vm.trigger;
-    vm.language;
-    vm.body;
 
     /////////////////////////
 
@@ -30,12 +25,7 @@
       .getSnippet(vm.id)
       .then(function(res){
         vm.snippet = res;
-        vm.name = res.name;
-        vm.description = res.description || "";
-        vm.trigger = res.trigger;
-        vm.language = res.language
-        vm.body = visualStudioCodeFilter(res.body);
-      })
+      });
   }
 
   angular

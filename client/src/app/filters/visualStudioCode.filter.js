@@ -1,11 +1,30 @@
-angular
-  .module('dlmSnippetMachine')
-  .filter('visualStudioCode', visualStudioCode);
-  
+(function() {
+'use strict';
+
+  angular
+    .module('dlmSnippetMachine')
+    .filter('visualStudioCode', visualStudioCode);
+
   function visualStudioCode() {
-    return function(input) {
-      if (angular.isDefined(input)) {
-        var array = input.split('\n') || [];
+    return visualStudioCodeFilter;
+
+    ////////////////
+
+    function visualStudioCodeFilter(snippet) {
+      var snipObj = snippet || {name: "", trigger: "", body: "", description: ""};
+      var result = '"' + snipObj.name + "\": {\n";
+      result += "  \"prefix\": {" + ' "' + snipObj.trigger + "\",\n";
+      result += "  \"body\": [\n";
+      result += formatSnippetBody(snipObj.body) + "\n";
+      result += "  ],\n";
+      result += "  \"description\": \"" + snipObj.description + "\"\n";
+      result += "}";
+      return result;
+    }
+
+    function formatSnippetBody(snippetBody) {
+      if (snippetBody) {
+        var array = snippetBody.split('\n') || [];
         for (var i = 0 ; i < array.length ; i++) {
           var tmp = array[i].replace(/\"/g,'\\"');
           array[i] = '    "' + tmp + '"';
@@ -15,7 +34,8 @@ angular
         });
         return output.join(',\n');
       } else {
-        throw new Error('visualStudioCodeFilter must be given a string of code as an input');
+        return "formatSnippetBody must be given the snippetBody as an argument";
       }
     }
   }
+})();
