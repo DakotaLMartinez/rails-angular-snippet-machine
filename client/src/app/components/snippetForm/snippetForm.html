@@ -1,23 +1,47 @@
 <h1>{{ vm.title }}</h1>
 <display-errors errors="vm.errors"></display-errors>
 <form ng-submit="vm.submitForm()">
-  <div class="form-group">
-    <label for="snippetName">Name</label>
-    <input type="text" class="form-control" id="snippetName" placeholder="..." ng-model="vm.name" />
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="form-group">
+        <label for="snippetName">Name</label>
+        <input type="text" class="form-control" id="snippetName" placeholder="..." ng-model="vm.snippet.name" />
+      </div>
+      <div class="form-group">
+        <label for="snippetDescription">Description</label>
+        <input type="text" class="form-control" id="snippetDescription" placeholder="Describe your snippet..." ng-model="vm.snippet.description">
+      </div>
+      <div class="form-group">
+        <label for="snippetLanguage">Language</label>
+        <input type="text" class="form-control" id="snippetLanguage" autocomplete="off" placeholder="What language is this used for" ng-model="vm.snippet.language" uib-typeahead="lang for lang in vm.snippet.languages | filter:$viewValue | limitTo:8"  />
+      </div>
+      <div class="form-group">
+        <label for="snippetTrigger">Tab Trigger</label>
+        <input type="text" class="form-control" id="snippetTrigger" placeholder="Enter the Tab Trigger Text." ng-model="vm.snippet.trigger">
+      </div>
+      <h4>Snippet Body:</h4>
+      <ace-editor body="vm.snippet.body" size="450"></ace-editor>
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </div>
+    <div class="col-sm-4">
+      <h3>VS Code</h3>
+      <textarea name="vsCodeSnippet" id="vsCodeSnippet" cols="40" rows="10">
+{{ vm.snippet | visualStudioCode }}
+      </textarea>
+      <h3>Sublime</h3>
+      <textarea name="sublimeSnippet" id="sublimeSnippet" cols="40" rows="10">
+{{ vm.snippet | sublimeText }}
+      </textarea> 
+
+      <h3>Tips</h3>
+      To create a variable within a snippet:
+      <pre>
+${variable}
+      </pre>
+      If you need to add curly braces inside a variable, make sure to escape the closing braces:
+      <pre>
+ui-sref="show(${id: {{ instanceId \}\} })"
+      </pre>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="snippetDescription">Description</label>
-    <input type="text" class="form-control" id="snippetDescription" placeholder="Describe your snippet..." ng-model="vm.description">
-  </div>
-  <div class="form-group">
-    <label for="snippetLanguage">Language</label>
-    <input type="text" class="form-control" id="snippetLanguage" autocomplete="off" placeholder="What language is this used for" ng-model="vm.language" uib-typeahead="lang for lang in vm.languages | filter:$viewValue | limitTo:8"  />
-  </div>
-  <div class="form-group">
-    <label for="snippetTrigger">Tab Trigger</label>
-    <input type="text" class="form-control" id="snippetTrigger" placeholder="Enter the Tab Trigger Text." ng-model="vm.trigger">
-  </div>
-  <h4>Snippet Body:</h4>
-  <ace-editor body="vm.body" size="450"></ace-editor>
-  <button type="submit" class="btn btn-primary">Submit</button>
 </form>
