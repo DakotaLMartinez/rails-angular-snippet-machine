@@ -1,16 +1,18 @@
 <div class="bg-navy mb5">
   <nav class="container">
-    <ul class="list pl0 mv0 pv0 tr tl-ns f3 f2-l">
-      <li class="b dn dib-ns pv4"><a class="orange no-underline pv4 pr3" href="" ui-sref="snippetsIndex">Snippets</a></li>
-      <li class="b dn dib-ns pv4"><a class="orange no-underline pv4 ph3" href="" ui-sref="snippetNew" >New Snippet</a></li>
-      <li class="b dn dib-ns pv4"><a class="orange no-underline pv4 pl3" href="" ui-sref="instructions">Instructions</a></li>
+    <ul class="list pl0 mv0 pv0 tc tl-ns f3 f2-l">
+      <li class="b dib pv4 w-30 w-auto-ns"><a class="orange no-underline pv4 pl3 pl0-ns pr3-ns w-100 w-auto-ns" href="" ui-sref="snippetsIndex">Snippets</a></li>
+      <li class="b dib pv4 w-33 w-auto-ns"><a class="orange no-underline pv4 ph3 ph3-ns w-100 w-auto-ns" href="" ui-sref="snippetNew" >New Snippet</a></li>
+      <li class="b dib pv4 w-30 w-auto-ns"><a class="orange no-underline pv4 pr3 pr0-ns pl3-ns w-100 w-auto-ns" href="" ui-sref="instructions">Instructions</a></li>
       <!--<li class="b dn dib-ns"><a href="" ui-sref="" class="orange no-underline pv2 ph3"></a></li>-->
 
-      <li class="b dn dib-ns pv4 fr" ng-if="!$ctrl.user.signedIn" ui-sref="register"><a href="" class="orange no-underline pv4 pl3">Sign Up</a></li>
-      <li class="b dn dib-ns pv4 fr" ng-if="!$ctrl.user.signedIn" ui-sref="signIn"><a href="" class="orange no-underline pv4 pl3">Sign In</a></li>
+      <li class="tc white dn-ns">-----</li>
+
+      <li class="b dib pv4 w-50 w-auto-ns fr" ng-if="!$ctrl.user.signedIn" ui-sref="register"><a href="" class="orange no-underline pv4 ph5 pr0-ns pl3-ns">Sign Up</a></li>
+      <li class="b dib pv4 w-50 w-auto-ns fr" ng-if="!$ctrl.user.signedIn" ui-sref="signIn">  <a href="" class="orange no-underline pv4 ph5 pr0-ns pl3-ns">Sign In</a></li>
     
-      <li class="b dn dib-ns pv4 fr" ng-if="$ctrl.user.signedIn" ng-click="$ctrl.signOut()"><a href="" class="orange no-underline pv4 pl3">Sign Out</a></li>
-      <li class="b dn dib-ns pv4 fr" ng-if="$ctrl.user.signedIn" ui-sref="userProfile"><a href="" class="orange no-underline pv4 pl3">My Profile</a></li>
+      <li class="b dib pv4 w-50 w-auto-ns fr" ng-if="$ctrl.user.signedIn" ng-click="$ctrl.signOut()"><a href="" class="orange no-underline pv4 ph5 pr0-ns pl3-ns">Sign Out</a></li>
+      <li class="b dib pv4 w-50 w-auto-ns fr" ng-if="$ctrl.user.signedIn" ui-sref="userProfile">     <a href="" class="orange no-underline pv4 ph5 pr0-ns pl3-ns">My Profile</a></li>
 
     </ul>
   </nav>
