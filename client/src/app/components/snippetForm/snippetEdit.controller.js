@@ -5,8 +5,8 @@
     .module('dlmSnippetMachine')
     .controller('SnippetEditController', SnippetEditController);
 
-  SnippetEditController.$inject = ['Snippet', '$stateParams', '$filter', '$state', 'Language', 'visualStudioCodeFilter', 'sublimeTextFilter'];
-  function SnippetEditController(Snippet, $stateParams, $filter, $state, Language, visualStudioCodeFilter, sublimeTextFilter) {
+  SnippetEditController.$inject = ['Snippet', '$stateParams', '$filter', '$state', 'Language'];
+  function SnippetEditController(Snippet, $stateParams, $filter, $state, Language) {
     var vm = this;
     vm.title = "Edit Snippet";
     var snippet = {};
@@ -18,8 +18,6 @@
     vm.snippet.languages = Language.listSupportedLanguages();
     vm.snippet.trigger = "";
     vm.snippet.body = "";
-    // vm.visualStudioCodeBody = visualStudioCodeFilter(vm.snippet.body);
-    // vm.sublimeSnippet = sublimeTextFilter(vm.snippet);
 
     activate();
 
@@ -32,11 +30,10 @@
           vm.snippet = res;
           vm.snippet.name = res.name;
           vm.snippet.description = res.description;
-          vm.snippet.language = res.language.name; 
+          vm.snippet.language = res.language.name;
+          vm.snippet.languages = Language.listSupportedLanguages(); 
           vm.snippet.trigger = res.trigger; 
           vm.snippet.body = res.body;
-          // vm.visualStudioCodeBody = visualStudioCodeFilter(vm.snippet);
-          // vm.sublimeSnippet = sublimeTextFilter(vm.snippet);
         })
 
       vm.submitForm = submitForm;
