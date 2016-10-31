@@ -12,6 +12,16 @@ $icon-font-path: "../../bootstrap-sass/assets/fonts/bootstrap/";
 // bower:scss
 // endbower
 
+a {
+  color: green;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  text-decoration: none;
+  color: greenyellow;
+}
+
 .browsehappy {
   margin: 0.2em 0;
   background: #ccc;
