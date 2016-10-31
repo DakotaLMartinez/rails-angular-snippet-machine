@@ -55,6 +55,7 @@ class User < ActiveRecord::Base
         us.language = snippet.language
         us.trigger = snippet.trigger
         snippet.save      
+        us.save
       end
     # this should never happen, we have a uniqueness index on user, language and trigger
     # so we would only see more than 1 match if the user_snippets data were corrupted.
