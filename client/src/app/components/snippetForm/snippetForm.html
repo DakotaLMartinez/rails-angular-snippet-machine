@@ -1,23 +1,85 @@
 <h1>{{ vm.title }}</h1>
 <display-errors errors="vm.errors"></display-errors>
-<form ng-submit="vm.submitForm()">
+<form name="snippetForm" ng-submit="vm.submitForm()">
   <div class="row">
     <div class="col-sm-8">
       <div class="form-group">
         <label for="snippetName">Name</label>
-        <input type="text" class="form-control" id="snippetName" placeholder="..." ng-model="vm.snippet.name" />
+        <input 
+          type="text" 
+          class="form-control" 
+          id="snippetName" 
+          name="snippetName"
+          placeholder="..." 
+          ng-model="vm.snippet.name" 
+          required="required" />
+      
+        <div 
+          ng-messages="snippetForm.snippetName.$error"
+          ng-show="snippetForm.snippetName.$touched" 
+          role="alert">
+          <div class="pv2 pl4 f3 b bg-navy red" ng-message="required">Name is Required</div>
+        </div>
       </div>
       <div class="form-group">
         <label for="snippetDescription">Description</label>
-        <input type="text" class="form-control" id="snippetDescription" placeholder="Describe your snippet..." ng-model="vm.snippet.description">
+        <input 
+          type="text" 
+          class="form-control"  
+          id="snippetDescription"
+          name="snippetDescription" 
+          placeholder="Describe your snippet..." 
+          ng-model="vm.snippet.description" />
       </div>
       <div class="form-group">
         <label for="snippetLanguage">Language</label>
-        <input type="text" class="form-control" id="snippetLanguage" autocomplete="off" placeholder="What language is this used for" ng-model="vm.snippet.language" uib-typeahead="lang for lang in vm.snippet.languages | filter:$viewValue | limitTo:8"  />
+        <input 
+          type="text" 
+          class="form-control" 
+          id="snippetLanguage" 
+          name="snippetLanguage"
+          autocomplete="off" 
+          placeholder="What language is this used for" 
+          ng-model="vm.snippet.language" 
+          uib-typeahead="lang for lang in vm.snippet.languages | filter:$viewValue | limitTo:8" 
+          required="required" 
+          validate-language />
+
+        <div 
+          ng-messages="snippetForm.snippetLanguage.$error" 
+          ng-show="snippetForm.snippetLanguage.$touched"
+          role="alert">
+          <div class="pv2 pl4 f3 b bg-navy red" ng-message="required">
+            Language is Required!
+          </div>
+          <div class="pv2 pl4 f3 b bg-navy red" ng-message="language">
+            Sorry, that's not a supported language.
+          </div>
+        </div>
       </div>
       <div class="form-group">
         <label for="snippetTrigger">Tab Trigger</label>
-        <input type="text" class="form-control" id="snippetTrigger" placeholder="Enter the Tab Trigger Text." ng-model="vm.snippet.trigger">
+        <input 
+          type="text" 
+          class="form-control" 
+          id="snippetTrigger" 
+          name="snippetTrigger"
+          placeholder="Enter the Tab Trigger Text." 
+          ng-model="vm.snippet.trigger" 
+          required="required" 
+          validate-trigger />
+
+        <div 
+          ng-messages="snippetForm.snippetTrigger.$error" 
+          ng-show="snippetForm.snippetTrigger.$dirty"
+          role="alert">
+          <div class="pv2 pl4 f3 b bg-navy red" ng-message="required">
+            Trigger is Required!
+          </div>
+          <div class="pv2 pl4 f3 b bg-navy red" ng-message="trigger">
+            Trigger cannot have any spaces!
+          </div>
+        </div>
       </div>
       <h4>Snippet Body:</h4>
       <ace-editor body="vm.snippet.body" size="450"></ace-editor>
