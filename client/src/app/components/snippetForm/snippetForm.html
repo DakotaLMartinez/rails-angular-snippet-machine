@@ -14,7 +14,10 @@
           ng-model="vm.snippet.name" 
           required="required" />
       
-        <div ng-messages="snippetForm.snippetName.$error" role="alert">
+        <div 
+          ng-messages="snippetForm.snippetName.$error"
+          ng-show="snippetForm.snippetName.$touched" 
+          role="alert">
           <div class="pv2 pl4 f3 b bg-navy red" ng-message="required">Name is Required</div>
         </div>
       </div>
@@ -42,7 +45,10 @@
           required="required" 
           validate-language />
 
-        <div ng-messages="snippetForm.snippetLanguage.$error" role="alert">
+        <div 
+          ng-messages="snippetForm.snippetLanguage.$error" 
+          ng-show="snippetForm.snippetLanguage.$touched"
+          role="alert">
           <div class="pv2 pl4 f3 b bg-navy red" ng-message="required">
             Language is Required!
           </div>
@@ -62,7 +68,10 @@
           ng-model="vm.snippet.trigger" 
           required="required" />
 
-        <div ng-messages="snippetForm.snippetTrigger.$error" role="alert">
+        <div 
+          ng-messages="snippetForm.snippetTrigger.$error" 
+          ng-show="snippetForm.snippetTrigger.$touched"
+          role="alert">
           <div class="pv2 pl4 f3 b bg-navy red" ng-message="required">
             Trigger is Required!
           </div>
