@@ -13,12 +13,14 @@
           placeholder="..." 
           ng-model="vm.snippet.name" 
           required="required" />
-      
+
         <div 
           ng-messages="snippetForm.snippetName.$error"
           ng-show="snippetForm.snippetName.$touched" 
           role="alert">
-          <div class="pv2 pl4 f3 b bg-navy red" ng-message="required">Name is Required</div>
+          <div class="pv2 pl4 f3 b bg-navy red" ng-message="required">
+            Name is Required
+          </div>
         </div>
       </div>
       <div class="form-group">
