@@ -19,7 +19,7 @@
       result += "  <tabTrigger>" + snipObj.trigger + "</tabTrigger>\n";
       if(Language.getSublimeAbbreviation(snipObj.language)) {
         result += "  <scope>" + Language.getSublimeAbbreviation(snipObj.language) + "</scope>\n";
-      } else if (Language.getSublimeAbbreviation(snipObj.language.name)) {
+      } else if (snipObj.language && Language.getSublimeAbbreviation(snipObj.language.name)) {
         result += "  <scope>" + Language.getSublimeAbbreviation(snipObj.language.name) + "</scope>\n";
       } else {
         result += "  <!-- Optional: Set a scope to limit where the snippet will trigger -->\n";
