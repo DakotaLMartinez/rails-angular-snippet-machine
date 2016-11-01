@@ -10,9 +10,11 @@
     this.listSupportedLanguages = listSupportedLanguages;
     this.getVscodeAbbreviation  = getVscodeAbbreviation;
     this.getSublimeAbbreviation = getSublimeAbbreviation;
+    this.isSupported = isSupported;
     var vscode  = this.vsCodeAbbreviations;
     var sublime = this.getSublimeAbbreviation;
     var languages = this.supportedLanguages;
+    var supported = {};
 
     ////////////////
 
@@ -135,6 +137,8 @@
 
     languages = ["Batch", "C", "C++", "Clojure", "CoffeeScript", "CSS", "Diff", "Dockerfile", "F#", "Git Commit Message", "Git Rebase message", "Go", "Groovy", "Handlebars", "HTML", "Ini", "Jade", "Java", "JavaScript", "JavaScriptReact", "JSON", "Less", "Lua", "Makefile", "Markdown", "Objective C", "Perl", "Perl 6", "PHP", "Plain Text", "PowerShell", "Python", "R", "Razor", "Ruby", "Rust", "Sass", "ShaderLab", "Shell Script (Bash)", "SQL", "Swift", "Typescript", "Typescript React", "Visual Basic", "XML", "XSL", "YAML", "ActionScript", "AppleScript", "ASP", "C#", "D", "Erlang", "GraphViz", "Haskell", "JSP", "Java Properties", "Java Doc", "BibTex", "Latex Log", "Latex Memoir", "Latex", "TeX", "Lisp", "MakeFile", "Multi Markdown", "Matlab", "Objective-C++", "OCaml campl4", "OCaml", "OCamllex", "Regular Expression(python)", "R Console", "Ruby on Rails", "Ruby HAML", "SQL(Ruby)", "Regular Expression", "RestructuredText", "Scala", "Shell Script", "Stylus", "TCL", "HTML(TCL)", "Textile"]
 
+    supported = { "Batch": true, "C": true, "C++": true, "Clojure": true, "CoffeeScript": true, "CSS": true, "Diff": true, "Dockerfile": true, "F#": true, "Git Commit Message": true, "Git Rebase message": true, "Go": true, "Groovy": true, "Handlebars": true, "HTML": true, "Ini": true, "Jade": true, "Java": true, "JavaScript": true, "JavaScriptReact": true, "JSON": true, "Less": true, "Lua": true, "Makefile": true, "Markdown": true, "Objective C": true, "Perl": true, "Perl 6": true, "PHP": true, "Plain Text": true, "PowerShell": true, "Python": true, "R": true, "Razor": true, "Ruby": true, "Rust": true, "Sass": true, "ShaderLab": true, "Shell Script (Bash)": true, "SQL": true, "Swift": true, "Typescript": true, "Typescript React": true, "Visual Basic": true, "XML": true, "XSL": true, "YAML": true, "ActionScript": true, "AppleScript": true, "ASP": true, "C#": true, "D": true, "Erlang": true, "GraphViz": true, "Haskell": true, "JSP": true, "Java Properties": true, "Java Doc": true, "BibTex": true, "Latex Log": true, "Latex Memoir": true, "Latex": true, "TeX": true, "Lisp": true, "MakeFile": true, "Multi Markdown": true, "Matlab": true, "Objective-C++": true, "OCaml campl4": true, "OCaml": true, "OCamllex": true, "Regular Expression(python)": true, "R Console": true, "Ruby on Rails": true, "Ruby HAML": true, "SQL(Ruby)": true, "Regular Expression": true, "RestructuredText": true, "Scala": true, "Shell Script": true, "Stylus": true, "TCL": true, "HTML(TCL)": true, "Textile": true }
+
     function getVscodeAbbreviation(language) { 
       return vscode[language];
     }
@@ -145,6 +149,10 @@
 
     function listSupportedLanguages() {
       return languages;
+    }
+
+    function isSupported(language) {
+      return supported[language];
     }
   }
 })();
