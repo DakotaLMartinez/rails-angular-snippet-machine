@@ -66,14 +66,18 @@
           name="snippetTrigger"
           placeholder="Enter the Tab Trigger Text." 
           ng-model="vm.snippet.trigger" 
-          required="required" />
+          required="required" 
+          validate-trigger />
 
         <div 
           ng-messages="snippetForm.snippetTrigger.$error" 
-          ng-show="snippetForm.snippetTrigger.$touched"
+          ng-show="snippetForm.snippetTrigger.$dirty"
           role="alert">
           <div class="pv2 pl4 f3 b bg-navy red" ng-message="required">
             Trigger is Required!
+          </div>
+          <div class="pv2 pl4 f3 b bg-navy red" ng-message="trigger">
+            Trigger cannot have any spaces!
           </div>
         </div>
       </div>
