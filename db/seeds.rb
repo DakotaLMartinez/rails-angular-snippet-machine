@@ -534,6 +534,94 @@ end'
   'one': '${3:one}', 
   'other': '{} $0'
 }\" />"
+  },
+  {
+    name: 'Angular 1 ng-if div', 
+    description: 'Adds a div with an ng-if directive', 
+    language: html, 
+    trigger: 'ngif', 
+    body: '<div ng-if="${expression}">$0</div>'
+  },
+  {
+    name: 'Angular 1 ng-messages field validation', 
+    description: 'Adds an ng-if div with error messages for a field on an Angular form', 
+    language: html, 
+    trigger: 'ng1messages',
+    body: '<div ng-messages="${formName}.${fieldName}.$error" role="alert">
+  <div ${class="$0"} ng-message="${errorType}">
+    ${errorMessage}
+  </div>
+</div>'
+  },
+  {
+    name: 'Angular 1 ng-messages validation error message', 
+    description: 'Adds an error message to an ng-messages error block', 
+    language: html, 
+    trigger: 'ng1message', 
+    body: '<div ${class="$0"} ng-message="${errorType}">
+  ${errorMessage}
+</div>'
+  },
+  {
+    name: 'Angular 1 Custom Validation Directive', 
+    description: 'Creates an Angular Directive to add custom validation to a form field', 
+    language: javascript, 
+    trigger: 'ng1validationdirective',
+    body: "(function() {
+  'use strict';
+
+  angular
+    .module('${app}')
+    .directive('validate${fieldName}', validate${fieldName});
+
+  validate${fieldName}.$inject = ['${dep1}'];
+  function validateTrigger(${dep1}) {
+    // Usage:
+    //
+    // Creates:
+    //
+    var directive = {
+      restrict: 'A',
+      require: '?ngModel',
+      link: link
+    };
+    return directive;
+    
+    function link(scope, element, attrs, ngModel) {
+      ngModel.$validators.${validatorName} = function(modelValue, viewValue) {
+          var value = modelValue || viewValue;
+          return ${expressionThatReturnsTrueIfValueIsValid} || false;
+      }
+    }
+  }
+
+})();"
+  }, 
+  {
+    name: 'Angular 1 Form Group for use with ng-messages', 
+    description: 'Adds an Angular 1 Form Group to a form designed to work with ng-messages', 
+    language: html, 
+    trigger: 'ng1formgroup', 
+    body: '<div class="form-group">
+  <label for="${fieldName}">Name</label>
+  <input 
+    type="${text}" 
+    class="form-control" 
+    id="${fieldName}" 
+    name="${fieldName}"
+    placeholder="${...}" 
+    ng-model="${vm.modelName}" 
+    ${required="required"} />
+
+  <div 
+    ng-messages="${formName}.${fieldName}.$error"
+    ng-show="${formName}.${fieldName}.$touched" 
+    role="alert">
+    <div class="${classes}" ng-message="${errorName}">
+      ${errorMessage}
+    </div>
+  </div>
+</div>'
   }
 ]
 attributes_hashes.each do |attributes|
