@@ -9,6 +9,7 @@
   function User($http, getApiUrl, $window, $rootScope, $log, $q) {
     this.getUserSnippets = getUserSnippets;
     this.getCurrentUserPermissions = getCurrentUserPermissions;
+    this.clearCachedPermissions = clearCachedPermissions;
     this.currentUserCanEditSnippet = currentUserCanEditSnippet;
     this.addSnippet = addSnippet;
     this.removeSnippet = removeSnippet;
@@ -44,6 +45,10 @@
         }
         return promise;
       }
+    }
+
+    function clearCachedPermissions() {
+      currentUserPermissions = false;
     }
 
     function currentUserCanEditSnippet(id) {
