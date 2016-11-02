@@ -26,11 +26,6 @@
       <p><span class="b">Language:</span> {{ snippet.language.name }}</p>
       <p><span class="b">Tab Trigger:</span> {{ snippet.trigger }}</p>
       <p><span class="b">Author:</span> {{ snippet.author }}</p>
-      <p><span class="b"><ng-pluralize count="snippet.user_snippets_count" when="{
-        '0': 'No users',
-        'one': '1 User', 
-        'other': '{} Users'
-      }"></ng-pluralize></span></p>
       <p><add-snippet-button id="snippet.id"></add-snippet-button></p>
     </div>
     <div class="col-sm-9">

@@ -1,10 +1,5 @@
 <div>
   <h1>{{ vm.snippet.name }}</h1>
-  <h4 class="mv0"><ng-pluralize count="vm.snippet.user_snippets_count" when="{
-    '0': 'No users',
-    'one': '1 user', 
-    'other': '{} users'
-  }" /></h4>
   <div class="mv2">
     <snippet-edit-button id="vm.id"></snippet-edit-button>
     <snippet-delete-button id="vm.id"></snippet-delete-button>
