@@ -8,13 +8,6 @@
   /** @ngInject */
   function routerConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('home', {
-        url: '/main',
-        templateUrl: 'app/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
-      })
-      
       .state('register', {
         url: '/sign_up', 
         templateUrl: 'app/components/createAccount/createAccount.html', 
