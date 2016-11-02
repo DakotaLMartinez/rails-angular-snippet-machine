@@ -29,16 +29,17 @@
       if (User.loggedIn()) {
         var id = $ctrl.id
         User 
-          .currentUserCanEditSnippet(id)
+          .getCurrentUserPermissions()
           .then(function(res){
-            if (res === true) {
+            var can_edit = res.data.can_edit;
+            if (can_edit[id]) {
               $ctrl.showButton = true;
             } else {
               $ctrl.showButton = false;
             }
           })
           .catch(function(res){
-            $log.log(res);
+            $log.warn(res);
           })
       }
     }
