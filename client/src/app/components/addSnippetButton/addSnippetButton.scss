@@ -1,0 +1,75 @@
+.star {
+  margin: 5px 0;
+  position: relative;
+  top: 2px;
+  display: inline-block;
+  color: $brand-primary;
+  width: 0px;
+  height: 0px;
+  border-right: 10px solid transparent;
+  border-bottom: 7px  solid $brand-primary;
+  border-left: 10px solid transparent;
+  -moz-transform: rotate(35deg);
+  -webkit-transform: rotate(35deg);
+  -ms-transform: rotate(35deg);
+  -o-transform: rotate(35deg);
+}
+
+.star:before {
+  border-bottom: 8px solid $brand-primary;
+  border-left: 3px solid transparent;
+  border-right: 3px solid transparent;
+  position: absolute;
+  height: 0;
+  width: 0;
+  top: -5px;
+  left: -6px;
+  display: block;
+  content: '';
+  -webkit-transform: rotate(-35deg);
+  -moz-transform: rotate(-35deg);
+  -ms-transform: rotate(-35deg);
+  -o-transform: rotate(-35deg);
+}
+
+.star:after {
+  position: absolute;
+  display: block;
+  color: $brand-primary;
+  top: 0px;
+  left: -10px;
+  width: 0px;
+  height: 0px;
+  border-right: 10px solid transparent;
+  border-bottom: 7px solid $brand-primary;
+  border-left: 10px solid transparent;
+  -webkit-transform: rotate(-70deg);
+  -moz-transform: rotate(-70deg);
+  -ms-transform: rotate(-70deg);
+  -o-transform: rotate(-70deg);
+  content: '';
+}
+
+.addLink {
+  transition: none;
+  display: inline-block;
+  width: 82px;
+}
+
+.star-active .star, .star-active .star:after, .star-active, .star-active a {
+  color: greenyellow !important;
+} 
+
+.star-active .star, .star-active .star:after,
+.addLink:hover .star, .addLink:hover .star:after {
+  border-bottom: 7px solid greenyellow !important;
+}
+
+.star-active .star:before, 
+.addLink:hover .star:before {
+  border-bottom: 8px solid greenyellow !important;
+}
+
+.addSnippetButton {
+  width: 190px;
+}
