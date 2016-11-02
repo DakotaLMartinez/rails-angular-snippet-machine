@@ -5,8 +5,8 @@
     .module('dlmSnippetMachine')
     .service('User', User);
 
-  User.$inject = ['$http', 'getApiUrl', '$window', '$rootScope', '$log'];
-  function User($http, getApiUrl, $window, $rootScope, $log) {
+  User.$inject = ['$http', 'getApiUrl', '$window', '$rootScope', '$log', '$q'];
+  function User($http, getApiUrl, $window, $rootScope, $log, $q) {
     this.getUserSnippets = getUserSnippets;
     this.getCurrentUserPermissions = getCurrentUserPermissions;
     this.currentUserCanEditSnippet = currentUserCanEditSnippet;
@@ -15,6 +15,8 @@
     this.saveUserSnippets = saveUserSnippets;
     this.loggedIn = loggedIn;
   
+    var currentUserPermissions;
+
     var url = getApiUrl.getUrl();
     var currentUserId;
     
@@ -29,9 +31,18 @@
     }
 
     function getCurrentUserPermissions() {
-      if ($rootScope.user) {
-        currentUserId = $rootScope.user.id;
-        return $http.get(url + '/users/' + currentUserId + '/permissions');
+      var promise;
+      if (Object.keys($rootScope.user).length !== 0) {
+        if (!currentUserPermissions) {
+          currentUserId = $rootScope.user.id;
+          promise = $http.get(url + '/users/' + currentUserId + '/permissions');
+          promise.then(function(response){
+            currentUserPermissions = response;
+          });
+        } else {
+          promise = $q.when(currentUserPermissions);
+        }
+        return promise;
       }
     }
 
