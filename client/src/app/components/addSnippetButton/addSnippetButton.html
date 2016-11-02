@@ -1,1 +1,14 @@
-<button class="btn btn-success" ng-show="$ctrl.showButton" ng-click="$ctrl.addOrRemoveFromSnippets()">{{ $ctrl.buttonText }}</button>
+<div class="pa3 bg-navy b orange addSnippetButton" ng-class="$ctrl.starActive">
+  <a 
+    class="orange pointer addLink" 
+    ng-show="$ctrl.showButton" 
+    ng-click="$ctrl.addOrRemoveFromSnippets()">
+      <span class="star"></span> {{ $ctrl.buttonText }}
+  </a>
+   <span ng-if="$ctrl.showButton" class="dib ph2">|</span> 
+<ng-pluralize count="$ctrl.userCount" when="{
+    '0': '0 Users',
+    'one': '1 User', 
+    'other': '{} Users'
+  }"></ng-pluralize>
+</div>

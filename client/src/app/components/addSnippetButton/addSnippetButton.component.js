@@ -20,44 +20,34 @@
   addSnippetButtonController.$inject = ['User', 'Snippet', '$log', '$state'];
   function addSnippetButtonController(User, Snippet, $log, $state) {
     var $ctrl = this;
-    $ctrl.buttonText = "Add to My Snippets";
+    $ctrl.starActive = "";
+    $ctrl.buttonText = "Add";
     $ctrl.showButton = false;
     $ctrl.editableSnippets;
     $ctrl.downloadableSnippets;
+    $ctrl.userCount;
 
     $ctrl.addToSnippets;
     $ctrl.removeFromSnippets;
 
     ////////////////
 
-    function updateUserPermissions() {
-      if (User.loggedIn()) {
-        User 
-          .getCurrentUserPermissions()
-          .then(function(res){
-            $ctrl.editableSnippets = res.data.can_edit;
-            $ctrl.downloadableSnippets = res.data.can_download;
-            if(!$ctrl.editableSnippets[$ctrl.id]) {
-              $ctrl.showButton = true;
-              if($ctrl.downloadableSnippets[$ctrl.id]) {
-                $ctrl.buttonText = "Remove From My Snippets";
-              } 
-            }
-          });
-      }
-    }
-
     $ctrl.$onInit = function() { 
       updateUserPermissions();
 
+      getSnippetUserCount();
+
       $ctrl.addOrRemoveFromSnippets = function(){
         var id = $ctrl.id;
-        if ($ctrl.buttonText === "Add to My Snippets") {
+        if ($ctrl.buttonText === "Add") {
           User 
             .addSnippet(id)
             .then(function(res){
               $log.log(res);
-              $ctrl.buttonText = "Remove From My Snippets";
+              var hasSnippet = res.data;
+              updateButtonText(hasSnippet);
+              updateSnippetUserCount(hasSnippet);
+              updateStarClass(hasSnippet);
               updateUserPermissions();
             });
         } else {
@@ -65,7 +55,10 @@
             .removeSnippet(id)
             .then(function(res){
               $log.log(res);
-              $ctrl.buttonText = "Add to My Snippets";
+              var hasSnippet = res.data;
+              updateButtonText(hasSnippet);
+              updateSnippetUserCount(hasSnippet);
+              updateStarClass(hasSnippet);
               updateUserPermissions();
             });
         }
@@ -78,5 +71,63 @@
       updateUserPermissions();
     };
     $ctrl.$onDestroy = function() { };
+
+    ////////////////////////////////////
+
+    function updateUserPermissions() {
+      if (User.loggedIn()) {
+        User 
+          .getCurrentUserPermissions()
+          .then(function(res){
+            $ctrl.editableSnippets = res.data.can_edit;
+            $ctrl.downloadableSnippets = res.data.can_download;
+            if(!$ctrl.editableSnippets[$ctrl.id]) {
+              $ctrl.showButton = true;
+              if($ctrl.downloadableSnippets[$ctrl.id]) {
+                $ctrl.buttonText = "Remove";
+                $ctrl.starActive = "star-active";
+              } 
+            }
+          });
+      }
+    }
+
+    function updateButtonText(hasSnippet) {
+      if (hasSnippet) {
+        $ctrl.buttonText = "Remove";
+      } else {
+        $ctrl.buttonText = "Add";
+      }
+    }
+
+    function getSnippetUserCount() {
+      if ($ctrl.id) {
+        Snippet 
+          .getSnippet($ctrl.id)
+          .then(function(res) {
+            $ctrl.userCount = res.user_snippets_count;
+          });
+      } else {
+        $log.warn("getSnippetUserCount must be given an id");
+      }
+    }
+
+    function updateSnippetUserCount(hasSnippet) {
+      if (hasSnippet) {
+        $ctrl.userCount++;
+      } else {
+        $ctrl.userCount--;
+      }
+    }
+
+    function updateStarClass(hasSnippet) {
+      if (hasSnippet) {
+        $ctrl.starActive = "star-active";
+      } else {
+        $ctrl.starActive = "";
+      }
+    }
+
+    
   }
 })();
