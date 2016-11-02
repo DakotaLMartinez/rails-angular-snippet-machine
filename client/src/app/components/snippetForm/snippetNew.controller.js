@@ -5,8 +5,8 @@
     .module('dlmSnippetMachine')
     .controller('SnippetNewController', SnippetNewController);
 
-  SnippetNewController.$inject = ['Snippet', '$filter', '$state', 'Language', 'sublimeTextFilter', 'visualStudioCodeFilter'];
-  function SnippetNewController(Snippet, $filter, $state, Language, sublimeTextFilter, visualStudioCodeFilter) {
+  SnippetNewController.$inject = ['Snippet', '$filter', '$state', 'Language', 'sublimeTextFilter', 'visualStudioCodeFilter', 'User'];
+  function SnippetNewController(Snippet, $filter, $state, Language, sublimeTextFilter, visualStudioCodeFilter, User) {
     var vm = this;
     vm.title = "New Snippet";
     var snippet = {}
@@ -43,6 +43,7 @@
           .then(createSuccess, createError);
 
         function createSuccess(res){
+          User.clearCachedPermissions();
           $state.go('snippetShow', {id: res.id});
         }
 
