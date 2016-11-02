@@ -45,15 +45,15 @@
     }
 
     function updatePermissions() {
-      User
-        .currentUserCanEditSnippet($ctrl.id)
+      User 
+        .getCurrentUserPermissions()
         .then(function(res){
-          if (res === true) {
+          var can_edit = res.data.can_edit;
+          if (can_edit[$ctrl.id]) {
             $ctrl.showButton = true;
           }
-        })
-        .catch(function(res){
-          $log.log(res);
+        }).catch(function(res){
+          $log.warn(res);
         })
     }
 
