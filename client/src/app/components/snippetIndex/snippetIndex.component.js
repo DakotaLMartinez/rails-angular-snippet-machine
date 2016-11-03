@@ -8,8 +8,7 @@
   var SnippetIndex = {
     bindings: {
       userId: '=',
-      profilePage: '<',
-      itemsPerPage: '<'
+      profilePage: '<'
     },
     templateUrl: 'app/components/snippetIndex/snippetIndex.html',
     controller: SnippetIndexController,
@@ -20,7 +19,7 @@
   function SnippetIndexController (Snippet, User, Language) {
     var vm = this; 
     vm.snippets = [];
-    vm.itemsPerPage = vm.itemsPerPage || 4;
+    vm.itemsPerPage = vm.itemsPerPage || 5;
     vm.languages = Language.listSupportedLanguages();
     if (vm.profilePage === true) {
       vm.title = "My Snippets";
