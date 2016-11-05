@@ -1,5 +1,0 @@
-revised build script to omit npm install and bower install (not needed for now)
-adds gulp build back into build script
-switches order of scripts to allow for gulp to be available.
-adds npm install gulp to build script
-reverts to original build script
