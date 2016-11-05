@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :snippet_ids, :permissions]
+  before_action :set_user, only: [:show, :permissions]
 
   def index 
     @users = User.all
