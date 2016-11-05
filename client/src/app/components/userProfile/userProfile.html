@@ -1,4 +1,4 @@
-<h1>{{ vm.user.email }} - User Profile Page</h1>
-<a class="btn btn-primary" href="" ng-click="vm.saveSnippets()">Save to Dropbox</a>
+<h1>{{ $ctrl.user.email }} - User Profile Page</h1>
+<a class="btn btn-primary" href="" ng-click="$ctrl.saveUserSnippets()">Save to Dropbox</a>
 
-<snippet-index user-id="vm.user.id" profile-page="true"></snippet-index>
+<snippet-index user-id="$ctrl.user.id" profile-page="true"></snippet-index>

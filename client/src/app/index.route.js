@@ -85,9 +85,7 @@
 
       .state('userProfile', {
         url: '/profile', 
-        templateUrl: 'app/components/userProfile/userProfile.html', 
-        controller: 'UserProfileController', 
-        controllerAs: 'vm',
+        template: '<user-profile></user-profile>',
         resolve: {
           auth: ['$auth', '$q', function($auth, $q) {
             var deferred = $q.defer();
