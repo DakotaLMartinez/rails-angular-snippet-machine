@@ -46,9 +46,7 @@
       
       .state('snippetShow', {
         url: '/snippets/:id',
-        templateUrl: 'app/components/snippetShow/snippetShow.html', 
-        controller: 'SnippetShowController', 
-        controllerAs: 'vm', 
+        template: '<snippet-show id="$resolve.snippetId"></snippet-show>',
         resolve: {
           snippetId: ['$stateParams', function($stateParams){
             return $stateParams.id;

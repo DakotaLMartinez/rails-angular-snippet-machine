@@ -1,20 +1,20 @@
 <div>
-  <h1>{{ vm.snippet.name }}</h1>
+  <h1>{{ $ctrl.snippet.name }}</h1>
   <div class="mv2">
-    <snippet-edit-button id="vm.id"></snippet-edit-button>
-    <snippet-delete-button id="vm.id"></snippet-delete-button>
+    <snippet-edit-button id="$ctrl.id"></snippet-edit-button>
+    <snippet-delete-button id="$ctrl.id"></snippet-delete-button>
   </div>
   <div class="mv2">
-    <add-snippet-button id="vm.id"></add-snippet-button>
+    <add-snippet-button id="$ctrl.id"></add-snippet-button>
   </div>
-  <p>Description: {{ vm.snippet.description }}</p>
-  <p>Language: {{ vm.snippet.language.name }}</p>
-  <p>Tab Trigger: {{ vm.snippet.trigger }}</p>
+  <p>Description: {{ $ctrl.snippet.description }}</p>
+  <p>Language: {{ $ctrl.snippet.language.name }}</p>
+  <p>Tab Trigger: {{ $ctrl.snippet.trigger }}</p>
   <h3>Snippet Body:</h3>
-  <a class="btn btn-default" href="" ui-sref="snippetShow({id: {{ vm.id }} })">Code Editor</a>  
-  <a class="btn btn-default" href="" ui-sref="snippetShow.vscode({id: {{ vm.id }} })">Visual Studio Code Snippet</a>
-  <a class="btn btn-default" href="" ui-sref="snippetShow.sublime({id: {{ vm.id }} })">Sublime Snippet</a>
+  <a class="btn btn-default" href="" ui-sref="snippetShow({id: {{ $ctrl.id }} })">Code Editor</a>  
+  <a class="btn btn-default" href="" ui-sref="snippetShow.vscode({id: {{ $ctrl.id }} })">Visual Studio Code Snippet</a>
+  <a class="btn btn-default" href="" ui-sref="snippetShow.sublime({id: {{ $ctrl.id }} })">Sublime Snippet</a>
   <div ui-view>
-    <ace-editor body="vm.snippet.body" size="600"></ace-editor>
+    <ace-editor body="$ctrl.snippet.body" size="600"></ace-editor>
   </div>
 </div>
