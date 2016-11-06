@@ -100,9 +100,7 @@
       
       .state('instructions', {
         url: '/instructions', 
-        templateUrl: 'app/components/instructions/instructions.html', 
-        controller: 'InstructionsController',
-        controllerAs: 'vm'
+        template: '<instructions></instructions>'
       });
 
     $urlRouterProvider.otherwise('/');
