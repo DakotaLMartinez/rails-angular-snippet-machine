@@ -29,9 +29,7 @@
       
       .state('snippetNew', {
         url: '/snippets/new', 
-        templateUrl: 'app/components/snippetForm/snippetForm.html',
-        controller: 'SnippetNewController', 
-        controllerAs: 'vm', 
+        template: '<snippet-new></snippet-new>',
         resolve: {
           auth: ['$auth', '$q', function($auth, $q) {
             var deferred = $q.defer();
