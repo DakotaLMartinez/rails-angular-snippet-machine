@@ -10,9 +10,7 @@
     $stateProvider
       .state('register', {
         url: '/sign_up', 
-        templateUrl: 'app/components/createAccount/createAccount.html', 
-        controller: 'createAccountController', 
-        controllerAs: 'vm'
+        template: '<create-account></create-account>'
       })
       
       .state('signIn', {
