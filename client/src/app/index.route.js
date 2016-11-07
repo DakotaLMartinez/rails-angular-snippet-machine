@@ -74,9 +74,7 @@
       
       .state('snippetEdit', {
         url: '/snippets/:id/edit', 
-        templateUrl: 'app/components/snippetForm/snippetForm.html', 
-        controller: 'SnippetEditController', 
-        controllerAs: 'vm'
+        template: '<snippet-edit></snippet-edit>'
       })
 
       .state('userProfile', {
