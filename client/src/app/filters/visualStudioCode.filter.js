@@ -23,7 +23,7 @@
     }
 
     function formatSnippetBody(snippetBody) {
-      if (snippetBody) {
+      if (snippetBody || snippetBody === "") {
         var array = snippetBody.split('\n') || [];
         for (var i = 0 ; i < array.length ; i++) {
           var tmp = array[i].replace(/\"/g,'\\"');
