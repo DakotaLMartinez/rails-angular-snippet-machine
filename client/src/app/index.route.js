@@ -15,9 +15,7 @@
       
       .state('signIn', {
         url: '/sign_in', 
-        templateUrl: 'app/components/loginForm/loginForm.html', 
-        controller: 'loginFormController', 
-        controllerAs: 'vm'
+        template: '<login-form></login-form>'
       })
       
       .state('snippetsIndex', {
