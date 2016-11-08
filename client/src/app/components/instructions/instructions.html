@@ -7,7 +7,7 @@
 </p> 
 
 <p>
-  After <a href="" ng-click="vm.authenticateWithDropbox()">authenticating with Dropbox</a>, you'll need to set up a symlink between your dropbox directory and the directory where Visual Studio Code snippets are stored. First, you'll want to copy any existing snippets into SnippetMachine. At the moment, this means entering them into the web app through the New Snippet Form. Note that once you've synchronized SnippetMachine with Dropbox, your changes will be effective immediately upon clicking the Save to Dropbox button on your User Profile page. So, any custom snippets you created that were not saved into the web app before syncing will be overwritten by the symlink you create below.
+  After <a href="" ng-click="$ctrl.authenticateWithDropbox()">authenticating with Dropbox</a>, you'll need to set up a symlink between your dropbox directory and the directory where Visual Studio Code snippets are stored. First, you'll want to copy any existing snippets into SnippetMachine. At the moment, this means entering them into the web app through the New Snippet Form. Note that once you've synchronized SnippetMachine with Dropbox, your changes will be effective immediately upon clicking the Save to Dropbox button on your User Profile page. So, any custom snippets you created that were not saved into the web app before syncing will be overwritten by the symlink you create below.
 </p>
 
 <pre>
@@ -22,7 +22,7 @@ ln -s ~/Dropbox/Apps/dlmSnippetMachine/vscode/snippets ~/Library/Application\ Su
 <h4>Sublime Text 2</h4>
 
 <p>
-  Again, Dropbox integration is crucial to getting the most out of SnippetMachine. After <a href="" ng-click="vm.authenticateWithDropbox()">authenticating with Dropbox</a>, you'll want to create a symlink between your dropbox directory and the directory where Sublime Text 2 Snippets are usually stored. First, you'll want to move the Sublime directory into your dropbox, then symlink your dropbox folder to the directory containing the folder you just moved. Finally, creating the symlink will enable SnippetMachine to add Snippets to Sublime Text through Dropbox integration. The commands to do this are below. 
+  Again, Dropbox integration is crucial to getting the most out of SnippetMachine. After <a href="" ng-click="$ctrl.authenticateWithDropbox()">authenticating with Dropbox</a>, you'll want to create a symlink between your dropbox directory and the directory where Sublime Text 2 Snippets are usually stored. First, you'll want to move the Sublime directory into your dropbox, then symlink your dropbox folder to the directory containing the folder you just moved. Finally, creating the symlink will enable SnippetMachine to add Snippets to Sublime Text through Dropbox integration. The commands to do this are below. 
 </p>
 
 <pre>

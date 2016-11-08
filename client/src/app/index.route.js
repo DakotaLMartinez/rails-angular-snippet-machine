@@ -10,16 +10,12 @@
     $stateProvider
       .state('register', {
         url: '/sign_up', 
-        templateUrl: 'app/components/createAccount/createAccount.html', 
-        controller: 'createAccountController', 
-        controllerAs: 'vm'
+        template: '<create-account></create-account>'
       })
       
       .state('signIn', {
         url: '/sign_in', 
-        templateUrl: 'app/components/loginForm/loginForm.html', 
-        controller: 'loginFormController', 
-        controllerAs: 'vm'
+        template: '<login-form></login-form>'
       })
       
       .state('snippetsIndex', {
@@ -29,9 +25,7 @@
       
       .state('snippetNew', {
         url: '/snippets/new', 
-        templateUrl: 'app/components/snippetForm/snippetForm.html',
-        controller: 'SnippetNewController', 
-        controllerAs: 'vm', 
+        template: '<snippet-new></snippet-new>',
         resolve: {
           auth: ['$auth', '$q', function($auth, $q) {
             var deferred = $q.defer();
@@ -46,9 +40,7 @@
       
       .state('snippetShow', {
         url: '/snippets/:id',
-        templateUrl: 'app/components/snippetShow/snippetShow.html', 
-        controller: 'SnippetShowController', 
-        controllerAs: 'vm', 
+        template: '<snippet-show id="$resolve.snippetId"></snippet-show>',
         resolve: {
           snippetId: ['$stateParams', function($stateParams){
             return $stateParams.id;
@@ -78,16 +70,12 @@
       
       .state('snippetEdit', {
         url: '/snippets/:id/edit', 
-        templateUrl: 'app/components/snippetForm/snippetForm.html', 
-        controller: 'SnippetEditController', 
-        controllerAs: 'vm'
+        template: '<snippet-edit></snippet-edit>'
       })
 
       .state('userProfile', {
         url: '/profile', 
-        templateUrl: 'app/components/userProfile/userProfile.html', 
-        controller: 'UserProfileController', 
-        controllerAs: 'vm',
+        template: '<user-profile></user-profile>',
         resolve: {
           auth: ['$auth', '$q', function($auth, $q) {
             var deferred = $q.defer();
@@ -102,9 +90,7 @@
       
       .state('instructions', {
         url: '/instructions', 
-        templateUrl: 'app/components/instructions/instructions.html', 
-        controller: 'InstructionsController',
-        controllerAs: 'vm'
+        template: '<instructions></instructions>'
       });
 
     $urlRouterProvider.otherwise('/');

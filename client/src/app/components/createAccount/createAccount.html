@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-3 bg-lightest-blue ph3 pv4 br4">
+  <div class="col-sm-6 col-sm-offset-3 bg-navy ph3 pv4 br4">
     <dropbox-connect></dropbox-connect>
     <p class="pv0 mt3 tc">-- or --</p> 
     <h1>Create Account</h1>
@@ -35,8 +35,8 @@
       </div>
 
       <button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
-      <div class="mt3 alert alert-danger" role="alert" ng-show="vm.errors">
-        <div ng-repeat="error in vm.errors">
+      <div class="mt3 alert alert-danger" role="alert" ng-show="$ctrl.errors">
+        <div ng-repeat="error in $ctrl.errors">
           {{ error }}  
         </div>
       </div>

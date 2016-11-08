@@ -1,36 +1,69 @@
 <div class="row">
-  <div class="col-sm-6 col-sm-offset-3 bg-lightest-blue ph3 pv4 br4">
-    <div ng-if="!user.signedIn">
-      <dropbox-connect></dropbox-connect>
-      <p class="pv0 mt3 tc"> -- or --</p>
-    </div>
-    <div class="panel panel-warning mb0">
-      <div class="panel-heading" ng-if="!user.signedIn"><h4 class="mv1 tc">Sign in via email</h4></div>
-      <div class="panel-heading" ng-if="user.signedIn"><h4 class="mv1 tc">Welcome to SnippetMachine!</h4></div>
-      <div class="panel-body">
+  <div class="col-sm-6 col-sm-offset-3 bg-navy pt4 br4">
 
-        <form ng-submit="submitLogin(loginForm)" role="form" ng-init="loginForm = {}" ng-if="!user.signedIn">
-          <div class="form-group">
-            <label for="email">Email address</label>
-            <input type="email" class="form-control" id="email" ng-model="loginForm.email" placeholder="Email">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" ng-model="loginForm.password" placeholder="Password">
-          </div>
-          <button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
-          
-        </form>
+    <div ng-if="!$ctrl.user.signedIn" class="pa3">
+      <dropbox-connect></dropbox-connect> 
+      <p class="mt3 tc"> -- or --</p> 
 
-        <div ng-if="user.signedIn" class="tc">
-          <button ng-click="vm.goToProfile()" class="btn btn-primary">Go to My Profile</button> or <button ng-click="vm.goToIndex()" class="btn btn-primary">View All Snippets</button>
-          <!--<button class="btn btn-default" ng-click="vm.signOut()" ng-if="user.signedIn">Sign out</button>-->
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h4 class="mv1 tc">Sign in via email</h4>
         </div>
         
-        <div class="mt3 alert alert-danger" role="alert" ng-show="vm.error">
-          {{vm.error}}
-        </div>
+        <div class="panel-body black">
+
+          <form 
+            ng-submit="$ctrl.handleLoginBtnClick(loginForm)" 
+            role="form" 
+            name="Login"
+            ng-init="loginForm = {}">
+
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="email" 
+                name="email"
+                ng-model="loginForm.email" 
+                placeholder="Email"
+                required="required">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input 
+                type="password" 
+                class="form-control" 
+                id="password"
+                name="password" 
+                ng-model="loginForm.password" 
+                placeholder="Password"
+                required="required">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
+            
+          </form>
+
+          <div class="mt3 alert alert-danger" role="alert" ng-show="$ctrl.errors">
+            <div ng-repeat="error in $ctrl.errors">
+              {{ error }}
+            </div>
+          </div>
+
+        </div><!-- /.panel-body -->
+      </div><!-- /.panel -->
+    </div><!-- !$ctrl.user.signedIn -->
+      
+    <div ng-if="$ctrl.user.signedIn" class="pb4">
+      <h4 class="mv2 tc">Welcome to SnippetMachine!</h4>
+
+      <div class="tc">
+        <a ui-sref="userProfile" class="btn btn-primary">Go to My Profile</a>
+         or 
+        <a ui-sref="snippetsIndex" class="btn btn-primary">View All Snippets</a>
       </div>
-    </div>
-  </div>
-</div>
+    </div><!-- $ctrl.user.signedIn -->
+
+  </div><!-- /.col-sm-6 -->
+</div><!-- /.row -->
