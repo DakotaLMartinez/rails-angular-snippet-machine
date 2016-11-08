@@ -622,6 +622,134 @@ end'
     </div>
   </div>
 </div>'
+  }, 
+  {
+    name: 'Angular 1 Login Form',
+    description: 'Adds an Angular 1 HTML login form for use with ng-token-auth (styled with bootstrap and tachyons)', 
+    language: html, 
+    trigger: 'ng1loginform',
+    body: '<div class="row">
+  <div class="col-sm-6 col-sm-offset-3 ${bg-navy} pt4 br4">
+
+    <div ng-if="!$ctrl.user.signedIn" class="pa3">
+      ${<!-- optional oauth components here -->}
+      ${<!--<dropbox-connect></dropbox-connect>
+      <p class="mt3 tc"> -- or --</p>-->}
+      <div class="panel panel-info">
+        <div class="panel-heading">
+          <h4 class="mv1 tc">Sign in via email</h4>
+        </div>
+        
+        <div class="panel-body ${black}">
+
+          <form 
+            ng-submit="$ctrl.handleLoginBtnClick(loginForm)" 
+            role="form" 
+            name="Login"
+            ng-init="loginForm = {}">
+
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input 
+                type="email" 
+                class="form-control" 
+                id="email" 
+                name="email"
+                ng-model="loginForm.email" 
+                placeholder="Email"
+                required="required">
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input 
+                type="password" 
+                class="form-control" 
+                id="password"
+                name="password" 
+                ng-model="loginForm.password" 
+                placeholder="Password"
+                required="required">
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-lg btn-block">Sign In</button>
+            
+          </form>
+
+          <div class="mt3 alert alert-danger" role="alert" ng-show="$ctrl.errors">
+            <div ng-repeat="error in $ctrl.errors">
+              {{ error }}
+            </div>
+          </div>
+
+        </div><!-- /.panel-body -->
+      </div><!-- /.panel -->
+    </div><!-- !$ctrl.user.signedIn -->
+      
+    <div ng-if="$ctrl.user.signedIn" class="pb4">
+      <h4 class="mv2 tc">Welcome to ${SnippetMachine}</h4>
+
+      <div class="tc">
+        <a ui-sref="${userProfile}" class="btn btn-primary">${Go to My Profile}</a>
+         or 
+        <a ui-sref="${snippetsIndex}" class="btn btn-primary">${View All Snippets}</a>
+      </div>
+    </div><!-- $ctrl.user.signedIn -->
+
+  </div><!-- /.col-sm-6 -->
+</div><!-- /.row -->'
+  }, 
+  {
+    name: 'Angular 1 Login Form Component', 
+    description: 'Adds an Angular 1 Component for displaying a login form using ng-token-auth', 
+    language: javascript, 
+    trigger: 'ng1loginformcomponent', 
+    body: "(function() {
+'use strict';
+
+  // Usage: Add <login-form> to an html template
+  // 
+  // Creates: a login form that authenticates a 
+  // User and redirects to a specified state.
+
+  angular
+    .module('${Module}')
+    .component('${loginForm}', {
+      templateUrl: '${app/components/loginForm/loginForm.html}',
+      controller: ${LoginForm}Controller,
+    });
+
+  ${LoginForm}Controller.$inject = ['$auth', '$rootScope', '$state'${, '$log'}];
+  function ${LoginForm}Controller($auth, $rootScope, $state${, $log}) {
+    var $ctrl = this;
+    $ctrl.errors;
+    $ctrl.user = $rootScope.user
+  
+    // functions //
+    $ctrl.handleLoginBtnClick;  
+
+    ////////////////
+
+    function handleLoginBtnClick(loginForm) {
+      $auth
+        .submitLogin(loginForm)
+        .then(function(){
+          $state.go('${snippetsIndex}');
+        })
+        .catch(function(res){
+          ${$log.log(res);}
+          $ctrl.errors = res.errors;
+        });
+    }
+
+    ////////////////
+
+    $ctrl.$onInit = function() { 
+      $ctrl.handleLoginBtnClick = handleLoginBtnClick;
+    };
+    $ctrl.$onChanges = function(changesObj) { };
+    $ctrl.$onDestroy = function() { };
+  }
+})();"
   }
 ]
 attributes_hashes.each do |attributes|
