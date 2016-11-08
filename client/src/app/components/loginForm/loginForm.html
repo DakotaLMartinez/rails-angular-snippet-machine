@@ -2,9 +2,9 @@
   <div class="col-sm-6 col-sm-offset-3 bg-navy pt4 br4">
 
     <div ng-if="!$ctrl.user.signedIn" class="pa3">
-      <dropbox-connect></dropbox-connect>
-      <p class="mt3 tc"> -- or --</p>
-    
+      <dropbox-connect></dropbox-connect> 
+      <p class="mt3 tc"> -- or --</p> 
+
       <div class="panel panel-info">
         <div class="panel-heading">
           <h4 class="mv1 tc">Sign in via email</h4>
@@ -55,11 +55,13 @@
       </div><!-- /.panel -->
     </div><!-- !$ctrl.user.signedIn -->
       
-    <div ng-if="$ctrl.user.signedIn">
-      <h4 class="mv1 tc">Welcome to SnippetMachine!</h4>
+    <div ng-if="$ctrl.user.signedIn" class="pb4">
+      <h4 class="mv2 tc">Welcome to SnippetMachine!</h4>
 
       <div class="tc">
-        <a ui-sref="userProfile" class="btn btn-primary">Go to My Profile</a> or <a ui-sref="snippetsIndex" class="btn btn-primary">View All Snippets</a>
+        <a ui-sref="userProfile" class="btn btn-primary">Go to My Profile</a>
+         or 
+        <a ui-sref="snippetsIndex" class="btn btn-primary">View All Snippets</a>
       </div>
     </div><!-- $ctrl.user.signedIn -->
 
