@@ -9,12 +9,8 @@
   angular
     .module('dlmSnippetMachine')
     .component('createAccount', {
-      // template:'htmlTemplate',
       templateUrl: 'app/components/createAccount/createAccount.html',
       controller: CreateAccountController,
-      bindings: {
-        
-      },
     });
 
   CreateAccountController.$inject = ['$auth', '$rootScope', '$scope', '$state', '$log'];
