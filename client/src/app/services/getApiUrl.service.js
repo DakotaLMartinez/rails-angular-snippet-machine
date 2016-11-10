@@ -15,7 +15,7 @@
       var protocol = $location.protocol();
       var host = $location.host();
       var port = $location.port();
-      var apiUrl = protocol + '://'+ host + port + '/api';
+      var apiUrl = protocol + '://'+ host + '/api';
 
       if (host === 'localhost' && port === 3000) {
         apiUrl = 'http://localhost:4000/api';
