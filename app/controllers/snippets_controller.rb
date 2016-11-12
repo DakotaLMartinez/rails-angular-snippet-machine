@@ -74,8 +74,12 @@ class SnippetsController < ApplicationController
   # GET /snippets/:id/add_snippet
   def add_snippet 
     begin
-      current_user.add_snippet(@snippet)
-      render json: UserSnippet.exists?(user: current_user, snippet: @snippet)
+      if current_user.add_snippet(@snippet)
+        render json: UserSnippet.exists?(user: current_user, snippet: @snippet)
+      else 
+        @snippet.errors.add(:trigger, "conflicts with another snippet you've already added to your account.")
+        render json: @snippet.errors.full_messages, status: :unprocessable_entity
+      end
     rescue
       render json: @snippet.errors.full_messages
     end

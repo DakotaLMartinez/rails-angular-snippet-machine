@@ -9,7 +9,6 @@
   angular
     .module('dlmSnippetMachine')
     .component('addSnippetButton', {
-      // template:'htmlTemplate',
       templateUrl: 'app/components/addSnippetButton/addSnippetButton.html',
       controller: addSnippetButtonController,
       bindings: {
@@ -22,6 +21,7 @@
     var $ctrl = this;
     $ctrl.starActive = "";
     $ctrl.buttonText = "Add";
+    $ctrl.added = false;
     $ctrl.showButton = false;
     $ctrl.editableSnippets;
     $ctrl.downloadableSnippets;
@@ -39,30 +39,42 @@
 
       $ctrl.addOrRemoveFromSnippets = function(){
         var id = $ctrl.id;
-        if ($ctrl.buttonText === "Add") {
-          User 
-            .addSnippet(id)
-            .then(function(res){
-              $log.log(res);
-              var hasSnippet = res.data;
-              updateButtonText(hasSnippet);
-              updateSnippetUserCount(hasSnippet);
-              updateStarClass(hasSnippet);
-              updateUserPermissions();
-            });
-        } else {
-          User
-            .removeSnippet(id)
-            .then(function(res){
-              $log.log(res);
-              var hasSnippet = res.data;
-              updateButtonText(hasSnippet);
-              updateSnippetUserCount(hasSnippet);
-              updateStarClass(hasSnippet);
-              updateUserPermissions();
-            });
+        if (!$ctrl.editableSnippets[id]) {
+          if (!$ctrl.added) {
+            $ctrl.added = true;
+            User 
+              .addSnippet(id)
+              .then(function(res){
+                $log.log(res);
+                var hasSnippet = res.data;
+                updateButtonText(hasSnippet);
+                updateSnippetUserCount(hasSnippet);
+                updateStarClass(hasSnippet);
+                // updateUserPermissions();
+              })
+              .catch(function(res){
+                alert(res.data[0]);
+                $log.log(res);
+                $ctrl.added = false;
+              });
+          } else {
+            $ctrl.added = false;
+            User
+              .removeSnippet(id)
+              .then(function(res){
+                $log.log(res);
+                var hasSnippet = res.data;
+                updateButtonText(hasSnippet);
+                updateSnippetUserCount(hasSnippet);
+                updateStarClass(hasSnippet);
+                // updateUserPermissions();
+              })
+              .catch(function(res){
+                $log.log(res);
+                $ctrl.added = true;
+              });
+          }
         }
-        // $state.go('userProfile');
       }
       
       
@@ -85,6 +97,7 @@
               $ctrl.showButton = true;
               if($ctrl.downloadableSnippets[$ctrl.id]) {
                 $ctrl.buttonText = "Remove";
+                $ctrl.added = true;
                 $ctrl.starActive = "star-active";
               } 
             }
