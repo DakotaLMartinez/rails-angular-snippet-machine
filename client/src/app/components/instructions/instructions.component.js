@@ -13,17 +13,20 @@
       controller: InstructionsController,
     });
 
-  InstructionsController.$inject = ['$auth'];
-  function InstructionsController($auth) {
+  InstructionsController.$inject = ['$auth', 'getApiUrl', '$rootScope'];
+  function InstructionsController($auth, getApiUrl, $rootScope) {
     var $ctrl = this;
-    $ctrl.authenticateWithDropbox;
+    // $ctrl.authenticateWithDropbox;
+    $ctrl.authorizeDropboxLink;
+    $ctrl.user = $rootScope.user;
 
     ////////////////
 
     $ctrl.$onInit = function() { 
-      $ctrl.authenticateWithDropbox = function() {
-        $auth.authenticate('dropbox')
-      };
+      // $ctrl.authenticateWithDropbox = function() {
+      //   $auth.authenticate('dropbox')
+      // };
+      $ctrl.authorizeDropboxLink = getApiUrl.getUrl() + '/dropbox';
     };
     $ctrl.$onChanges = function(changesObj) { };
     $ctrl.$onDestroy = function() { };
