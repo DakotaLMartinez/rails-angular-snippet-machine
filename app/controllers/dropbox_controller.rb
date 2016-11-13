@@ -1,7 +1,6 @@
 class DropboxController < ApplicationController
-  before_action :authenticate_current_user, only: [:upload_existing_snippets]
-
-  before_action :authenticate_dropbox, only: [:add_snippets]
+  before_action :authenticate_current_user
+  before_action :authenticate_dropbox, only: [:add_snippets, :upload_existing_snippets]
   
   def authorize 
     consumer      = Dropbox::API::OAuth.consumer(:authorize)
