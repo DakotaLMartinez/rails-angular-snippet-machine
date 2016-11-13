@@ -21,6 +21,12 @@
     var vm = this;
     vm.mode = vm.language || 'javascript';
     $scope.editorSize = setEditorSize();
+    $scope.aceLoaded = function (_editor) {
+      // This is to remove following warning message on console:
+      // Automatically scrolling cursor into view after selection change this will be disabled in the next version
+      // set editor.$blockScrolling = Infinity to disable this message
+      _editor.$blockScrolling = Infinity;
+    }
     
     
     /////////////////////
