@@ -1,5 +1,5 @@
 class DropboxController < ApplicationController
-  before_action :authenticate_current_user
+  before_action :authenticate_current_user, only: [:upload_existing_snippets]
 
   before_action :authenticate_dropbox, only: [:add_snippets]
   
@@ -9,9 +9,9 @@ class DropboxController < ApplicationController
     dropbox_callback_url = url_for(controller: 'dropbox', action: 'connect')
     set_redirect_url(dropbox_callback_url)
     url = request_token.authorize_url(:oauth_callback => dropbox_callback_url)
-    redirect_to url
     session[:dropbox_oauth_request_token]  = request_token.token
     session[:dropbox_oauth_request_secret] = request_token.secret
+    redirect_to url
   end
 
   def connect
@@ -36,7 +36,6 @@ class DropboxController < ApplicationController
       secret = session[:dropbox_secret]
       @uploader = DropboxUploader.new(token, secret, get_current_user)
       render json: @uploader.upload_snippets
-      # render json: @uploader
     end
   end
 
