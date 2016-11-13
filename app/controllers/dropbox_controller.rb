@@ -1,4 +1,5 @@
 class DropboxController < ApplicationController
+  before_action :authenticate_current_user
 
   before_action :authenticate_dropbox, only: [:add_snippets]
   
@@ -27,6 +28,16 @@ class DropboxController < ApplicationController
     end
     @redirect_url = get_redirect_url
     redirect_to @redirect_url
+  end
+
+  def upload_existing_snippets
+    if dropbox_enabled?
+      token = session[:dropbox_token]
+      secret = session[:dropbox_secret]
+      @uploader = DropboxUploader.new(token, secret, get_current_user)
+      render json: @uploader.upload_snippets
+      # render json: @uploader
+    end
   end
 
   # get /api/dropbox/users/:user_id/add_snippets

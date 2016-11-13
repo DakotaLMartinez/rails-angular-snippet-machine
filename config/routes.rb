@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
     get 'dropbox/', to: 'dropbox#authorize'
     get 'dropbox/connect', to: 'dropbox#connect'
+    get 'dropbox/upload_existing_snippets', to: 'dropbox#upload_existing_snippets'
 
     get 'dropbox/users/:user_id/add_snippets', to: 'dropbox#add_snippets', as: 'add_user_snippets'
     
