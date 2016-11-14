@@ -17,6 +17,7 @@
   function dropboxUploadController(User) {
     var $ctrl = this;
     $ctrl.uploadSnippetsFromDropboxLink = User.uploadSnippetsFromDropboxLink();
+    $ctrl.user = User.loggedIn();
 
     ////////////////
 

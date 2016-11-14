@@ -1,1 +1,2 @@
-<a ng-href="{{ $ctrl.uploadSnippetsFromDropboxLink }}" class="btn btn-primary btn-block">Upload Snippets From Dropbox to SnippetMachine</a>
+<a ng-show="$ctrl.user" ng-href="{{ $ctrl.uploadSnippetsFromDropboxLink }}" class="btn btn-primary btn-block">Upload Snippets From Dropbox to SnippetMachine</a>
+<a ng-show="!$ctrl.user" href="" class="btn btn-primary btn-block" disabled="true" title="must be logged in">Upload Snippets From Dropbox to SnippetMachine</a>
