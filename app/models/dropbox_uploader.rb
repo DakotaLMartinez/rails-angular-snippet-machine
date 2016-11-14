@@ -9,13 +9,14 @@ class DropboxUploader
 
   def upload_snippets 
     client = Dropbox::API::Client.new(token: @token, secret: @secret)
+    upload_count = 0
 
     uploaded_snippets = (client.ls "vscode/snippets").collect do |lang| 
       language_name = vscode_filenames[lang.path.split('/').last]
       language = Language.find_or_create_by(name: language_name)
       snippets = JSON.parse(client.download lang.path)
 
-      upload_count = 0
+      
 
       collection = snippets.collect do |name, snippet| 
         s = Snippet.new(name: name, description: snippet["description"], trigger: snippet["prefix"], language_id: language.id, body: snippet["body"].join("\n"), user: @user, author: @user.email)
@@ -27,7 +28,7 @@ class DropboxUploader
       "#{upload_count} new #{language_name} #{pronoun(upload_count)} successfully uploaded to SnippetMachine from your Dropbox"
     end
     
-    uploaded_snippets
+    upload_count
   end
 
   private 
