@@ -16,8 +16,8 @@
       }
     });
 
-  InstructionsController.$inject = ['$auth', 'getApiUrl', '$rootScope', 'Flash'];
-  function InstructionsController($auth, getApiUrl, $rootScope, Flash) {
+  InstructionsController.$inject = ['$auth', 'getApiUrl', '$rootScope', 'Flash', 'pluralizeSnippetFilter'];
+  function InstructionsController($auth, getApiUrl, $rootScope, Flash, pluralizeSnippetFilter) {
     var $ctrl = this;
     $ctrl.uploadCount;
     $ctrl.authorizeDropboxLink;
@@ -25,17 +25,9 @@
 
     ////////////////
 
-    function pluralizeSnippet(uploadCount) {
-      if (uploadCount === 1) {
-        return "snippet";
-      } else {
-        return "snippets";
-      }
-    }
-
     $ctrl.$onInit = function() { 
       if ($ctrl.uploadCount) {
-        var message = $ctrl.uploadCount + " new " + pluralizeSnippet($ctrl.uploadCount) + " successfully uploaded to SnippetMachine from your Dropbox";
+        var message = $ctrl.uploadCount + " new " + pluralizeSnippetFilter($ctrl.uploadCount) + " successfully uploaded to SnippetMachine from your Dropbox";
         Flash.create('success', message);
       }
       $ctrl.authorizeDropboxLink = getApiUrl.getUrl() + '/dropbox';
