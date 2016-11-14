@@ -7,7 +7,7 @@ class ApplicationController < ActionController::API
     if url.match(/localhost/)
       @redirect_url = "http://localhost:3000"
     else 
-      @redirect_url = "http://snippetmachine.dakotaleemartinez.com"
+      @redirect_url = "https://snippetmachine.dakotaleemartinez.com"
     end
     @redirect_url
   end
@@ -16,7 +16,7 @@ class ApplicationController < ActionController::API
     if url_for(controller: 'dropbox', action: 'connect').match(/localhost/)
       "http://localhost:3000"
     else 
-      "http://snippetmachine.dakotaleemartinez.com"
+      "https://snippetmachine.dakotaleemartinez.com"
     end
   end
 
