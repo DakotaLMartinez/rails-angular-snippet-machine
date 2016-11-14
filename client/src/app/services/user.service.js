@@ -14,6 +14,7 @@
     this.addSnippet = addSnippet;
     this.removeSnippet = removeSnippet;
     this.saveUserSnippets = saveUserSnippets;
+    this.uploadSnippetsFromDropboxLink = uploadSnippetsFromDropboxLink;
     this.loggedIn = loggedIn;
   
     var currentUserPermissions;
@@ -83,6 +84,12 @@
       }
       // var popUp = $window.open(saveUrl, 'Save-to-Dropbox','width=500,height=400');
       // $timeout(function(){popUp.close()}, 8000);
+    }
+
+    function uploadSnippetsFromDropboxLink() {
+      if (loggedIn()) {
+        return url + '/dropbox/upload_existing_snippets';
+      }
     }
 
     function loggedIn() {
