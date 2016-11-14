@@ -89,8 +89,13 @@
       })
       
       .state('instructions', {
-        url: '/instructions', 
-        template: '<instructions></instructions>'
+        url: '/instructions?:upload_count', 
+        template: '<instructions upload-count="$resolve.uploadCount"></instructions>',
+        resolve: {
+          uploadCount: ['$stateParams', function($stateParams){
+            return $stateParams.upload_count;
+          }]
+        }
       });
 
     $urlRouterProvider.otherwise('/');
