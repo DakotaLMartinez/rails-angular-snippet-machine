@@ -74,8 +74,8 @@
       })
 
       .state('userProfile', {
-        url: '/profile', 
-        template: '<user-profile></user-profile>',
+        url: '/profile?:upload_count', 
+        template: '<user-profile upload-count="$resolve.uploadCount"></user-profile>',
         resolve: {
           auth: ['$auth', '$q', function($auth, $q) {
             var deferred = $q.defer();
@@ -84,6 +84,9 @@
             } else {
               return deferred.reject({redirectTo: 'signIn'});
             }
+          }],
+          uploadCount: ['$stateParams', function($stateParams){
+            return $stateParams.upload_count;
           }]
         }
       })
