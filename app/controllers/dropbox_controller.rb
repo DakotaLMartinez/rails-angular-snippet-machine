@@ -35,7 +35,7 @@ class DropboxController < ApplicationController
       secret = session[:dropbox_secret]
       @uploader = DropboxUploader.new(token, secret, get_current_user)
       message = @uploader.upload_snippets
-      redirect_to "#{get_redirect_url}/#/instructions?upload_count=#{message}"
+      redirect_to "#{get_redirect_url}/#/profile?upload_count=#{message}"
     end
   end
 
