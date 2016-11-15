@@ -25,7 +25,7 @@
       $ctrl.user = $rootScope.user.signedIn;
     });
 
-    $rootScope.$on('auth:registration-success', function(){
+    $rootScope.$on('auth:registration-email-success', function(){
       $ctrl.user = $rootScope.user.signedIn;
     })
 
