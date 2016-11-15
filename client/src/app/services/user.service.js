@@ -87,9 +87,7 @@
     }
 
     function uploadSnippetsFromDropboxLink() {
-      if (loggedIn()) {
-        return url + '/dropbox/upload_existing_snippets';
-      }
+      return url + '/dropbox/upload_existing_snippets';
     }
 
     function loggedIn() {
