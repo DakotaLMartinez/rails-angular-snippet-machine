@@ -36,8 +36,6 @@
     $ctrl.$onInit = function() { 
       $ctrl.signedIn = $ctrl.loggedIn || $rootScope.user.signedIn;
       $ctrl.uploadSnippetsFromDropboxLink = User.uploadSnippetsFromDropboxLink();
-      $log.log($ctrl.signedIn);
-      $log.log($ctrl.uploadSnippetsFromDropboxLink);
     };
     $ctrl.$onChanges = function() {
       
