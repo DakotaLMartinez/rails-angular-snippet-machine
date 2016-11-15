@@ -25,6 +25,10 @@
       $ctrl.user = $rootScope.user.signedIn;
     });
 
+    $rootScope.$on('auth:registration-success', function(){
+      $ctrl.user = $rootScope.user.signedIn;
+    })
+
     $ctrl.$onInit = function() { 
 
     };
