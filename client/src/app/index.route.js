@@ -92,11 +92,14 @@
       })
       
       .state('instructions', {
-        url: '/instructions?:upload_count', 
-        template: '<instructions upload-count="$resolve.uploadCount"></instructions>',
+        url: '/instructions?:upload_count?:authorized', 
+        template: '<instructions upload-count="$resolve.uploadCount" authorized="$resolve.authorized"></instructions>',
         resolve: {
           uploadCount: ['$stateParams', function($stateParams){
             return $stateParams.upload_count;
+          }], 
+          authorized: ['$stateParams', function($stateParams) {
+            return $stateParams.authorized;
           }]
         }
       });
