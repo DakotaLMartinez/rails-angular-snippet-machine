@@ -49,7 +49,7 @@ ln -s ~/Dropbox/Apps/dlmSnippetMachine/vscode/snippets ~/Library/Application\ Su
       Now that your existing snippets are in the dlmSnippetMachine folder within your dropbox, all that remains is to upload them to SnippetMachine. After you click the button below, you'll be taken to your profile page. There, you will be able to view and edit all of your snippets.
     </p>
 
-    <dropbox-upload></dropbox-upload>
+    <dropbox-upload logged-in="$ctrl.loggedIn"></dropbox-upload>
   </uib-tab>
   <uib-tab heading="Sublime Text 2" class="btn-default">
     <h2>Sublime Text 2</h2>
@@ -77,6 +77,6 @@ ln -s ~/Dropbox/Apps/dlmSnippetMachine/sublime/User ~/Library/Application\ Suppo
       Now that your existing snippets are in the dlmSnippetMachine folder within your dropbox, all that remains is to upload them to SnippetMachine. After you click the button below, you'll be taken to your profile page. There, you will be able to view and edit all of your snippets.
     </p>
 
-    <dropbox-upload></dropbox-upload>
+    <dropbox-upload logged-in="$ctrl.loggedIn"></dropbox-upload>
   </uib-tab>
 </uib-tabset>
