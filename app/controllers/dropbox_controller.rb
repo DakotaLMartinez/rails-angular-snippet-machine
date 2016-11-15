@@ -25,7 +25,7 @@ class DropboxController < ApplicationController
     rescue OAuth::Unauthorized => e
       render json: "Couldn't authorize with Dropbox (#{e.message})"
     end
-    redirect_to "#{get_redirect_url}/#/instructions"
+    redirect_to "#{get_redirect_url}/#/instructions?authorized=true"
   end
 
   def upload_existing_snippets
