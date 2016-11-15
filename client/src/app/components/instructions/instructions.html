@@ -7,10 +7,10 @@
 <p class="f3">
   At the moment, SnippetMachine supports snippets written for Visual Studio Code and Sublime Text 2 on Mac OS X. Setting up is a four step process for each editor.  The first two steps for each editor are the same: 
   <ol class="f2">
-    <li ng-show="!$ctrl.user.signedIn"><a href="" ui-sref="register">Create a SnippetMachine Account</a></li>
-    <li ng-show="!$ctrl.user.signedIn">Authorize SnippetMachine to access its own folder within your Dropbox</li>
-    <li ng-show="$ctrl.user.signedIn">Create a SnippetMachine Account</li>
-    <li ng-show="$ctrl.user.signedIn"><a href="" ng-href="{{$ctrl.authorizeDropboxLink}}">Authorize SnippetMachine to access its own folder within your Dropbox</a></li>
+    <li ng-show="!$ctrl.loggedIn"><a href="" ui-sref="register">Create a SnippetMachine Account</a></li>
+    <li ng-show="!$ctrl.loggedIn">Authorize SnippetMachine to access its own folder within your Dropbox</li>
+    <li ng-show="$ctrl.loggedIn">Create a SnippetMachine Account</li>
+    <li ng-show="$ctrl.loggedIn"><a href="" ng-href="{{$ctrl.authorizeDropboxLink}}">Authorize SnippetMachine to access its own folder within your Dropbox</a></li>
   </ol>
 </p>
 
