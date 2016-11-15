@@ -13,17 +13,15 @@
       controller: InstructionsController,
       bindings: {
         uploadCount: '=',
-        user: '=',
         authorized: '='
       }
     });
 
-  InstructionsController.$inject = ['$auth', 'getApiUrl', '$rootScope', 'Flash', 'pluralizeSnippetFilter', '$log'];
-  function InstructionsController($auth, getApiUrl, $rootScope, Flash, pluralizeSnippetFilter, $log) {
+  InstructionsController.$inject = ['$auth', 'getApiUrl', '$rootScope', 'Flash', 'pluralizeSnippetFilter'];
+  function InstructionsController($auth, getApiUrl, $rootScope, Flash, pluralizeSnippetFilter) {
     var $ctrl = this;
     $ctrl.uploadCount;
     $ctrl.authorizeDropboxLink;
-    // $ctrl.user = $rootScope.user;
     $ctrl.loggedIn = $rootScope.user.signedIn || $ctrl.authorized;
 
     ////////////////
@@ -35,8 +33,6 @@
       }
       $ctrl.authorizeDropboxLink = getApiUrl.getUrl() + '/dropbox';
       $ctrl.loggedIn = $rootScope.user.signedIn || $ctrl.authorized;
-      $log.log("logged in: " + $ctrl.loggedIn + " user: " + $ctrl.user);
-      $log.log($ctrl.user);
     };
     $ctrl.$onChanges = function(changesObj) { };
     $ctrl.$onDestroy = function() { };
