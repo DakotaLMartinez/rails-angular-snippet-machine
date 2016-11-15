@@ -10,27 +10,34 @@
     .module('dlmSnippetMachine')
     .component('dropboxUpload', {
       templateUrl: 'app/components/dropboxUpload/dropboxUpload.html',
-      controller: dropboxUploadController
+      controller: dropboxUploadController, 
+      bindings: {
+        loggedIn: '='
+      }
     });
 
-  dropboxUploadController.$inject = ['User', '$rootScope'];
-  function dropboxUploadController(User, $rootScope) {
+  dropboxUploadController.$inject = ['User', '$rootScope', '$log', 'getApiUrl'];
+  function dropboxUploadController(User, $rootScope, $log, getApiUrl) {
     var $ctrl = this;
+    $ctrl.signedIn = $ctrl.loggedIn || $rootScope.user.signedIn;
     $ctrl.uploadSnippetsFromDropboxLink = User.uploadSnippetsFromDropboxLink();
-    $ctrl.user = $rootScope.user.signedIn;
+    
 
     ////////////////
 
     $rootScope.$on('auth:login-success', function(){
-      $ctrl.user = $rootScope.user.signedIn;
+      $ctrl.signedIn = $rootScope.user.signedIn;
     });
 
     $rootScope.$on('auth:registration-email-success', function(){
-      $ctrl.user = $rootScope.user.signedIn;
+      $ctrl.signedIn = $rootScope.user.signedIn;
     })
 
     $ctrl.$onInit = function() { 
-
+      $ctrl.signedIn = $ctrl.loggedIn || $rootScope.user.signedIn;
+      $ctrl.uploadSnippetsFromDropboxLink = User.uploadSnippetsFromDropboxLink();
+      $log.log($ctrl.signedIn);
+      $log.log($ctrl.uploadSnippetsFromDropboxLink);
     };
     $ctrl.$onChanges = function() {
       
