@@ -13,20 +13,24 @@
       controller: dropboxUploadController
     });
 
-  dropboxUploadController.$inject = ['User'];
-  function dropboxUploadController(User) {
+  dropboxUploadController.$inject = ['User', '$rootScope'];
+  function dropboxUploadController(User, $rootScope) {
     var $ctrl = this;
     $ctrl.uploadSnippetsFromDropboxLink = User.uploadSnippetsFromDropboxLink();
-    $ctrl.user = User.loggedIn();
+    $ctrl.user = $rootScope.user.signedIn;
 
     ////////////////
+
+    $rootScope.$on('auth:login-success', function(){
+      $ctrl.user = $rootScope.user.signedIn;
+    });
 
     $ctrl.$onInit = function() { 
 
     };
-    $ctrl.$onChanges = function(changesObj) {
-
-     };
+    $ctrl.$onChanges = function() {
+      
+    };
     $ctrl.$onDestroy = function() { };
   }
 })();
