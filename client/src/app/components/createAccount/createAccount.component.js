@@ -41,7 +41,7 @@
       $scope.handleRegBtnClick = handleRegBtnClick;
 
       $rootScope.$on('auth:registration-email-success', function(){
-        $state.go('snippetsIndex');
+        $state.go('instructions');
       });
 
       $rootScope.$on('auth:registration-email-error', function(ev, reason){
