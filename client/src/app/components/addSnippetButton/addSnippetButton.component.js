@@ -13,6 +13,7 @@
       controller: addSnippetButtonController,
       bindings: {
         id: '=',
+        showButton: '='
       },
     });
 
@@ -22,7 +23,7 @@
     $ctrl.starActive = "";
     $ctrl.buttonText = "Add";
     $ctrl.added = false;
-    $ctrl.showButton = false;
+    $ctrl.showButton = $ctrl.showButton || false;
     $ctrl.editableSnippets;
     $ctrl.downloadableSnippets;
     $ctrl.userCount;
