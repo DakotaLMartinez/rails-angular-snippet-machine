@@ -93,11 +93,14 @@
       
       .state('instructions', {
         url: '/instructions?:upload_count?:authorized', 
-        template: '<instructions upload-count="$resolve.uploadCount" authorized="$resolve.authorized"></instructions>',
+        template: '<instructions upload-count="$resolve.uploadCount" user="$resolve.user" authorized="$resolve.authorized"></instructions>',
         resolve: {
           uploadCount: ['$stateParams', function($stateParams){
             return $stateParams.upload_count;
           }], 
+          user: ['$rootScope', function($rootScope){
+            return $rootScope.user;
+          }],
           authorized: ['$stateParams', function($stateParams) {
             return $stateParams.authorized;
           }]

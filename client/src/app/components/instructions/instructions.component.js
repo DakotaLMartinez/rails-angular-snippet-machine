@@ -13,6 +13,7 @@
       controller: InstructionsController,
       bindings: {
         uploadCount: '=',
+        user: '=',
         authorized: '='
       }
     });
