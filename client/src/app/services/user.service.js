@@ -24,6 +24,10 @@
     
     ////////////////
 
+    $rootScope.$on('auth:logout-success', function(){
+      clearCachedPermissions();
+    });
+
     function getUserSnippets(id) { 
       return $http
               .get(url + '/users/' + id)
