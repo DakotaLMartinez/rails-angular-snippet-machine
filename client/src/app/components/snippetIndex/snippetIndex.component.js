@@ -15,8 +15,8 @@
     controllerAs: 'vm'
   };
 
-  SnippetIndexController.$inject = ['Snippet', 'User', 'Language']
-  function SnippetIndexController (Snippet, User, Language) {
+  SnippetIndexController.$inject = ['Snippet', 'User', 'Language', '$timeout']
+  function SnippetIndexController (Snippet, User, Language, $timeout) {
     var vm = this; 
     vm.snippets = [];
     vm.itemsPerPage = vm.itemsPerPage || 5;
@@ -34,15 +34,22 @@
     function activate() {
       vm.loadSnippets = loadSnippets;
       vm.errors = {};
+      vm.showError = true;
      
       loadSnippets();
+
+      $timeout(loadSnippets, 1100);
 
       function loadSnippets() {
         if (vm.profilePage === true) {
           if (vm.userId) {
             getUserSnippets(vm.userId);
           } else {
-            vm.errors.user = ['must be loaded before snippets can be fetched - please click reload snippets button'];
+            $timeout(function(){
+              if (vm.showError) {
+                vm.errors.user = ['must be loaded before snippets can be fetched - please click reload snippets button'];
+              }
+            }, 2500);
           }
         } else {
           getAllSnippets();
@@ -72,6 +79,7 @@
           function handleSuccess(res) {
             vm.snippets = res;
             vm.errors = {};
+            vm.showError = false;
           }
       
           function handleError(res){
