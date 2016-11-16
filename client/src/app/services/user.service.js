@@ -5,8 +5,8 @@
     .module('dlmSnippetMachine')
     .service('User', User);
 
-  User.$inject = ['$http', 'getApiUrl', '$window', '$rootScope', '$log', '$q'];
-  function User($http, getApiUrl, $window, $rootScope, $log, $q) {
+  User.$inject = ['$http', 'getApiUrl', '$window', '$rootScope', '$log', '$q', '$timeout'];
+  function User($http, getApiUrl, $window, $rootScope, $log, $q, $timeout) {
     this.getUserSnippets = getUserSnippets;
     this.getCurrentUserPermissions = getCurrentUserPermissions;
     this.clearCachedPermissions = clearCachedPermissions;
@@ -48,6 +48,7 @@
         } else {
           promise = $q.when(currentUserPermissions);
         }
+        $timeout(clearCachedPermissions(), 1000 * 60 * 60);
         return promise;
       }
     }
