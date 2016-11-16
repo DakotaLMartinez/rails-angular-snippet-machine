@@ -12,8 +12,7 @@
       templateUrl: 'app/components/addSnippetButton/addSnippetButton.html',
       controller: addSnippetButtonController,
       bindings: {
-        id: '=',
-        showButton: '='
+        id: '='
       },
     });
 
@@ -34,7 +33,7 @@
     ////////////////
 
     $ctrl.$onInit = function() { 
-      updateUserPermissions();
+      getUserPermissions();
 
       getSnippetUserCount();
 
@@ -51,7 +50,7 @@
                 updateButtonText(hasSnippet);
                 updateSnippetUserCount(hasSnippet);
                 updateStarClass(hasSnippet);
-                // updateUserPermissions();
+                refreshCachedPermissions();
               })
               .catch(function(res){
                 alert(res.data[0]);
@@ -68,7 +67,7 @@
                 updateButtonText(hasSnippet);
                 updateSnippetUserCount(hasSnippet);
                 updateStarClass(hasSnippet);
-                // updateUserPermissions();
+                refreshCachedPermissions();
               })
               .catch(function(res){
                 $log.log(res);
@@ -80,14 +79,13 @@
       
       
     };
-    $ctrl.$onChanges = function(changesObj) { 
-      updateUserPermissions();
+    $ctrl.$onChanges = function() { 
     };
     $ctrl.$onDestroy = function() { };
 
     ////////////////////////////////////
 
-    function updateUserPermissions() {
+    function getUserPermissions() {
       if (User.loggedIn()) {
         User 
           .getCurrentUserPermissions()
@@ -140,6 +138,10 @@
       } else {
         $ctrl.starActive = "";
       }
+    }
+
+    function refreshCachedPermissions() {
+      User.refreshCachedPermissions();
     }
 
     
