@@ -15,8 +15,8 @@
     controllerAs: 'vm'
   };
 
-  SnippetIndexController.$inject = ['Snippet', 'User', 'Language', '$timeout']
-  function SnippetIndexController (Snippet, User, Language, $timeout) {
+  SnippetIndexController.$inject = ['Snippet', 'User', 'Language', '$timeout', '$rootScope']
+  function SnippetIndexController (Snippet, User, Language, $timeout, $rootScope) {
     var vm = this; 
     vm.snippets = [];
     vm.itemsPerPage = vm.itemsPerPage || 5;
@@ -26,15 +26,29 @@
     } else {
       vm.title = "Snippets Index";
     }
+    vm.showAddButton = User.loggedIn();
     
     activate();
 
     ///////////////////////////////
 
+    $rootScope.$on('auth:logout-success', function(){
+      vm.showAddButton = User.loggedIn();
+    })
+
+    $rootScope.$on('auth:registration-email-success', function(){
+      vm.showAddButton = User.loggedIn();
+    })
+
+    $rootScope.$on('auth:login-success', function(){
+      vm.showAddButton = User.loggedIn();
+    })
+
     function activate() {
       vm.loadSnippets = loadSnippets;
       vm.errors = {};
       vm.showError = true;
+      vm.showAddButton = User.loggedIn();
      
       loadSnippets();
 
