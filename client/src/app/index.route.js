@@ -75,7 +75,7 @@
 
       .state('userProfile', {
         url: '/profile?:upload_count', 
-        template: '<user-profile upload-count="$resolve.uploadCount"></user-profile>',
+        template: '<user-profile upload-count="$resolve.uploadCount" user="$resolve.user"></user-profile>',
         resolve: {
           auth: ['$auth', '$q', function($auth, $q) {
             var deferred = $q.defer();
@@ -84,6 +84,9 @@
             } else {
               return deferred.reject({redirectTo: 'signIn'});
             }
+          }],
+          user: ['$rootScope', function($rootScope){
+            return $rootScope.user;
           }],
           uploadCount: ['$stateParams', function($stateParams){
             return $stateParams.upload_count;
