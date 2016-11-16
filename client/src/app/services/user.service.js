@@ -10,6 +10,7 @@
     this.getUserSnippets = getUserSnippets;
     this.getCurrentUserPermissions = getCurrentUserPermissions;
     this.clearCachedPermissions = clearCachedPermissions;
+    this.refreshCachedPermissions = refreshCachedPermissions;
     this.currentUserCanEditSnippet = currentUserCanEditSnippet;
     this.addSnippet = addSnippet;
     this.removeSnippet = removeSnippet;
@@ -48,13 +49,18 @@
         } else {
           promise = $q.when(currentUserPermissions);
         }
-        $timeout(clearCachedPermissions(), 1000 * 60 * 60);
+        $timeout(refreshCachedPermissions, 1000 * 60 * 60);
         return promise;
       }
     }
 
     function clearCachedPermissions() {
       currentUserPermissions = false;
+    }
+
+    function refreshCachedPermissions() {
+      clearCachedPermissions();
+      getCurrentUserPermissions();
     }
 
     function currentUserCanEditSnippet(id) {
