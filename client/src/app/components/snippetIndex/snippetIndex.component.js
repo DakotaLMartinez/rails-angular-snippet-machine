@@ -46,7 +46,7 @@
       // adds retry to load snippets after 1.1 seconds 
       // this prevents a premature error if user 
       // not loaded before requesting snippets from api
-      // $timeout(loadSnippets,1100);
+      $timeout(loadSnippets,1100);
 
       $rootScope.$on('auth:logout-success', function(){
         loadSnippets(true);
@@ -63,10 +63,12 @@
       if ($ctrl.profilePage === true) {
         if ($ctrl.userId) {
           if ($ctrl.notLoaded || reload) {
+            // $log.log('should be calling api');
             getUserSnippets($ctrl.userId);
-          } else {
-            $log.log('$ctrl.notLoaded || reload is returning false');
-          }
+          } 
+          // else {
+          //   $log.log('$ctrl.notLoaded || reload is returning false');
+          // }
         } else {
           // waits 2.5 seconds (till after retry of loadSnippets)
           // before displaying an error. Displays an error if both 
@@ -79,11 +81,12 @@
         }
       } else {
         if ($ctrl.notLoaded || reload) {
-          $log.log('should be calling api');
+          // $log.log('should be calling api');
           getAllSnippets();
-        } else {
-          $log.log('$ctrl.notLoaded || reload is returning false');
-        }
+        } 
+        // else {
+        //   $log.log('$ctrl.notLoaded || reload is returning false');
+        // }
       }
     }
 
