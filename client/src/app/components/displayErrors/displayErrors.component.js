@@ -54,9 +54,9 @@
       }
 
       if (errorCount === 1) {
-        var header = '<h4>' + errorCount + ' error prevented this record from being saved:</h4>';
+        var header = '<h4>' + errorCount + ' error occurred:</h4>';
       } else {
-        var header = '<h4>' + errorCount + ' errors prevented this record from being saved:</h4>';
+        var header = '<h4>' + errorCount + ' errors occurred:</h4>';
       }
       
       return header + errorList;
